@@ -1,0 +1,31 @@
+plugins {
+  id 'eclipse' // easier use in eclipse and other IDEs
+}
+
+// pulls out properties from a global properties file
+Properties env = new Properties()
+File subPropertiesFile = new File("$projectDir/env.properties")
+subPropertiesFile.withInputStream {
+  env.load(it)
+}
+
+wrapper {
+  gradleVersion env.GRADLE_VERSION
+}
+
+subprojects {
+  repositories {
+	  mavenCentral()
+  }
+}
+
+// make sure your environment is set up correctly!
+task checkEnvironment {
+  doFirst {
+    if(gradle.gradleVersion != rootProject.ext.gradleVersion) {
+      throw new IOException("Configured version of Gradle (${rootProject.ext.gradleVersion}) is different than the one used in the build (${gradle.gradleVersion})")
+    }
+
+    println "Gradle: ${gradle.gradleVersion}"
+  }
+}

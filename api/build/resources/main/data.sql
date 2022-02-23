@@ -1,0 +1,8 @@
+CREATE TABLE AUTHENTICATION (
+    id INTEGER NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id)
+);
+INSERT INTO AUTHENTICATION(username, password)
+VALUES ('admin', 'admin');

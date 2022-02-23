@@ -1,0 +1,18 @@
+ca/me/proj/service/authentication/AuthenticationService.java
+ ca.me.proj.service.authentication.AuthenticationService
+ca/me/proj/repository/authentication/IAuthenticationRepository.java
+ ca.me.proj.repository.authentication.IAuthenticationRepository
+ca/me/proj/controller/authentication/AuthenticationController.java
+ ca.me.proj.controller.authentication.AuthenticationController
+ca/me/proj/config/LocalWebConfig.java
+ ca.me.proj.config.LocalWebConfig
+ca/me/proj/config/CustomContentNegotiationStrategy.java
+ ca.me.proj.config.CustomContentNegotiationStrategy
+ca/me/proj/mapper/authentication/IAuthenticationMapper.java
+ ca.me.proj.mapper.authentication.IAuthenticationMapper
+ca/me/proj/config/WebConfig.java
+ ca.me.proj.config.WebConfig
+ca/me/proj/ApiApplication.java
+ ca.me.proj.ApiApplication
+ca/me/proj/entity/authentication/AuthenticationEntity.java
+ ca.me.proj.entity.authentication.AuthenticationEntity

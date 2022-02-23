@@ -1,0 +1,22 @@
+#!/bin/sh
+
+echo "Verifying what is about to be committed"
+
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+        against=HEAD
+else
+        # Initial commit: diff against an empty tree object
+        against=$(git hash-object -t tree /dev/null)
+fi
+
+
+echo "Making sure all tests pass before pushing"
+
+./gradlew test -qq
+
+if [ "$?" -ne 0 ]; then
+  echo "\n\n\e[38;2;255;0;0mTests failed! Aborting push...\e[0m\n\n"
+  exit 1
+else echo "\n\n\e[38;2;0;255;0mTests passed, pushing to remote.\e[0m\n\n"
+fi

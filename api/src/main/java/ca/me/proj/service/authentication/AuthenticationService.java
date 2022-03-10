@@ -6,7 +6,7 @@ import ca.me.proj.dtos.authentication.AuthenticationDTO;
 import ca.me.proj.entity.authentication.AuthenticationEntity;
 import ca.me.proj.mapper.authentication.IAuthenticationMapper;
 import ca.me.proj.repository.authentication.IAuthenticationRepository;
-import ca.me.proj.rest.components.service.base.AbstractBaseServiceImpl;
+import ca.me.proj.service.base.AbstractBaseServiceImpl;
 
 @Service
 public class AuthenticationService

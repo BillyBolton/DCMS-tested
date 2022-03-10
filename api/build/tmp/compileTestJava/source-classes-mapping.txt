@@ -1,4 +1,0 @@
-ca/gc/hc/integration/AdvisorSearchIT.java
- ca.gc.hc.integration.AdvisorSearchIT
-ca/gc/hc/unit/application/TestingWebApplicationTests.java
- ca.gc.hc.unit.application.TestingWebApplicationTests

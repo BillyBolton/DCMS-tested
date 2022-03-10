@@ -19,7 +19,7 @@ public class QAuthenticationEntity extends EntityPathBase<AuthenticationEntity> 
 
     public static final QAuthenticationEntity authenticationEntity = new QAuthenticationEntity("authenticationEntity");
 
-    public final ca.me.proj.rest.components.entity.base.QAbstractBaseEntity _super = new ca.me.proj.rest.components.entity.base.QAbstractBaseEntity(this);
+    public final ca.me.proj.entity.base.QAbstractBaseEntity _super = new ca.me.proj.entity.base.QAbstractBaseEntity(this);
 
     //inherited
     public final NumberPath<Long> id = _super.id;

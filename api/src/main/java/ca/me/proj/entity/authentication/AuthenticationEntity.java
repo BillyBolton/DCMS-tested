@@ -4,7 +4,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import ca.me.proj.rest.components.entity.base.AbstractBaseEntity;
+import ca.me.proj.entity.base.AbstractBaseEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

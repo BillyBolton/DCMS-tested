@@ -1,6 +1,6 @@
 package ca.me.proj.dtos.authentication;
 
-import ca.me.proj.rest.components.dtos.base.BaseDTO;
+import ca.me.proj.dtos.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

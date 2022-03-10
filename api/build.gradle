@@ -213,17 +213,3 @@ dependencies {
 
   implementation "com.google.code.gson:gson:$GSON_VERSION"
 }
-
-// // make sure your environment is set up correctly!
-// task checkEnvironment {
-//   doFirst {
-//     if(JavaVersion.current() != javaVersion) {
-//       throw new IOException("Configured version of Java (${javaVersion}) is different than the host version (${JavaVersion.current()})")
-//     }
-
-//     println "Spring Boot profiles: ${profiles}"
-//     println "Java: ${javaVersion} (${env.JAVA_VERSION})"
-//   }
-// }
-
-// compileJava.dependsOn checkEnvironment

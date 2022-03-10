@@ -19,13 +19,3 @@ subprojects {
   }
 }
 
-// make sure your environment is set up correctly!
-// task checkEnvironment {
-//   doFirst {
-//     if(gradle.gradleVersion != rootProject.ext.gradleVersion) {
-//       throw new IOException("Configured version of Gradle (${rootProject.ext.gradleVersion}) is different than the one used in the build (${gradle.gradleVersion})")
-//     }
-
-//     println "Gradle: ${gradle.gradleVersion}"
-//   }
-// }

@@ -16,8 +16,6 @@ ca/me/proj/mapper/base/IBaseMapper.java
  ca.me.proj.mapper.base.IBaseMapper
 ca/me/proj/controller/base/AbstractReadWriteController.java
  ca.me.proj.controller.base.AbstractReadWriteController
-ca/me/proj/repository/base/IQdslRepository.java
- ca.me.proj.repository.base.IQdslRepository
 ca/me/proj/service/authentication/AuthenticationService.java
  ca.me.proj.service.authentication.AuthenticationService
 ca/me/proj/service/base/IBaseService.java
@@ -28,14 +26,10 @@ ca/me/proj/repository/base/IBaseRepository.java
  ca.me.proj.repository.base.IBaseRepository
 ca/me/proj/mapper/authentication/IAuthenticationMapper.java
  ca.me.proj.mapper.authentication.IAuthenticationMapper
-ca/me/proj/service/base/search/AbstractQdslServiceImpl.java
- ca.me.proj.service.base.search.AbstractQdslServiceImpl
 ca/me/proj/ApiApplication.java
  ca.me.proj.ApiApplication
 ca/me/proj/config/WebConfig.java
  ca.me.proj.config.WebConfig
-ca/me/proj/service/base/search/IQdslService.java
- ca.me.proj.service.base.search.IQdslService
 ca/me/proj/entity/authentication/AuthenticationEntity.java
  ca.me.proj.entity.authentication.AuthenticationEntity
 ca/me/proj/constants/ApiUri.java

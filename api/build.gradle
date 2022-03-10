@@ -192,6 +192,11 @@ dependencies {
   // set to 'providedRuntime' to allow both jar/war deploys
   providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
 
+// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
+  providedRuntime group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '10.1.0-M11'
+
+
+
   // easier mocks
   testImplementation "org.mockito:mockito-junit-jupiter:$MOCKITO_VERSION"
 

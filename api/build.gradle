@@ -212,14 +212,6 @@ dependencies {
   providedRuntime "org.springdoc:springdoc-openapi-data-rest:$SPRINGDOC_VERSION"
   // implementation "org.springdoc:springdoc-openapi-security:$SPRINGDOC_VERSION"
 
-  // Better Queries
-  api "com.querydsl:querydsl-jpa:$QDSL_VERSION"
-  annotationProcessor "com.querydsl:querydsl-apt:$QDSL_VERSION:jpa"
-  implementation "com.querydsl:querydsl-apt:$QDSL_VERSION:jpa"
-	compile "com.querydsl:querydsl-jpa:$QDSL_VERSION"
-  annotationProcessor "javax.annotation:javax.annotation-api"
-  implementation "com.querydsl:querydsl-core:$QDSL_VERSION"
-
   implementation "com.google.code.gson:gson:$GSON_VERSION"
 }
 

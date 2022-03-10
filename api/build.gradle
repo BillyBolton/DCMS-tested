@@ -24,7 +24,7 @@ subPropertiesFile.withInputStream {
 
 // define environment and application settings
 def applicationName = env.APPLICATION_NAME
-def buildNumber = env.APPLICATION_BUILD_NUMBER
+def buildNumber = env.APPLICATION_BUILD_VERSION
 group = env.APPLICATION_GROUP
 version = env.APPLICATION_VERSION
 def javaVersion = JavaVersion.toVersion(env.JAVA_VERSION)
@@ -113,13 +113,13 @@ compileJava {
     ]
 }
 
-sourceSets {
-    generated {
-        java {
-            srcDirs += ["$projectDir/build/generated/sources/annotationProcessor/java/main"]
-        }
-    }
-}
+// sourceSets {
+//     generated {
+//         java {
+//             srcDirs += ["$projectDir/build/generated/sources/annotationProcessor/java/main"]
+//         }
+//     }
+// }
 
 
 
@@ -133,15 +133,16 @@ dependencies {
   }
 
   else {
+      runtimeOnly "org.postgresql:postgresql:$DB_DRIVER_VERSION"
 
     // if (profiles.contains("tc")) {
-    if (false) {
-    implementation "org.postgresql:postgresql:$DB_DRIVER_VERSION"
+    // if (false) {
+    // runtimeOnly "org.postgresql:postgresql:$DB_DRIVER_VERSION"
 
-      implementation "org.testcontainers:postgresql:$TESTCONTAINERS_VERSION"
-      runtimeOnly "org.testcontainers:testcontainers:$TESTCONTAINERS_VERSION"
-      testCompile "org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION"
-    }
+    //   implementation "org.testcontainers:postgresql:$TESTCONTAINERS_VERSION"
+    //   runtimeOnly "org.testcontainers:testcontainers:$TESTCONTAINERS_VERSION"
+    //   testCompile "org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION"
+    // }
   }  
 
   annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
@@ -204,8 +205,6 @@ dependencies {
   // Spring and Azure Active Directory
   // compile "com.azure.spring:azure-spring-boot-starter-active-directory:3.6.1"
 
-  // Oracle driver
-  providedRuntime 'com.oracle.database.jdbc:ojdbc10:19.11.0.0'
 
   // API documentation
   providedRuntime "org.springdoc:springdoc-openapi-ui:$SPRINGDOC_VERSION"
@@ -227,10 +226,4 @@ task checkEnvironment {
   }
 }
 
-task httpsSetup(type: Exec) {
-  commandLine './setup.sh'
-}
-
-
-checkEnvironment.dependsOn httpsSetup
 compileJava.dependsOn checkEnvironment

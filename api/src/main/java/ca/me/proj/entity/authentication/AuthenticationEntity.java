@@ -4,7 +4,7 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import ca.me.proj.entity.base.AbstractBaseEntity;
+import ca.me.proj.entity.base.AbstractSimpleEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "Authentication")
 @AttributeOverride(name = "id", column = @Column(name = "ID"))
-public class AuthenticationEntity extends AbstractBaseEntity {
+public class AuthenticationEntity extends AbstractSimpleEntity {
 
     @Column(name = "username")
     private String username;

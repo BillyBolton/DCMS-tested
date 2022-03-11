@@ -18,7 +18,7 @@ CREATE TABLE PROCEDURE (
     invoice_id INT NOT NULL,
     description VARCHAR(255),
     tooth CHAR,
-    procedure_count INT
+    procedure_count INT CHECK(procedure_count >= 0)
 );
 DROP SEQUENCE IF EXISTS procedure_seq;
 CREATE SEQUENCE procedure_seq START 1 INCREMENT 1 OWNED BY PROCEDURE.id;

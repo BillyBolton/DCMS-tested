@@ -11,9 +11,9 @@ VALUES ('admin', 'admin');
 DROP TABLE IF EXISTS PROCEDURE;
 CREATE TABLE PROCEDURE (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    apointment_id INT NOT NULL,
-    procedure_code INT NOT NULL,
-    invoice_id INT NOT NULL,
+    appointment_id BIGINT NOT NULL,
+    procedure_code BIGINT NOT NULL,
+    invoice_id BIGINT NOT NULL,
     description VARCHAR(255),
     tooth CHAR,
     procedure_count INT CHECK(procedure_count >= 0)

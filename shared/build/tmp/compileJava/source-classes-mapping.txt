@@ -10,3 +10,5 @@ ca/me/proj/dtos/authentication/AuthenticationDTO.java
  ca.me.proj.dtos.authentication.AuthenticationDTO
 ca/me/proj/dtos/base/SimpleDTO.java
  ca.me.proj.dtos.base.SimpleDTO
+ca/me/proj/dtos/procedure/ProcedureDTO.java
+ ca.me.proj.dtos.procedure.ProcedureDTO

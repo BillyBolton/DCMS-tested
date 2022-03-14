@@ -7,5 +7,4 @@ import ca.me.proj.entity.procedure.ProcedureEntity;
 @Repository
 public interface IProcedureRepository extends CrudRepository<ProcedureEntity, Long> {
 
-
 }

@@ -12,3 +12,5 @@ ca/me/proj/dtos/base/SimpleDTO.java
  ca.me.proj.dtos.base.SimpleDTO
 ca/me/proj/dtos/procedure/ProcedureDTO.java
  ca.me.proj.dtos.procedure.ProcedureDTO
+ca/me/proj/dtos/appointment/AppointmentDTO.java
+ ca.me.proj.dtos.appointment.AppointmentDTO

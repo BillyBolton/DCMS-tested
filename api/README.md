@@ -8,7 +8,7 @@ Connection.Host name / address = localhost
 Connection.Port = 5432
 Connection.Maintenance database = postgres
 Connection.Username = postgres
-Connection.password = ${Your_Personal_Password_Used_For_Your_Labs}
+Connection.password = ${your_local_pgAdmin_password}
 ```
 
 3. In pgAdmin, right-click newly created server that's called `DCMS` and select `Create Database`
@@ -21,11 +21,11 @@ General.Database = DCMS
 
 5. Initialize Database
 
-Right-click Database (not Server) called `DCMS`
-Click `Query Tool`
-Copy and paste the `schema-postgres.sql` contents from the Spring Boot Api project.
-Copy and paste the `data.sql` contents from the Spring Boot Api project.
-Run the query. Data should now be initialized in the database.
+- Right-click Database (not Server) called `DCMS`
+- Click `Query Tool`
+- Copy and paste the `schema-postgres.sql` contents from the Spring Boot Api project.
+- Copy and paste the `data.sql` contents from the Spring Boot Api project.
+- Run the query. Data should now be initialized in the database.
 
 6. Setup Spring Boot Api:
 

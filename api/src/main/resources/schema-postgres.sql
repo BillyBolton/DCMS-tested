@@ -1,4 +1,6 @@
+-- =============================================================
 -- Profile
+-- =============================================================
 DROP SEQUENCE IF EXISTS profile_seq CASCADE;
 CREATE SEQUENCE profile_seq START 1;
 DROP TABLE IF EXISTS PROFILE CASCADE;
@@ -11,7 +13,9 @@ CREATE TABLE PROFILE(
     lastName VARCHAR(255) NOT NULL,
     DOB DATE NOT NULL
 );
+-- =============================================================
 -- USER_PHONE
+-- =============================================================
 DROP TABLE IF EXISTS USER_PHONE CASCADE;
 CREATE TABLE USER_PHONE(
     phone_number VARCHAR(255) NOT NULL,
@@ -20,7 +24,9 @@ CREATE TABLE USER_PHONE(
     UNIQUE(phone_number, profile_id),
     PRIMARY KEY (phone_number, profile_id)
 );
+-- =============================================================
 -- BRANCH_PHONE
+-- =============================================================
 DROP TABLE IF EXISTS BRANCH_PHONE CASCADE;
 CREATE TABLE BRANCH_PHONE(
     phone_number VARCHAR(255) NOT NULL,
@@ -29,7 +35,9 @@ CREATE TABLE BRANCH_PHONE(
     UNIQUE(phone_number, branch_id),
     PRIMARY KEY (phone_number, branch_id)
 );
+-- =============================================================
 -- Address
+-- =============================================================
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
@@ -62,7 +70,9 @@ CREATE TABLE ADDRESS(
         postal_code
     )
 );
+-- =============================================================
 -- BRANCH
+-- =============================================================
 DROP SEQUENCE IF EXISTS branch_seq CASCADE;
 CREATE SEQUENCE branch_seq START 1;
 DROP TABLE IF EXISTS BRANCH CASCADE;
@@ -74,7 +84,9 @@ CREATE TABLE BRANCH(
     -- FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(eId),
     PRIMARY KEY (id)
 );
+-- =============================================================
 -- EMPLOYEE
+-- =============================================================
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
     eId BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
@@ -92,7 +104,9 @@ CREATE TABLE EMPLOYEE(
     branch_id VARCHAR(255) NOT NULL,
     FOREIGN KEY(branch_id) REFERENCES BRANCH(id) -- FOREIGN KEY(managerID) REFERENCES (id)
 );
+-- =============================================================
 -- PROCEDURE
+-- =============================================================
 DROP TABLE IF EXISTS PROCEDURE CASCADE;
 CREATE TABLE PROCEDURE (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
@@ -103,7 +117,9 @@ CREATE TABLE PROCEDURE (
     tooth CHAR,
     procedure_count INT CHECK(procedure_count >= 0)
 );
--- -- TREATMENT
+-- =============================================================
+-- TREATMENT
+-- =============================================================
 DROP TABLE IF EXISTS TREATMENT CASCADE;
 CREATE TABLE TREATMENT (
     medication VARCHAR(255) PRIMARY KEY,
@@ -113,19 +129,25 @@ CREATE TABLE TREATMENT (
     symptoms VARCHAR(255),
     comments VARCHAR(255)
 );
+-- =============================================================
 -- APPOINTMENT_TYPE
+-- =============================================================
 DROP TABLE IF EXISTS APPOINTMENT_TYPE CASCADE;
 CREATE TABLE APPOINTMENT_TYPE (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
     type VARCHAR(255) UNIQUE NOT NULL
 );
+-- =============================================================
 -- APPOINTMENT_STATUS
+-- =============================================================
 DROP TABLE IF EXISTS APPOINTMENT_STATUS CASCADE;
 CREATE TABLE APPOINTMENT_STATUS (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
     status VARCHAR(255) UNIQUE NOT NULL
 );
+-- =============================================================
 -- APPOINTMENT
+-- =============================================================
 DROP TABLE IF EXISTS APPOINTMENT CASCADE;
 CREATE TABLE APPOINTMENT (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,

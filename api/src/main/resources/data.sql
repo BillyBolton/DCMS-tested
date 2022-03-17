@@ -1,6 +1,6 @@
 -- AUTHENTICATION
-INSERT INTO AUTHENTICATION(username, password)
-VALUES ('admin', 'admin');
+INSERT INTO PROFILE(username, password, firstname,middlename,lastname,dob)
+VALUES ('admin', 'adminpass','admin','admin','admin','June 23, 1912');
 -- APPOINTMENT_TYPE
 INSERT INTO APPOINTMENT_TYPE(type)
 VALUES('CLEANING');

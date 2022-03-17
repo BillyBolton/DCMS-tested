@@ -11,3 +11,4 @@ rootProject.name = 'dcms'
 
 include 'api'
 include 'shared'
+

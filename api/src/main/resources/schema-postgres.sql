@@ -184,3 +184,11 @@ CREATE TABLE APPOINTMENT (
 -- =============================================================
 -- INSURANCE
 -- =============================================================
+DROP TABLE IF EXISTS APPOINTMENT_STATUS CASCADE;
+CREATE TABLE APPOINTMENT_STATUS (
+    policy_number VARCHAR(255) UNIQUE NOT NULL,
+    group_number VARCHAR(255) UNIQUE NOT NULL,
+    patient_id BIGINT NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES PATIENT(id),
+    PRIMARY KEY (policy_number, group_number, patient_id)
+);

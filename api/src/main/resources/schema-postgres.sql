@@ -14,10 +14,23 @@ CREATE TABLE PROFILE(
     DOB DATE NOT NULL
 );
 -- =============================================================
+-- PATIENT
+-- =============================================================
+DROP TABLE IF EXISTS PATIENT CASCADE;
+CREATE TABLE PATIENT(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    profile_id VARCHAR(255) NOT NULL UNIQUE,
+    FOREIGN KEY (profile_id) REFERENCES PROFILE(id)
+);
+-- =============================================================
+-- RESPONSIBLE_PARTY
+-- =============================================================
+-- =============================================================
 -- USER_PHONE
 -- =============================================================
-DROP TABLE IF EXISTS USER_PHONE CASCADE;
-CREATE TABLE USER_PHONE(
+DROP TABLE IF EXISTS PROFILE_PHONE CASCADE;
+CREATE TABLE PROFILE_PHONE(
     phone_number VARCHAR(255) NOT NULL,
     profile_id VARCHAR(255) NOT NULL,
     FOREIGN KEY(profile_id) REFERENCES PROFILE(id),
@@ -160,3 +173,6 @@ CREATE TABLE APPOINTMENT (
     status INT NOT NULL,
     room_number VARCHAR
 );
+-- =============================================================
+-- INSURANCE
+-- =============================================================

@@ -37,5 +37,18 @@ public class ProfileEntity {
     @NotNull
     @Column(name = "dob")
     private Date DOB;
+
+    public ProfileEntity(){}
+    public ProfileEntity (
+        String firstname,
+        String middlename,
+        String lastname,
+        Date dob
+    ) {
+        this.firstName = firstname;
+        this.middleName = middlename;
+        this.lastName = lastname;
+        this.DOB=dob;     
+    }
     
 }

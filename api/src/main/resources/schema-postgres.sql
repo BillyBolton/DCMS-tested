@@ -21,6 +21,7 @@ DROP TABLE IF EXISTS PROVINCE CASCADE;
 -- Address
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
     building_number INTEGER NOT NULL CHECK(building_number > 0),
     street VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
@@ -50,15 +51,73 @@ CREATE TABLE ADDRESS(
         postal_code
     )
 );
+-- BRANCH
+DROP TABLE IF EXISTS BRANCH CASCADE;
+CREATE TABLE BRANCH(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255) NOT NULL,
+    address_building_number INTEGER NOT NULL CHECK(address_building_number > 0),
+    address_street VARCHAR(255) NOT NULL,
+    address_city VARCHAR(255) NOT NULL,
+    address_province VARCHAR(20) NOT NULL CHECK (
+        ADDRESS_PROVINCE IN(
+            'AB',
+            'BC',
+            'MB',
+            'NB',
+            'NL',
+            'NT',
+            'NS',
+            'NU',
+            'ON',
+            'PE',
+            'QC',
+            'SK',
+            'YT'
+        )
+    ),
+    address_postal_code VARCHAR(7) NOT NULL,
+    phone_number BIGINT NOT NULL,
+    FOREIGN KEY(
+        address_building_number,
+        address_street,
+        address_city,
+        address_province,
+        address_postal_code
+    ) REFERENCES ADDRESS(
+        building_number,
+        street,
+        city,
+        province,
+        postal_code
+    ),
+    PRIMARY KEY (
+        name,
+        address_building_number,
+        address_street,
+        address_city,
+        address_province,
+        address_postal_code,
+        phone_number
+    )
+);
 -- EMPLOYEE
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
-    role BIGINT NOT NULL,
-    tyep BIGINT NOT NULL,
-    salary BIGINT NOT NULL,
-    SSN BIGINT NOT NULL PRIMARY KEY -- FOREIGN KEY(branchId) REFERENCES BRANCH(id),
+    eId BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
+    role VARCHAR(255) NOT NULL NOT NULL CHECK(
+        ROLE in (
+            'MANAGER',
+            'RECEPTIONIST',
+            'DENTIST',
+            'HYGIENIST'
+        )
+    ),
+    type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
+    salary BIGINT NOT NULL CHECK (salary > 0),
+    SSN BIGINT NOT NULL UNIQUE -- FOREIGN KEY(branchId) REFERENCES BRANCH(id),
     -- FOREIGN KEY(managerID) REFERENCES (id)
-) INHERITS (PROFILE);
+);
 -- PROCEDURE
 DROP TABLE IF EXISTS PROCEDURE CASCADE;
 CREATE TABLE PROCEDURE (

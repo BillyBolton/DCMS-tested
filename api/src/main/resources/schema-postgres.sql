@@ -11,12 +11,20 @@ CREATE TABLE PROFILE(
 );
 -- Phone
 DROP TABLE IF EXISTS PHONE CASCADE;
-CREATE TABLE PHONE(phoneNumber BIGINT NOT NULL PRIMARY KEY);
+-- CREATE TABLE PHONE(phoneNumber BIGINT NOT NULL PRIMARY KEY);
 -- Province
 DROP TABLE IF EXISTS PROVINCE CASCADE;
-CREATE TABLE PROVINCE(
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
-    PROVINCE VARCHAR(20) CHECK (
+-- CREATE TABLE PROVINCE(
+--     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
+--     PROVINCE VARCHAR(20)
+-- );
+-- Address
+DROP TABLE IF EXISTS ADDRESS CASCADE;
+CREATE TABLE ADDRESS(
+    building_number INTEGER NOT NULL CHECK(building_number > 0),
+    street VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    province VARCHAR(20) NOT NULL CHECK (
         PROVINCE IN(
             'AB',
             'BC',
@@ -32,24 +40,15 @@ CREATE TABLE PROVINCE(
             'SK',
             'YT'
         )
-    )
-);
--- Address
-DROP TABLE IF EXISTS ADDRESS CASCADE;
-CREATE TABLE ADDRESS(
-    buildingNumber INTEGER NOT NULL CHECK(buildingNumber > 0),
-    street VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    province BIGINT NOT NULL,
-    postalCode VARCHAR(7) NOT NULL,
+    ),
+    postal_code VARCHAR(7) NOT NULL,
     PRIMARY KEY (
-        buildingNumber,
+        building_number,
         street,
         city,
         province,
-        postalCode
-    ),
-    FOREIGN KEY (province) REFERENCES PROVINCE(id)
+        postal_code
+    )
 );
 -- EMPLOYEE
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;

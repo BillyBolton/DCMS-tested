@@ -21,7 +21,7 @@ DROP TABLE IF EXISTS PROVINCE CASCADE;
 -- Address
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
-    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
     building_number INTEGER NOT NULL CHECK(building_number > 0),
     street VARCHAR(255) NOT NULL,
     city VARCHAR(255) NOT NULL,
@@ -43,7 +43,7 @@ CREATE TABLE ADDRESS(
         )
     ),
     postal_code VARCHAR(7) NOT NULL,
-    PRIMARY KEY (
+    UNIQUE (
         building_number,
         street,
         city,
@@ -54,52 +54,9 @@ CREATE TABLE ADDRESS(
 -- BRANCH
 DROP TABLE IF EXISTS BRANCH CASCADE;
 CREATE TABLE BRANCH(
-    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(255) NOT NULL,
-    address_building_number INTEGER NOT NULL CHECK(address_building_number > 0),
-    address_street VARCHAR(255) NOT NULL,
-    address_city VARCHAR(255) NOT NULL,
-    address_province VARCHAR(20) NOT NULL CHECK (
-        ADDRESS_PROVINCE IN(
-            'AB',
-            'BC',
-            'MB',
-            'NB',
-            'NL',
-            'NT',
-            'NS',
-            'NU',
-            'ON',
-            'PE',
-            'QC',
-            'SK',
-            'YT'
-        )
-    ),
-    address_postal_code VARCHAR(7) NOT NULL,
-    phone_number BIGINT NOT NULL,
-    FOREIGN KEY(
-        address_building_number,
-        address_street,
-        address_city,
-        address_province,
-        address_postal_code
-    ) REFERENCES ADDRESS(
-        building_number,
-        street,
-        city,
-        province,
-        postal_code
-    ),
-    PRIMARY KEY (
-        name,
-        address_building_number,
-        address_street,
-        address_city,
-        address_province,
-        address_postal_code,
-        phone_number
-    )
+    id BIGINT NOT NULL UNIQUE PRIMARY KEY,
+    phone_number VARCHAR(255) NOT NULL,
+    FOREIGN KEY(id) REFERENCES ADDRESS(id)
 );
 -- EMPLOYEE
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;

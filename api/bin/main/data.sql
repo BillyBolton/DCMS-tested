@@ -1,4 +1,3 @@
--- AUTHENTICATION
 INSERT INTO PROFILE(
         username,
         password,
@@ -35,3 +34,17 @@ INSERT INTO ADDRESS(
         postal_code
     )
 VALUES ('50', 'Main Street', 'Toronto', 'ON', 'M5H 2J2');
+-- BRANCH
+INSERT INTO BRANCH(id, phone_number)
+VALUES (
+        (
+            SELECT id
+            FROM ADDRESS
+            WHERE building_number = '50'
+                AND street = 'Main Street'
+                AND city = 'Toronto'
+                AND province = 'ON'
+                AND postal_code = 'M5H 2J2'
+        ),
+        '613-123-1234'
+    );

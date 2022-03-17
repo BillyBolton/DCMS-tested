@@ -12,4 +12,13 @@ public interface IProfileRepository extends CrudRepository<ProfileEntity, Long> 
     @Override
     @Query(value = "SELECT * from PROFILE", nativeQuery = true)
     public List<ProfileEntity> findAll();
+
+    @Query(value = "SELECT * from PROFILE WHERE username = ?1", nativeQuery = true)
+    public ProfileEntity findByUsername(String username);
+
+    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1", nativeQuery = true)
+    public Boolean existsByUsername(String username);
+
+    
+    
 }

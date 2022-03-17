@@ -6,13 +6,11 @@ ca/me/proj/exceptions/ResourceNotFoundException.java
  ca.me.proj.exceptions.ResourceNotFoundException
 ca/me/proj/dtos/base/BaseDTO.java
  ca.me.proj.dtos.base.BaseDTO
-ca/me/proj/dtos/authentication/AuthenticationDTO.java
- ca.me.proj.dtos.authentication.AuthenticationDTO
 ca/me/proj/dtos/base/SimpleDTO.java
  ca.me.proj.dtos.base.SimpleDTO
-ca/me/proj/dtos/procedure/ProcedureDTO.java
- ca.me.proj.dtos.procedure.ProcedureDTO
 ca/me/proj/dtos/appointment/AppointmentDTO.java
  ca.me.proj.dtos.appointment.AppointmentDTO
+ca/me/proj/dtos/procedure/ProcedureDTO.java
+ ca.me.proj.dtos.procedure.ProcedureDTO
 ca/me/proj/dtos/profile/ProfileDTO.java
  ca.me.proj.dtos.profile.ProfileDTO

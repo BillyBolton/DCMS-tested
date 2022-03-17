@@ -1,14 +1,18 @@
 package ca.me.proj.controller.profile;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ca.me.proj.dtos.profile.ProfileDTO;
 import ca.me.proj.service.profile.ProfileService;
-import java.util.Date;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -16,19 +20,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ProfileController {
 
     @Autowired
-    private ProfileService service;
+    private ProfileService profileService;
 
     @GetMapping("/findAll")
     public List<ProfileDTO> findAll() {
-        return service.findAll();
+        return profileService.findAll();
     }
 
-    @PostMapping
-    public void createUser(String firstname, String middlename, String lastname, Date dob, String username, String password){
-        
-        service.createUser(firstname, middlename,  lastname, dob, username, password);
-        
+    @GetMapping("/findByUsername")
+    public ProfileDTO findbyUsername(@RequestParam String username){
+        return profileService.findByUsername(username);
+    }
 
+    @GetMapping("/existsByUsername")
+    public boolean existsByUsername(@RequestParam String username){
+        return profileService.existsByUsername(username);
+    }
+
+    @PostMapping("/createProfile")
+    public ResponseEntity<String> createProfile( @RequestBody ProfileDTO profileDTO ){
+        ResponseEntity<String> response = profileService.createProfile(profileDTO);
+        return response;
+    }
+
+    @DeleteMapping("/deleteByUsername")
+    public ProfileDTO deleteUserbyUsername(@RequestParam String username){
+        ProfileDTO profileDTO = profileService.deleteUserbyUsername(username);
+        return profileDTO;
     }
     
 }

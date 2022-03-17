@@ -1,11 +1,11 @@
 package ca.me.proj.service.profile;
 
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.entity.profile.ProfileEntity;
 import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.profile.IProfileRepository;
 
@@ -22,9 +22,36 @@ public class ProfileService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public void createUser(String firstname, String middlename, String lastname, Date dob, String username, String password){
-        ProfileEntity entity = new ProfileEntity(firstname,middlename,lastname,dob);
-        repository.save(entity);
+    public ResponseEntity<String> createProfile(ProfileDTO profileDTO){
+        
+        if(repository.existsByUsername(profileDTO.getUsername())){
+            return new ResponseEntity<String>(
+                "Username is taken", 
+                HttpStatus.BAD_REQUEST);
+                
+        }
+        else{
+            repository.save(mapper.dtoToEntity(profileDTO));
+            return new ResponseEntity<String>("Success",HttpStatus.ACCEPTED);
+           
+            
+        }
+        
+    }
+
+    public boolean existsByUsername(String username){
+        return repository.existsByUsername(username);
+    }
+
+  
+    public ProfileDTO findByUsername(String username){
+        return mapper.entityToDto(repository.findByUsername(username));
+    }
+
+    public ProfileDTO deleteUserbyUsername(String username){
+        ProfileDTO profileDTO = mapper.entityToDto(repository.findByUsername(username));
+        repository.deleteById(profileDTO.getId());
+        return profileDTO;
     }
     
 }

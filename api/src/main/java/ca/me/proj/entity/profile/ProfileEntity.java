@@ -23,6 +23,13 @@ public class ProfileEntity {
     private Long id;
     
     @NotNull
+    @Column(name = "username")
+    private String username;
+
+    @NotNull
+    @Column(name = "password")
+    private String password;
+    @NotNull
     @Column(name = "firstname")
     private String firstName;
     
@@ -40,11 +47,13 @@ public class ProfileEntity {
 
     public ProfileEntity(){}
     public ProfileEntity (
+        long id,
         String firstname,
         String middlename,
         String lastname,
         Date dob
     ) {
+        this.id = id;
         this.firstName = firstname;
         this.middleName = middlename;
         this.lastName = lastname;

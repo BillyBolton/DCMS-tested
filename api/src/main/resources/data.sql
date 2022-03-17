@@ -17,3 +17,12 @@ INSERT INTO APPOINTMENT_STATUS(status)
 VALUES ('COMPLETED');
 INSERT INTO APPOINTMENT_STATUS(status)
 VALUES ('UNSCHEDULED');
+-- ADDRESS
+INSERT INTO ADDRESS(
+        building_number,
+        street,
+        city,
+        province,
+        postal_code
+    )
+VALUES ('50', 'Main Street', 'Toronto', 'ON', 'M5H 2J2');

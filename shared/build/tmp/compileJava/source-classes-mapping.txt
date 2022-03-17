@@ -14,3 +14,9 @@ ca/me/proj/dtos/procedure/ProcedureDTO.java
  ca.me.proj.dtos.procedure.ProcedureDTO
 ca/me/proj/dtos/appointment/AppointmentDTO.java
  ca.me.proj.dtos.appointment.AppointmentDTO
+ca/me/proj/constants/province/Province.java
+ ca.me.proj.constants.province.Province
+ca/me/proj/dtos/address/AddressDTO.java
+ ca.me.proj.dtos.address.AddressDTO
+ca/me/proj/dtos/address/AddressIdDTO.java
+ ca.me.proj.dtos.address.AddressIdDTO

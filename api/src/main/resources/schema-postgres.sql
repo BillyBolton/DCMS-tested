@@ -26,6 +26,14 @@ CREATE TABLE PATIENT(
 -- =============================================================
 -- RESPONSIBLE_PARTY
 -- =============================================================
+DROP TABLE IF EXISTS RESPONSIBLE_PARTY CASCADE;
+CREATE TABLE RESPONSIBLE_PARTY(
+    responsible_id VARCHAR(255) NOT NULL,
+    patient_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY(responsible_id) REFERENCES PROFILE(id),
+    FOREIGN KEY(patient_id) REFERENCES PROFILE(id),
+    PRIMARY KEY (responsible_id, patient_id)
+);
 -- =============================================================
 -- USER_PHONE
 -- =============================================================

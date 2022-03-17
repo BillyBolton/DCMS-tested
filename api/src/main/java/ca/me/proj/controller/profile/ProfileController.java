@@ -37,7 +37,7 @@ public class ProfileController {
         return profileService.existsByUsername(username);
     }
 
-    @PostMapping("/createProfile")
+    @PostMapping("/create")
     public ResponseEntity<String> createProfile( @RequestBody ProfileDTO profileDTO ){
         ResponseEntity<String> response = profileService.createProfile(profileDTO);
         return response;

@@ -6,14 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.profile.IProfileRepository;
 
 @Service
 public class ProfileService extends AuthenticationService {
-
-    @Autowired
-    private IProfileMapper mapper;
 
     @Autowired
     private IProfileRepository repository;

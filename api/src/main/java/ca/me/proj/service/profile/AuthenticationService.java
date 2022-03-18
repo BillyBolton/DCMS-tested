@@ -17,7 +17,7 @@ public class AuthenticationService {
     protected static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
-    private IProfileMapper mapper;
+    protected IProfileMapper mapper;
 
     @Autowired
     private IProfileRepository profileRepository;

@@ -18,10 +18,9 @@ CREATE TABLE PROFILE(
 -- =============================================================
 DROP TABLE IF EXISTS PATIENT CASCADE;
 CREATE TABLE PATIENT(
-    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    id VARCHAR(255) NOT NULL UNIQUE,
     email VARCHAR(255) NOT NULL UNIQUE,
-    profile_id VARCHAR(255) NOT NULL UNIQUE,
-    FOREIGN KEY (profile_id) REFERENCES PROFILE(id)
+    FOREIGN KEY (id) REFERENCES PROFILE(id)
 );
 -- =============================================================
 -- RESPONSIBLE_PARTY
@@ -44,17 +43,6 @@ CREATE TABLE PROFILE_PHONE(
     FOREIGN KEY(profile_id) REFERENCES PROFILE(id),
     UNIQUE(phone_number, profile_id),
     PRIMARY KEY (phone_number, profile_id)
-);
--- =============================================================
--- BRANCH_PHONE
--- =============================================================
-DROP TABLE IF EXISTS BRANCH_PHONE CASCADE;
-CREATE TABLE BRANCH_PHONE(
-    phone_number VARCHAR(255) NOT NULL,
-    branch_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY(branch_id) REFERENCES Branch(id),
-    UNIQUE(phone_number, branch_id),
-    PRIMARY KEY (phone_number, branch_id)
 );
 -- =============================================================
 -- ADDRESS
@@ -91,6 +79,7 @@ CREATE TABLE ADDRESS(
         postal_code
     )
 );
+
 -- =============================================================
 -- BRANCH
 -- =============================================================
@@ -105,12 +94,28 @@ CREATE TABLE BRANCH(
     -- FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(eId),
     PRIMARY KEY (id)
 );
+
+
+-- =============================================================
+-- BRANCH_PHONE
+-- =============================================================
+DROP TABLE IF EXISTS BRANCH_PHONE CASCADE;
+CREATE TABLE BRANCH_PHONE(
+    phone_number VARCHAR(255) NOT NULL,
+    branch_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY(branch_id) REFERENCES Branch(id),
+    UNIQUE(phone_number, branch_id),
+    PRIMARY KEY (phone_number, branch_id)
+);
+
 -- =============================================================
 -- EMPLOYEE
 -- =============================================================
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
-    eId BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
+    emp_type BIGINT NOT NULL,
+    SSN BIGINT NOT NULL PRIMARY KEY, -- FOREIGN KEY(branchId) REFERENCES BRANCH(id),
+    -- FOREIGN KEY(managerID) REFERENCES (id)
     role VARCHAR(255) NOT NULL NOT NULL CHECK(
         ROLE in (
             'MANAGER',
@@ -121,7 +126,6 @@ CREATE TABLE EMPLOYEE(
     ),
     type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
     salary BIGINT NOT NULL CHECK (salary > 0),
-    SSN BIGINT NOT NULL UNIQUE,
     branch_id VARCHAR(255) NOT NULL,
     FOREIGN KEY(branch_id) REFERENCES BRANCH(id) -- FOREIGN KEY(managerID) REFERENCES (id)
 );
@@ -188,7 +192,7 @@ DROP TABLE IF EXISTS INSURANCE CASCADE;
 CREATE TABLE INSURANCE (
     policy_number VARCHAR(255) UNIQUE NOT NULL,
     group_number VARCHAR(255) UNIQUE NOT NULL,
-    patient_id BIGINT NOT NULL,
+    patient_id VARCHAR(255) NOT NULL,
     FOREIGN KEY (patient_id) REFERENCES PATIENT(id),
     PRIMARY KEY (policy_number, group_number, patient_id)
 );

@@ -223,6 +223,12 @@ CREATE TABLE FEE(
 -- =============================================================
 -- PAYMENT
 -- =============================================================
+DROP TABLE IF EXISTS PAYMENT CASCADE;
+CREATE TABLE PAYMENT(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    amount DOUBLE PRECISION NOT NULL CHECK(amount > 0) -- invoice_id BIGINT NOT NULL,
+    -- FOREIGN KEY(invoice_id) REFERENCES INVOICE(id)
+);
 -- =============================================================
 -- PAYMENT_TYPE
 -- =============================================================
@@ -242,9 +248,9 @@ CREATE TABLE PATIENT_BILLING(
         AND(LENGTH(expiry_date::TEXT) = 4)
     ),
     payment_type BIGINT NOT NULL,
-    FOREIGN KEY (payment_type) REFERENCES PATIENT_BILLING(id),
+    FOREIGN KEY (payment_type) REFERENCES PAYMENT_TYPE(id),
     PRIMARY KEY (card_number, expiry_date)
-);
+) INHERITS (PAYMENT);
 -- =============================================================
 -- INSURANCE_CLAIM
 -- =============================================================

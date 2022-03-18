@@ -57,7 +57,7 @@ CREATE TABLE BRANCH_PHONE(
     PRIMARY KEY (phone_number, branch_id)
 );
 -- =============================================================
--- Address
+-- ADDRESS
 -- =============================================================
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
@@ -206,9 +206,28 @@ CREATE TABLE PROCEDURE_TYPE(
 -- =============================================================
 -- FEE
 -- =============================================================
+DROP SEQUENCE IF EXISTS fee_seq CASCADE;
+CREATE SEQUENCE fee_seq START 1;
+DROP TABLE IF EXISTS FEE CASCADE;
+CREATE TABLE FEE(
+    procedure_code VARCHAR(255) NOT NULL DEFAULT 'F_' || nextval('fee_seq')::VARCHAR(255) UNIQUE,
+    procedure_name VARCHAR(255) NOT NULL UNIQUE,
+    procedure_type VARCHAR(255) NOT NULL,
+    cost DOUBLE PRECISION NOT NULL CHECK(cost > 0),
+    FOREIGN KEY(procedure_type) REFERENCES PROCEDURE_TYPE(id),
+    PRIMARY KEY (procedure_code)
+);
 -- =============================================================
 -- INVOICE
 -- =============================================================
+-- =============================================================
+-- PAYMENT_TYPE
+-- =============================================================
+DROP TABLE IF EXISTS PAYMENT_TYPE CASCADE;
+CREATE TABLE PAYMENT_TYPE(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
+    type VARCHAR(255) UNIQUE NOT NULL
+);
 -- =============================================================
 -- PATIENT_BILLING
 -- =============================================================

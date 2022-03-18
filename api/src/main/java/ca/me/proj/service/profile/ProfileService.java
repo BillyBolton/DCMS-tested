@@ -20,16 +20,15 @@ public class ProfileService extends AuthenticationService {
 
     public ResponseEntity<String> createProfile(ProfileDTO profileDTO) {
 
+        // One way password encryption
         profileDTO.setPassword(encoder.encode(profileDTO.getPassword()));
 
-        if (repository.existsByUsername(profileDTO.getUsername())) {
-            return new ResponseEntity<String>("Username is taken", HttpStatus.BAD_REQUEST);
-
-        } else {
-            repository.save(mapper.dtoToEntity(profileDTO));
-            return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
+        if (Boolean.TRUE.equals(repository.existsByUsername(profileDTO.getUsername()))) {
+            return new ResponseEntity<>("Username is taken", HttpStatus.BAD_REQUEST);
         }
 
+        repository.save(mapper.dtoToEntity(profileDTO));
+        return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
     }
 
     public boolean existsByUsername(String username) {

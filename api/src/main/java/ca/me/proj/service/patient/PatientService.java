@@ -25,47 +25,33 @@ public class PatientService {
         return mapper.entityToDto(patientRepository.findAll());
     }
 
-    public ResponseEntity<String> createPatient(PatientDTO patientDTO){
-        if(!profileRepository.existsById(patientDTO.getId())){
-            return new ResponseEntity<String>(
-                "ID does not exist", 
-                HttpStatus.BAD_REQUEST);
-        }else{
-            patientRepository.save(mapper.dtoToEntity(patientDTO));
-            return new ResponseEntity<String>("Success",HttpStatus.ACCEPTED);
+    public ResponseEntity<String> createPatient(PatientDTO patientDTO) {
+        if (!profileRepository.existsById(patientDTO.getId())) {
+            return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
         }
-
+        patientRepository.save(mapper.dtoToEntity(patientDTO));
+        return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
     }
 
-    public boolean existsByID(String id){
+    public boolean existsByID(String id) {
         return patientRepository.existsById(id);
     }
 
-    public ResponseEntity<String> deletePatientByID(String id){
-            if(patientRepository.existsById(id)){
-                patientRepository.deleteById(id);
-                return new ResponseEntity<String>("Success: Deleted ID: " + id,HttpStatus.ACCEPTED);
-            }
-            else{
-                //Not sure what proper syntax here would be if not a Response Entity
-                return new ResponseEntity<String>(
-                "ID does not exist", 
-                HttpStatus.BAD_REQUEST);
-            }
-        
-        
-    }
-    public ResponseEntity<String> updateEmail(PatientDTO patientDTO){
-        if(patientRepository.existsById(patientDTO.getId())){
-            patientRepository.save(mapper.dtoToEntity(patientDTO));
-            return new ResponseEntity<String>("Success: Updated Email: " + patientDTO.getEmail(),HttpStatus.ACCEPTED);
-        }else{
-                return new ResponseEntity<String>(
-                "ID does not exist", 
-                HttpStatus.BAD_REQUEST);
+    public ResponseEntity<String> deletePatientByID(String id) {
+        if (patientRepository.existsById(id)) {
+            patientRepository.deleteById(id);
+            return new ResponseEntity<>("Success: Deleted ID: " + id, HttpStatus.ACCEPTED);
         }
+        // Not sure what proper syntax here would be if not a Response Entity
+        return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
     }
 
-
-
+    public ResponseEntity<String> updateEmail(PatientDTO patientDTO) {
+        if (patientRepository.existsById(patientDTO.getId())) {
+            patientRepository.save(mapper.dtoToEntity(patientDTO));
+            return new ResponseEntity<>("Success: Updated Email: " + patientDTO.getEmail(),
+                    HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+    }
 }

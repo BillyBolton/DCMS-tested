@@ -226,7 +226,8 @@ CREATE TABLE FEE(
 DROP TABLE IF EXISTS PAYMENT CASCADE;
 CREATE TABLE PAYMENT(
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
-    amount DOUBLE PRECISION NOT NULL CHECK(amount > 0) -- invoice_id BIGINT NOT NULL,
+    amount DOUBLE PRECISION NOT NULL CHECK(amount > 0),
+    date Date NOT NULL -- invoice_id BIGINT NOT NULL,
     -- FOREIGN KEY(invoice_id) REFERENCES INVOICE(id)
 );
 -- =============================================================
@@ -254,3 +255,11 @@ CREATE TABLE PATIENT_BILLING(
 -- =============================================================
 -- INSURANCE_CLAIM
 -- =============================================================
+DROP TABLE IF EXISTS INSURANCE_CLAIM CASCADE;
+CREATE TABLE INSURANCE_CLAIM(
+    policy_number VARCHAR(255) NOT NULL,
+    group_number VARCHAR(255) NOT NULL,
+    UNIQUE (policy_number, group_number),
+    FOREIGN KEY (policy_number) REFERENCES INSURANCE(policy_number),
+    FOREIGN KEY (group_number) REFERENCES INSURANCE(group_number)
+) INHERITS (PAYMENT);

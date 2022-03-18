@@ -4,28 +4,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import ca.me.proj.dtos.profile.AuthenticationDTO;
 import ca.me.proj.dtos.profile.ProfileDTO;
 import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.profile.IProfileRepository;
+import ca.me.proj.service.authentication.AuthenticationService;
 
 @Service
-public class ProfileService {
-
-    private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+public class ProfileService extends AuthenticationService {
 
     @Autowired
     private IProfileMapper mapper;
 
     @Autowired
     private IProfileRepository repository;
-
-    public boolean authenticate(AuthenticationDTO credentials) {
-        ProfileDTO dto = mapper.entityToDto(repository.findByUsername(credentials.getUsername()));
-        return encoder.matches(credentials.getPassword(), dto.getPassword());
-    }
 
     public List<ProfileDTO> findAll() {
         return mapper.entityToDto(repository.findAll());
@@ -41,8 +33,6 @@ public class ProfileService {
         } else {
             repository.save(mapper.dtoToEntity(profileDTO));
             return new ResponseEntity<String>("Success", HttpStatus.ACCEPTED);
-
-
         }
 
     }

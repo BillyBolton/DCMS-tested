@@ -1,5 +1,5 @@
 package ca.me.proj.dtos.profile;
 
 public enum AuthenticationRole {
-    ADMIN, PATIENT, EMPLOYEE
+    RESPONSIBLE_PARTY, PATIENT, EMPLOYEE
 }

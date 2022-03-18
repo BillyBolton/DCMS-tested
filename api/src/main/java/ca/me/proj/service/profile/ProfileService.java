@@ -25,7 +25,7 @@ public class ProfileService extends AuthenticationService {
         dto.setPassword(encoder.encode(dto.getPassword()));
 
         // ID shoudl be null since this is a generated value
-        if (dto.getId() != null || repository.existsByUsername(dto.getUsername())) {
+        if (repository.existsByUsername(dto.getUsername())) {
             return new ResponseEntity<>("BAD REQUEST - Username already taken ",
                     HttpStatus.BAD_REQUEST);
         }

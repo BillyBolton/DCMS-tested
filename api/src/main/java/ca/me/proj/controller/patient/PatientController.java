@@ -27,8 +27,8 @@ public class PatientController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPatient(@RequestBody PatientDTO patientDTO) {
-        return service.createPatient(patientDTO);
+    public ResponseEntity<String> createPatient(@RequestBody PatientDTO dto) {
+        return service.createPatient(dto);
     }
 
     @GetMapping("/existsByID")
@@ -42,8 +42,8 @@ public class PatientController {
     }
 
     @PatchMapping("/updateEmail")
-    public ResponseEntity<String> updateEmail(@RequestBody PatientDTO patientDTO) {
-        return service.updateEmail(patientDTO);
+    public ResponseEntity<String> updateEmail(@RequestBody PatientDTO dto) {
+        return service.updateEmail(dto);
     }
 
 

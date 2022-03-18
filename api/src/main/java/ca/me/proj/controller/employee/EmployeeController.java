@@ -28,8 +28,8 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
-        return service.createEmployee(employeeDTO);
+    public ResponseEntity<String> createEmployee(@RequestBody EmployeeDTO dto) {
+        return service.createEmployee(dto);
     }
 
     @DeleteMapping("/deleteByID")

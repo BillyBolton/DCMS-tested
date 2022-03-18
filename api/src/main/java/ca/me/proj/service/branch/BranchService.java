@@ -23,8 +23,11 @@ public class BranchService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public ResponseEntity<String> createBranch(BranchDTO branchDTO) {
-        repository.save(mapper.dtoToEntity(branchDTO));
+    public ResponseEntity<String> createBranch(BranchDTO dto) {
+
+        dto.setId(null);
+
+        repository.save(mapper.dtoToEntity(dto));
         return CustomResponseEntity.saveSuccess();
     }
 

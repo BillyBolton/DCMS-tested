@@ -33,6 +33,8 @@ public class EmployeeService {
 
     public ResponseEntity<String> createEmployee(EmployeeDTO dto) {
 
+        dto.setId(null);
+
         // If ID does not exist in Profile repo
         if (!profileRepository.existsById(dto.getId())) {
             return CustomResponseEntity.badRequestDNE();

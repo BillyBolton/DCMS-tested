@@ -20,7 +20,7 @@ public class ProfileService extends AuthenticationService {
     }
 
     public ResponseEntity<String> createProfile(ProfileDTO dto) {
-
+        dto.setId(null);
         // One way password encryption
         dto.setPassword(encoder.encode(dto.getPassword()));
 

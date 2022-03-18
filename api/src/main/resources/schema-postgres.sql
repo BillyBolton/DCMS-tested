@@ -90,7 +90,7 @@ CREATE TABLE BRANCH(
     manager_id VARCHAR(255) NULL,
     address_id BIGINT NULL UNIQUE,
     --FOREIGN KEY(address_id) REFERENCES ADDRESS(id),
-    FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
+    -- FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
     PRIMARY KEY (id)
 );
 -- =============================================================
@@ -122,7 +122,7 @@ CREATE TABLE EMPLOYEE(
     type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
     salary BIGINT NOT NULL CHECK (salary > 0),
     managerID VARCHAR(255) NULL,
-    branchID VARCHAR(255),
+    branchID VARCHAR(255) NOT NULL,
     FOREIGN KEY(id) REFERENCES PROFILE(id),
     FOREIGN KEY(branchID) REFERENCES BRANCH(id),
     FOREIGN KEY(managerID) REFERENCES EMPLOYEE(id)

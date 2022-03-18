@@ -2,6 +2,7 @@ package ca.me.proj.service.profile;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
@@ -18,16 +19,18 @@ public class ProfileService extends AuthenticationService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public ResponseEntity<String> createProfile(ProfileDTO profileDTO) {
+    public ResponseEntity<String> createProfile(ProfileDTO dto) {
 
         // One way password encryption
-        profileDTO.setPassword(encoder.encode(profileDTO.getPassword()));
+        dto.setPassword(encoder.encode(dto.getPassword()));
 
-        if (repository.existsByUsername(profileDTO.getUsername())) {
-            return CustomResponseEntity.badRequestDNE();
+        // ID shoudl be null since this is a generated value
+        if (dto.getId() != null || repository.existsByUsername(dto.getUsername())) {
+            return new ResponseEntity<>("BAD REQUEST - Username already taken ",
+                    HttpStatus.BAD_REQUEST);
         }
 
-        repository.save(mapper.dtoToEntity(profileDTO));
+        repository.save(mapper.dtoToEntity(dto));
         return CustomResponseEntity.saveSuccess();
     }
 
@@ -35,12 +38,10 @@ public class ProfileService extends AuthenticationService {
         return repository.existsByUsername(username);
     }
 
-    // TODO: Response Entity
     public ProfileDTO findByUsername(String username) {
         return mapper.entityToDto(repository.findByUsername(username));
     }
 
-    // TODO: Repsponse Entity
     public ResponseEntity<String> deleteUserbyUsername(String username) {
         if (!repository.existsByUsername(username)) {
             return CustomResponseEntity.badRequestDNE();

@@ -47,7 +47,6 @@ public class ProfileController {
         return service.existsByID(id);
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<String> createProfile(@RequestBody ProfileDTO profileDTO) {
         return service.createProfile(profileDTO);

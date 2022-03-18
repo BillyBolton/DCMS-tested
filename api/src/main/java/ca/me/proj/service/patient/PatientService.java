@@ -25,11 +25,13 @@ public class PatientService {
         return mapper.entityToDto(patientRepository.findAll());
     }
 
-    public ResponseEntity<String> createPatient(PatientDTO patientDTO) {
-        if (!profileRepository.existsById(patientDTO.getId())) {
+    public ResponseEntity<String> createPatient(PatientDTO dto) {
+
+        // If ID does not exist in Profile repo
+        if (!profileRepository.existsById(dto.getId())) {
             return CustomResponseEntity.badRequestDNE();
         }
-        patientRepository.save(mapper.dtoToEntity(patientDTO));
+        patientRepository.save(mapper.dtoToEntity(dto));
         return CustomResponseEntity.saveSuccess();
     }
 
@@ -38,17 +40,17 @@ public class PatientService {
     }
 
     public ResponseEntity<String> deletePatientByID(String id) {
-        if (patientRepository.existsById(id)) {
-            patientRepository.deleteById(id);
-            return CustomResponseEntity.deleteSuccess();
+        if (!patientRepository.existsById(id)) {
+            return CustomResponseEntity.badRequestDNE();
         }
-        // Not sure what proper syntax here would be if not a Response Entity
-        return CustomResponseEntity.badRequestDNE();
+
+        patientRepository.deleteById(id);
+        return CustomResponseEntity.deleteSuccess();
     }
 
-    public ResponseEntity<String> updateEmail(PatientDTO patientDTO) {
-        if (patientRepository.existsById(patientDTO.getId())) {
-            patientRepository.save(mapper.dtoToEntity(patientDTO));
+    public ResponseEntity<String> updateEmail(PatientDTO dto) {
+        if (patientRepository.existsById(dto.getId())) {
+            patientRepository.save(mapper.dtoToEntity(dto));
             return CustomResponseEntity.updateSuccess();
         }
         return CustomResponseEntity.badRequestDNE();

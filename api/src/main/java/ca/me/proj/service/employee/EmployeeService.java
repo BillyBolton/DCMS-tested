@@ -31,52 +31,48 @@ public class EmployeeService {
         return mapper.entityToDto(employeeRepository.findAll());
     }
 
-    public ResponseEntity<String> createEmployee(EmployeeDTO employeeDTO) {
+    public ResponseEntity<String> createEmployee(EmployeeDTO dto) {
 
         // If ID does not exist in Profile repo
-        if (!profileRepository.existsById(employeeDTO.getId())) {
+        if (!profileRepository.existsById(dto.getId())) {
             return CustomResponseEntity.badRequestDNE();
         }
 
         // If Employee Role is incorrectly formated
-        else if (!employeeDTO.getRole().equals("MANAGER")
-                && !employeeDTO.getRole().equals("RECEPTIONIST")
-                && !employeeDTO.getRole().equals("DENTIST")
-                && !employeeDTO.getRole().equals("HYGIENIST")) {
-            return new ResponseEntity<>("Invalid Employee Role: " + employeeDTO.getRole(),
+        else if (!dto.getRole().equals("MANAGER") && !dto.getRole().equals("RECEPTIONIST")
+                && !dto.getRole().equals("DENTIST") && !dto.getRole().equals("HYGIENIST")) {
+            return new ResponseEntity<>("Invalid Employee Role: " + dto.getRole(),
                     HttpStatus.BAD_REQUEST);
 
         }
 
         // If Employee type is incorrectly formated
-        else if (!employeeDTO.getType().equals("FT") && !employeeDTO.getType().equals("PT")) {
-            return new ResponseEntity<>("Invalid Employee Type: " + employeeDTO.getType(),
+        else if (!dto.getType().equals("FT") && !dto.getType().equals("PT")) {
+            return new ResponseEntity<>("Invalid Employee Type: " + dto.getType(),
                     HttpStatus.BAD_REQUEST);
         }
 
         // If Employee Salary is less than or equal to 0
-        else if (employeeDTO.getSalary() <= 0) {
-            return new ResponseEntity<>("Salary must be > 0: " + employeeDTO.getSalary(),
+        else if (dto.getSalary() <= 0) {
+            return new ResponseEntity<>("Salary must be > 0: " + dto.getSalary(),
                     HttpStatus.BAD_REQUEST);
         }
 
         // If Branch does not exist
-        else if (!branchRepository.existsById(employeeDTO.getBranchID())) {
-            return new ResponseEntity<>("Branch ID does not exist " + employeeDTO.getBranchID(),
+        else if (!branchRepository.existsById(dto.getBranchID())) {
+            return new ResponseEntity<>("Branch ID does not exist " + dto.getBranchID(),
                     HttpStatus.BAD_REQUEST);
 
         }
         // If ManagerID does not exists
-        else if (employeeDTO.getManagerID() != null
-                && !employeeRepository.existsById(employeeDTO.getManagerID())) {
-            return new ResponseEntity<>("ManagerID does not exist " + employeeDTO.getManagerID(),
+        else if (dto.getManagerID() != null && !employeeRepository.existsById(dto.getManagerID())) {
+            return new ResponseEntity<>("ManagerID does not exist " + dto.getManagerID(),
                     HttpStatus.BAD_REQUEST);
 
         } else {
-            employeeRepository.save(mapper.dtoToEntity(employeeDTO));
+            employeeRepository.save(mapper.dtoToEntity(dto));
             return CustomResponseEntity.saveSuccess();
         }
-
     }
 
     public ResponseEntity<String> deleteEmployeeByID(String id) {

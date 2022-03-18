@@ -24,7 +24,6 @@ public class ProfileController {
 
     @PostMapping("/authenticate")
     public boolean authenticate(@RequestBody AuthenticationDTO credentials) {
-
         return service.authenticate(credentials);
     }
 
@@ -51,14 +50,12 @@ public class ProfileController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createProfile(@RequestBody ProfileDTO profileDTO) {
-        ResponseEntity<String> response = service.createProfile(profileDTO);
-        return response;
+        return service.createProfile(profileDTO);
     }
 
     @DeleteMapping("/deleteByUsername")
-    public ProfileDTO deleteUserbyUsername(@RequestParam String username) {
-        ProfileDTO profileDTO = service.deleteUserbyUsername(username);
-        return profileDTO;
+    public ResponseEntity<String> deleteUserbyUsername(@RequestParam String username) {
+        return service.deleteUserbyUsername(username);
     }
 
 }

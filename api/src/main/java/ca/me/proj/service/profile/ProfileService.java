@@ -41,10 +41,13 @@ public class ProfileService extends AuthenticationService {
     }
 
     // TODO: Repsponse Entity
-    public ProfileDTO deleteUserbyUsername(String username) {
-        ProfileDTO profileDTO = mapper.entityToDto(repository.findByUsername(username));
-        repository.deleteById(profileDTO.getId());
-        return profileDTO;
+    public ResponseEntity<String> deleteUserbyUsername(String username) {
+        if (!repository.existsByUsername(username)) {
+            return CustomResponseEntity.badRequestDNE();
+        }
+
+        repository.deleteById(mapper.entityToDto(repository.findByUsername(username)).getId());
+        return CustomResponseEntity.deleteSuccess();
     }
 
     public boolean existsByID(String id) {

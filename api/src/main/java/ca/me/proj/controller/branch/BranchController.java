@@ -33,8 +33,7 @@ public class BranchController {
 
     @PostMapping("/create")
     public ResponseEntity<String> createPatient(@RequestBody BranchDTO branchDTO) {
-        ResponseEntity<String> response = service.createBranch(branchDTO);
-        return response;
+        return service.createBranch(branchDTO);
     }
 
     @DeleteMapping("/deleteByID")

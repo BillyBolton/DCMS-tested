@@ -3,10 +3,10 @@ package ca.me.proj.service.branch;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.branch.BranchDTO;
+import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.branch.IBranchMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
 
@@ -25,15 +25,15 @@ public class BranchService {
 
     public ResponseEntity<String> createBranch(BranchDTO branchDTO) {
         repository.save(mapper.dtoToEntity(branchDTO));
-        return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
+        return CustomResponseEntity.saveSuccess();
     }
 
     public ResponseEntity<String> deleteBranchByID(String id) {
         if (repository.existsById(id)) {
             repository.deleteById(id);
-            return new ResponseEntity<>("Success: Deleted ID: " + id, HttpStatus.ACCEPTED);
+            return CustomResponseEntity.deleteSuccess();
         } else {
-            return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+            return CustomResponseEntity.badRequestDNE();
         }
     }
 

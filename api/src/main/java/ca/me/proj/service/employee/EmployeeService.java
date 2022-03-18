@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.employee.EmployeeDTO;
+import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.employee.IEmployeeMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
 import ca.me.proj.repository.employee.IEmployeeRepository;
@@ -34,7 +35,7 @@ public class EmployeeService {
 
         // If ID does not exist in Profile repo
         if (!profileRepository.existsById(employeeDTO.getId())) {
-            return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+            return CustomResponseEntity.badRequestDNE();
         }
 
         // If Employee Role is incorrectly formated
@@ -73,7 +74,7 @@ public class EmployeeService {
 
         } else {
             employeeRepository.save(mapper.dtoToEntity(employeeDTO));
-            return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
+            return CustomResponseEntity.saveSuccess();
         }
 
     }
@@ -81,10 +82,10 @@ public class EmployeeService {
     public ResponseEntity<String> deleteEmployeeByID(String id) {
         if (employeeRepository.existsById(id)) {
             employeeRepository.deleteById(id);
-            return new ResponseEntity<>("Success: Deleted ID: " + id, HttpStatus.ACCEPTED);
+            return CustomResponseEntity.deleteSuccess();
         } else {
             // Not sure what proper syntax here would be if not a Response Entity
-            return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+            return CustomResponseEntity.badRequestDNE();
         }
 
     }

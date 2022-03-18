@@ -2,10 +2,10 @@ package ca.me.proj.service.profile;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
+import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.repository.profile.IProfileRepository;
 
 @Service
@@ -23,23 +23,24 @@ public class ProfileService extends AuthenticationService {
         // One way password encryption
         profileDTO.setPassword(encoder.encode(profileDTO.getPassword()));
 
-        if (Boolean.TRUE.equals(repository.existsByUsername(profileDTO.getUsername()))) {
-            return new ResponseEntity<>("Username is taken", HttpStatus.BAD_REQUEST);
+        if (repository.existsByUsername(profileDTO.getUsername())) {
+            return CustomResponseEntity.badRequestDNE();
         }
 
         repository.save(mapper.dtoToEntity(profileDTO));
-        return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
+        return CustomResponseEntity.saveSuccess();
     }
 
     public boolean existsByUsername(String username) {
         return repository.existsByUsername(username);
     }
 
-
+    // TODO: Response Entity
     public ProfileDTO findByUsername(String username) {
         return mapper.entityToDto(repository.findByUsername(username));
     }
 
+    // TODO: Repsponse Entity
     public ProfileDTO deleteUserbyUsername(String username) {
         ProfileDTO profileDTO = mapper.entityToDto(repository.findByUsername(username));
         repository.deleteById(profileDTO.getId());

@@ -2,10 +2,10 @@ package ca.me.proj.service.patient;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.patient.PatientDTO;
+import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.repository.patient.IPatientRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
@@ -27,10 +27,10 @@ public class PatientService {
 
     public ResponseEntity<String> createPatient(PatientDTO patientDTO) {
         if (!profileRepository.existsById(patientDTO.getId())) {
-            return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+            return CustomResponseEntity.badRequestDNE();
         }
         patientRepository.save(mapper.dtoToEntity(patientDTO));
-        return new ResponseEntity<>("Success", HttpStatus.ACCEPTED);
+        return CustomResponseEntity.saveSuccess();
     }
 
     public boolean existsByID(String id) {
@@ -40,18 +40,17 @@ public class PatientService {
     public ResponseEntity<String> deletePatientByID(String id) {
         if (patientRepository.existsById(id)) {
             patientRepository.deleteById(id);
-            return new ResponseEntity<>("Success: Deleted ID: " + id, HttpStatus.ACCEPTED);
+            return CustomResponseEntity.deleteSuccess();
         }
         // Not sure what proper syntax here would be if not a Response Entity
-        return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+        return CustomResponseEntity.badRequestDNE();
     }
 
     public ResponseEntity<String> updateEmail(PatientDTO patientDTO) {
         if (patientRepository.existsById(patientDTO.getId())) {
             patientRepository.save(mapper.dtoToEntity(patientDTO));
-            return new ResponseEntity<>("Success: Updated Email: " + patientDTO.getEmail(),
-                    HttpStatus.ACCEPTED);
+            return CustomResponseEntity.updateSuccess();
         }
-        return new ResponseEntity<>("ID does not exist", HttpStatus.BAD_REQUEST);
+        return CustomResponseEntity.badRequestDNE();
     }
 }

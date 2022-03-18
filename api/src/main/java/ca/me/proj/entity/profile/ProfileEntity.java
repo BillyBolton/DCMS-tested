@@ -15,13 +15,13 @@ import lombok.Data;
 @Entity
 @Table(name = "PROFILE")
 public class ProfileEntity {
-    
+
     @Id
     @NotNull
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private String id;
+
     @NotNull
     @Column(name = "username")
     private String username;
@@ -32,7 +32,7 @@ public class ProfileEntity {
     @NotNull
     @Column(name = "firstname")
     private String firstName;
-    
+
     @NotNull
     @Column(name = "middlename")
     private String middleName;
@@ -44,5 +44,5 @@ public class ProfileEntity {
     @NotNull
     @Column(name = "dob")
     private Date DOB;
-   
+
 }

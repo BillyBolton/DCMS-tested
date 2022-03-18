@@ -87,10 +87,10 @@ CREATE SEQUENCE branch_seq START 1;
 DROP TABLE IF EXISTS BRANCH CASCADE;
 CREATE TABLE BRANCH(
     id VARCHAR(255) NOT NULL DEFAULT 'B_' || nextval('branch_seq')::VARCHAR(255) UNIQUE,
-    -- manager_id BIGINT NOT NULL,
-    address_id BIGINT NOT NULL UNIQUE,
-    FOREIGN KEY(address_id) REFERENCES ADDRESS(id),
-    -- FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(eId),
+    manager_id VARCHAR(255) NULL,
+    address_id BIGINT NULL UNIQUE,
+    --FOREIGN KEY(address_id) REFERENCES ADDRESS(id),
+    FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
     PRIMARY KEY (id)
 );
 -- =============================================================
@@ -109,10 +109,8 @@ CREATE TABLE BRANCH_PHONE(
 -- =============================================================
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
-    emp_type BIGINT NOT NULL,
+    id VARCHAR(255) NOT NULL UNIQUE,
     SSN BIGINT NOT NULL PRIMARY KEY,
-    -- FOREIGN KEY(branchId) REFERENCES BRANCH(id),
-    -- FOREIGN KEY(managerID) REFERENCES (id)
     role VARCHAR(255) NOT NULL NOT NULL CHECK(
         ROLE in (
             'MANAGER',
@@ -123,8 +121,11 @@ CREATE TABLE EMPLOYEE(
     ),
     type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
     salary BIGINT NOT NULL CHECK (salary > 0),
-    branch_id VARCHAR(255) NOT NULL,
-    FOREIGN KEY(branch_id) REFERENCES BRANCH(id) -- FOREIGN KEY(managerID) REFERENCES (id)
+    managerID VARCHAR(255) NULL,
+    branchID VARCHAR(255),
+    FOREIGN KEY(id) REFERENCES PROFILE(id),
+    FOREIGN KEY(branchID) REFERENCES BRANCH(id),
+    FOREIGN KEY(managerID) REFERENCES EMPLOYEE(id)
 );
 -- =============================================================
 -- PROCEDURE

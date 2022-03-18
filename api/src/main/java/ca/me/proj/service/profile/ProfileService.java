@@ -54,7 +54,7 @@ public class ProfileService {
         return profileDTO;
     }
 
-    public boolean existsByID(Long id){
+    public boolean existsByID(String id){
         return repository.existsById(id);
     }
     

@@ -10,5 +10,5 @@ public class PatientDTO {
 
     private String email;
     //FKS
-    private Long id;
+    private String id;
 }

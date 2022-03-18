@@ -37,11 +37,11 @@ public class PatientService {
 
     }
 
-    public boolean existsByID(Long id){
+    public boolean existsByID(String id){
         return patientRepository.existsById(id);
     }
 
-    public ResponseEntity<String> deletePatientByID(Long id){
+    public ResponseEntity<String> deletePatientByID(String id){
             if(patientRepository.existsById(id)){
                 patientRepository.deleteById(id);
                 return new ResponseEntity<String>("Success: Deleted ID: " + id,HttpStatus.ACCEPTED);

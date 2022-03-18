@@ -38,7 +38,7 @@ public class ProfileController {
     }
 
     @GetMapping("/existsByID")
-    public boolean existsByID(@RequestParam Long id){
+    public boolean existsByID(@RequestParam String id){
         return profileService.existsByID(id);
     }
 

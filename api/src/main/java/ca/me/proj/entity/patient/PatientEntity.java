@@ -15,7 +15,7 @@ public class PatientEntity {
     @Id
     @NotNull
     @Column(name = "id")
-    private Long id;
+    private String id;
 
     @NotNull
     @Column(name = "email")

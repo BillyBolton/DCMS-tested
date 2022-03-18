@@ -35,12 +35,12 @@ public class PatientController {
     }
     
     @GetMapping("/existsByID")
-    public boolean existsByID(@RequestParam Long id){
+    public boolean existsByID(@RequestParam String id){
         return patientService.existsByID(id);
     }
 
     @DeleteMapping("/deleteByID")
-    public ResponseEntity<String> deletePatientByID(@RequestParam Long id){
+    public ResponseEntity<String> deletePatientByID(@RequestParam String id){
         return patientService.deletePatientByID(id);
     }
 

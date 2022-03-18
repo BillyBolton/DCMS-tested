@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import ca.me.proj.entity.profile.ProfileEntity;
 
 @Repository
-public interface IProfileRepository extends CrudRepository<ProfileEntity, Long> {
-    
+public interface IProfileRepository extends CrudRepository<ProfileEntity, String> {
+
     @Override
     @Query(value = "SELECT * from PROFILE", nativeQuery = true)
     public List<ProfileEntity> findAll();
@@ -16,9 +16,10 @@ public interface IProfileRepository extends CrudRepository<ProfileEntity, Long> 
     @Query(value = "SELECT * from PROFILE WHERE username = ?1", nativeQuery = true)
     public ProfileEntity findByUsername(String username);
 
-    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1", nativeQuery = true)
+    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1",
+            nativeQuery = true)
     public Boolean existsByUsername(String username);
 
-    
-    
+
+
 }

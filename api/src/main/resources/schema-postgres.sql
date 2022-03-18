@@ -195,6 +195,14 @@ CREATE TABLE INSURANCE (
 -- =============================================================
 -- PROCEDURE_TYPE
 -- =============================================================
+DROP SEQUENCE IF EXISTS procedure_type_seq CASCADE;
+CREATE SEQUENCE procedure_type_seq START 1;
+DROP TABLE IF EXISTS PROCEDURE_TYPE CASCADE;
+CREATE TABLE PROCEDURE_TYPE(
+    id VARCHAR(255) NOT NULL DEFAULT 'PT_' || nextval('procedure_type_seq')::VARCHAR(255) UNIQUE,
+    type VARCHAR(255) UNIQUE NOT NULL,
+    PRIMARY KEY (id)
+);
 -- =============================================================
 -- FEE
 -- =============================================================

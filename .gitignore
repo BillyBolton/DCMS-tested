@@ -73,6 +73,8 @@ gradle-app.setting
 
 .metadata
 bin/
+bin/**
+**/bin/**
 tmp/
 *.tmp
 *.bak

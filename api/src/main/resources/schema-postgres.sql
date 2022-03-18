@@ -79,7 +79,6 @@ CREATE TABLE ADDRESS(
         postal_code
     )
 );
-
 -- =============================================================
 -- BRANCH
 -- =============================================================
@@ -94,8 +93,6 @@ CREATE TABLE BRANCH(
     FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
     PRIMARY KEY (id)
 );
-
-
 -- =============================================================
 -- BRANCH_PHONE
 -- =============================================================
@@ -107,15 +104,13 @@ CREATE TABLE BRANCH_PHONE(
     UNIQUE(phone_number, branch_id),
     PRIMARY KEY (phone_number, branch_id)
 );
-
 -- =============================================================
 -- EMPLOYEE
 -- =============================================================
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
     id VARCHAR(255) NOT NULL UNIQUE,
-    SSN BIGINT NOT NULL PRIMARY KEY, 
-    
+    SSN BIGINT NOT NULL PRIMARY KEY,
     role VARCHAR(255) NOT NULL NOT NULL CHECK(
         ROLE in (
             'MANAGER',
@@ -127,7 +122,7 @@ CREATE TABLE EMPLOYEE(
     type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
     salary BIGINT NOT NULL CHECK (salary > 0),
     managerID VARCHAR(255) NULL,
-    branchID VARCHAR(255) NOT NULL,
+    branchID VARCHAR(255),
     FOREIGN KEY(id) REFERENCES PROFILE(id),
     FOREIGN KEY(branchID) REFERENCES BRANCH(id),
     FOREIGN KEY(managerID) REFERENCES EMPLOYEE(id)

@@ -37,6 +37,12 @@ public class ProfileController {
         return profileService.existsByUsername(username);
     }
 
+    @GetMapping("/existsByID")
+    public boolean existsByID(@RequestParam Long id){
+        return profileService.existsByID(id);
+    }
+
+
     @PostMapping("/create")
     public ResponseEntity<String> createProfile( @RequestBody ProfileDTO profileDTO ){
         ResponseEntity<String> response = profileService.createProfile(profileDTO);

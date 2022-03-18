@@ -53,5 +53,9 @@ public class ProfileService {
         repository.deleteById(profileDTO.getId());
         return profileDTO;
     }
+
+    public boolean existsByID(Long id){
+        return repository.existsById(id);
+    }
     
 }

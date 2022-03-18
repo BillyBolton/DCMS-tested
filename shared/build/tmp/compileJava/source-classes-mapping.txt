@@ -14,3 +14,5 @@ ca/me/proj/dtos/procedure/ProcedureDTO.java
  ca.me.proj.dtos.procedure.ProcedureDTO
 ca/me/proj/dtos/profile/ProfileDTO.java
  ca.me.proj.dtos.profile.ProfileDTO
+ca/me/proj/dtos/patient/PatientDTO.java
+ ca.me.proj.dtos.patient.PatientDTO

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
 import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.profile.IProfileRepository;
-import ca.me.proj.service.authentication.AuthenticationService;
 
 @Service
 public class ProfileService extends AuthenticationService {

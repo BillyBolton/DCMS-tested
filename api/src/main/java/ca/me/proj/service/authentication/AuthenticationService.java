@@ -6,8 +6,6 @@ import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.AuthenticationDTO;
 import ca.me.proj.dtos.profile.AuthenticationRole;
 import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.mapper.employee.IEmployeeMapper;
-import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.employee.IEmployeeRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
@@ -19,13 +17,7 @@ public class AuthenticationService {
     protected static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Autowired
-    private IProfileMapper profileMapper;
-
-    @Autowired
-    private IPatientMapper patientMapper;
-
-    @Autowired
-    private IEmployeeMapper employeeMapper;
+    private IProfileMapper mapper;
 
     @Autowired
     private IProfileRepository profileRepository;
@@ -41,8 +33,8 @@ public class AuthenticationService {
         if (!profileRepository.existsByUsername(credentials.getUsername())) {
             return false;
         }
-        ProfileDTO dto = profileMapper
-                .entityToDto(profileRepository.findByUsername(credentials.getUsername()));
+        ProfileDTO dto =
+                mapper.entityToDto(profileRepository.findByUsername(credentials.getUsername()));
         boolean matchingCredentials = encoder.matches(credentials.getPassword(), dto.getPassword());
 
         AuthenticationRole role = credentials.getRole();

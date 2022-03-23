@@ -18,7 +18,7 @@ public interface IProfileRepository extends CrudRepository<ProfileEntity, String
 
     @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1",
             nativeQuery = true)
-    public Boolean existsByUsername(String username);
+    public boolean existsByUsername(String username);
 
 
 

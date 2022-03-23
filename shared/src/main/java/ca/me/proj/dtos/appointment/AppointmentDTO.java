@@ -16,8 +16,8 @@ public class AppointmentDTO {
     private String room;
 
     // FKS
-    private Long branchId;
-    private Long employeeId;
-    private Long patientId;
+    private String branchId;
+    private String employeeId;
+    private String patientId;
 
 }

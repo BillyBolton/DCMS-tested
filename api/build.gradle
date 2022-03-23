@@ -183,7 +183,7 @@ dependencies {
 
   // protects API calls using oauth2 access tokens
   // implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
-  // implementation 'org.springframework.boot:spring-boot-starter-security:2.6.1'
+  implementation 'org.springframework.boot:spring-boot-starter-security:2.6.1'
 
 
   // standard MVC architecture

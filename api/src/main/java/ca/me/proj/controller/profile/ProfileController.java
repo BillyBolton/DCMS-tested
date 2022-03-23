@@ -1,18 +1,18 @@
 package ca.me.proj.controller.profile;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.service.profile.ProfileService;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import ca.me.proj.dtos.profile.AuthenticationDTO;
+import ca.me.proj.dtos.profile.ProfileDTO;
+import ca.me.proj.service.profile.ProfileService;
 
 
 @RestController
@@ -20,39 +20,41 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ProfileController {
 
     @Autowired
-    private ProfileService profileService;
+    private ProfileService service;
+
+    @PostMapping("/authenticate")
+    public boolean authenticate(@RequestBody AuthenticationDTO credentials) {
+        return service.authenticate(credentials);
+    }
 
     @GetMapping("/findAll")
     public List<ProfileDTO> findAll() {
-        return profileService.findAll();
+        return service.findAll();
     }
 
     @GetMapping("/findByUsername")
-    public ProfileDTO findbyUsername(@RequestParam String username){
-        return profileService.findByUsername(username);
+    public ProfileDTO findbyUsername(@RequestParam String username) {
+        return service.findByUsername(username);
     }
 
     @GetMapping("/existsByUsername")
-    public boolean existsByUsername(@RequestParam String username){
-        return profileService.existsByUsername(username);
+    public boolean existsByUsername(@RequestParam String username) {
+        return service.existsByUsername(username);
     }
 
     @GetMapping("/existsByID")
-    public boolean existsByID(@RequestParam String id){
-        return profileService.existsByID(id);
+    public boolean existsByID(@RequestParam String id) {
+        return service.existsByID(id);
     }
 
-
     @PostMapping("/create")
-    public ResponseEntity<String> createProfile( @RequestBody ProfileDTO profileDTO ){
-        ResponseEntity<String> response = profileService.createProfile(profileDTO);
-        return response;
+    public ResponseEntity<String> createProfile(@RequestBody ProfileDTO dto) {
+        return service.createProfile(dto);
     }
 
     @DeleteMapping("/deleteByUsername")
-    public ProfileDTO deleteUserbyUsername(@RequestParam String username){
-        ProfileDTO profileDTO = profileService.deleteUserbyUsername(username);
-        return profileDTO;
+    public ResponseEntity<String> deleteUserbyUsername(@RequestParam String username) {
+        return service.deleteUserbyUsername(username);
     }
-    
+
 }

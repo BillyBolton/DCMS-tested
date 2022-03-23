@@ -6,14 +6,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.mapper.profile.IProfileMapper;
+import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.repository.profile.IProfileRepository;
 
 @Service
-public class ProfileService {
-
-    @Autowired
-    private IProfileMapper mapper;
+public class ProfileService extends AuthenticationService {
 
     @Autowired
     private IProfileRepository repository;
@@ -22,40 +19,40 @@ public class ProfileService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public ResponseEntity<String> createProfile(ProfileDTO profileDTO){
-        
-        if(repository.existsByUsername(profileDTO.getUsername())){
-            return new ResponseEntity<String>(
-                "Username is taken", 
-                HttpStatus.BAD_REQUEST);
-                
+    public ResponseEntity<String> createProfile(ProfileDTO dto) {
+        dto.setId(null);
+        // One way password encryption
+        dto.setPassword(encoder.encode(dto.getPassword()));
+
+        // ID shoudl be null since this is a generated value
+        if (repository.existsByUsername(dto.getUsername())) {
+            return new ResponseEntity<>("BAD REQUEST - Username already taken ",
+                    HttpStatus.BAD_REQUEST);
         }
-        else{
-            repository.save(mapper.dtoToEntity(profileDTO));
-            return new ResponseEntity<String>("Success",HttpStatus.ACCEPTED);
-           
-            
-        }
-        
+
+        repository.save(mapper.dtoToEntity(dto));
+        return CustomResponseEntity.saveSuccess();
     }
 
-    public boolean existsByUsername(String username){
+    public boolean existsByUsername(String username) {
         return repository.existsByUsername(username);
     }
 
-  
-    public ProfileDTO findByUsername(String username){
+    public ProfileDTO findByUsername(String username) {
         return mapper.entityToDto(repository.findByUsername(username));
     }
 
-    public ProfileDTO deleteUserbyUsername(String username){
-        ProfileDTO profileDTO = mapper.entityToDto(repository.findByUsername(username));
-        repository.deleteById(profileDTO.getId());
-        return profileDTO;
+    public ResponseEntity<String> deleteUserbyUsername(String username) {
+        if (!repository.existsByUsername(username)) {
+            return CustomResponseEntity.badRequestDNE();
+        }
+
+        repository.deleteById(mapper.entityToDto(repository.findByUsername(username)).getId());
+        return CustomResponseEntity.deleteSuccess();
     }
 
-    public boolean existsByID(String id){
+    public boolean existsByID(String id) {
         return repository.existsById(id);
     }
-    
+
 }

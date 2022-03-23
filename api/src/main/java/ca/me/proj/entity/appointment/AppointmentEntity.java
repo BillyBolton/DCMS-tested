@@ -39,12 +39,12 @@ public class AppointmentEntity {
     // FKS
 
     @Column(name = "branch_id")
-    private Long branchId;
+    private String branchId;
 
     @Column(name = "employee_id")
-    private Long employeeId;
+    private String employeeId;
 
     @Column(name = "patient_id")
-    private Long patientId;
+    private String patientId;
 
 }

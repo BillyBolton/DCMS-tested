@@ -31,6 +31,7 @@ replay_pid*
 # GRADLE
 # ------------------------------------------------------------------------------
 
+.gradle
 .gradle/
 .gradle/**
 **/build/
@@ -73,6 +74,8 @@ gradle-app.setting
 
 .metadata
 bin/
+bin/**
+**/bin/**
 tmp/
 *.tmp
 *.bak

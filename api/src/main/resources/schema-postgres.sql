@@ -1,5 +1,42 @@
 -- =============================================================
--- Profile
+-- ADDRESS
+-- =============================================================
+DROP SEQUENCE IF EXISTS address_seq CASCADE;
+CREATE SEQUENCE address_seq START 1;
+DROP TABLE IF EXISTS ADDRESS CASCADE;
+CREATE TABLE ADDRESS(
+    id VARCHAR(255) NOT NULL DEFAULT 'A_' || nextval('address_seq')::VARCHAR(255) UNIQUE,
+    building_number INTEGER NOT NULL CHECK(building_number > 0),
+    street VARCHAR(255) NOT NULL,
+    city VARCHAR(255) NOT NULL,
+    province VARCHAR(20) NOT NULL CHECK (
+        PROVINCE IN(
+            'AB',
+            'BC',
+            'MB',
+            'NB',
+            'NL',
+            'NT',
+            'NS',
+            'NU',
+            'ON',
+            'PE',
+            'QC',
+            'SK',
+            'YT'
+        )
+    ),
+    postal_code VARCHAR(7) NOT NULL,
+    UNIQUE (
+        building_number,
+        street,
+        city,
+        province,
+        postal_code
+    )
+);
+-- =============================================================
+-- PROFILE
 -- =============================================================
 DROP SEQUENCE IF EXISTS profile_seq CASCADE;
 CREATE SEQUENCE profile_seq START 1;
@@ -11,7 +48,8 @@ CREATE TABLE PROFILE(
     firstName VARCHAR(255) NOT NULL,
     middleName VARCHAR(255) NOT NULL,
     lastName VARCHAR(255) NOT NULL,
-    DOB DATE NOT NULL
+    DOB DATE NOT NULL,
+    address_id VARCHAR(255) NOT NULL REFERENCES ADDRESS(id)
 );
 -- =============================================================
 -- PATIENT
@@ -45,42 +83,6 @@ CREATE TABLE PROFILE_PHONE(
     PRIMARY KEY (phone_number, profile_id)
 );
 -- =============================================================
--- ADDRESS
--- =============================================================
-DROP TABLE IF EXISTS ADDRESS CASCADE;
-CREATE TABLE ADDRESS(
-    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
-    building_number INTEGER NOT NULL CHECK(building_number > 0),
-    street VARCHAR(255) NOT NULL,
-    city VARCHAR(255) NOT NULL,
-    province VARCHAR(20) NOT NULL CHECK (
-        PROVINCE IN(
-            'AB',
-            'BC',
-            'MB',
-            'NB',
-            'NL',
-            'NT',
-            'NS',
-            'NU',
-            'ON',
-            'PE',
-            'QC',
-            'SK',
-            'YT'
-        )
-    ),
-    postal_code VARCHAR(7) NOT NULL,
-    UNIQUE (
-        building_number,
-        street,
-        city,
-        province,
-        postal_code
-    )
-);
-
--- =============================================================
 -- BRANCH
 -- =============================================================
 DROP SEQUENCE IF EXISTS branch_seq CASCADE;
@@ -89,13 +91,11 @@ DROP TABLE IF EXISTS BRANCH CASCADE;
 CREATE TABLE BRANCH(
     id VARCHAR(255) NOT NULL DEFAULT 'B_' || nextval('branch_seq')::VARCHAR(255) UNIQUE,
     manager_id VARCHAR(255) NULL,
-    address_id BIGINT NULL UNIQUE,
-    --FOREIGN KEY(address_id) REFERENCES ADDRESS(id),
-    FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
+    address_id VARCHAR(255) NULL UNIQUE,
+    FOREIGN KEY(address_id) REFERENCES ADDRESS(id),
+    -- FOREIGN KEY (manager_id) REFERENCES EMPLOYEE(id),
     PRIMARY KEY (id)
 );
-
-
 -- =============================================================
 -- BRANCH_PHONE
 -- =============================================================
@@ -107,55 +107,28 @@ CREATE TABLE BRANCH_PHONE(
     UNIQUE(phone_number, branch_id),
     PRIMARY KEY (phone_number, branch_id)
 );
-
 -- =============================================================
 -- EMPLOYEE
 -- =============================================================
 DROP TABLE IF EXISTS EMPLOYEE CASCADE;
 CREATE TABLE EMPLOYEE(
     id VARCHAR(255) NOT NULL UNIQUE,
-    SSN BIGINT NOT NULL PRIMARY KEY, 
-    
+    SSN BIGINT NOT NULL PRIMARY KEY,
     role VARCHAR(255) NOT NULL NOT NULL CHECK(
         ROLE in (
             'MANAGER',
-            'RECEPTIONIST',
             'DENTIST',
-            'HYGIENIST'
+            'HYGIENIST',
+            'RECEPTIONIST'
         )
     ),
     type VARCHAR(7) NOT NULL CHECK(TYPE IN ('FT', 'PT')),
     salary BIGINT NOT NULL CHECK (salary > 0),
-    managerID VARCHAR(255) NULL,
-    branchID VARCHAR(255) NOT NULL,
+    manager_id VARCHAR(255) NULL,
+    branch_id VARCHAR(255) NOT NULL,
     FOREIGN KEY(id) REFERENCES PROFILE(id),
-    FOREIGN KEY(branchID) REFERENCES BRANCH(id),
-    FOREIGN KEY(managerID) REFERENCES EMPLOYEE(id)
-);
--- =============================================================
--- PROCEDURE
--- =============================================================
-DROP TABLE IF EXISTS PROCEDURE CASCADE;
-CREATE TABLE PROCEDURE (
-    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
-    appointment_id BIGINT NOT NULL,
-    procedure_code BIGINT NOT NULL,
-    invoice_id BIGINT NOT NULL,
-    description VARCHAR(255),
-    tooth CHAR,
-    procedure_count INT CHECK(procedure_count >= 0)
-);
--- =============================================================
--- TREATMENT
--- =============================================================
-DROP TABLE IF EXISTS TREATMENT CASCADE;
-CREATE TABLE TREATMENT (
-    medication VARCHAR(255) PRIMARY KEY,
-    procedure_id INT NOT NULL,
-    teeth CHAR,
-    --?
-    symptoms VARCHAR(255),
-    comments VARCHAR(255)
+    FOREIGN KEY(branch_id) REFERENCES BRANCH(id),
+    FOREIGN KEY(manager_id) REFERENCES EMPLOYEE(id)
 );
 -- =============================================================
 -- APPOINTMENT_TYPE
@@ -179,9 +152,9 @@ CREATE TABLE APPOINTMENT_STATUS (
 DROP TABLE IF EXISTS APPOINTMENT CASCADE;
 CREATE TABLE APPOINTMENT (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
-    branch_id INT NOT NULL,
-    employee_id INT NOT NULL,
-    patient_id INT NOT NULL,
+    branch_id VARCHAR(255) NOT NULL,
+    employee_id VARCHAR(255) NOT NULL,
+    patient_id VARCHAR(255) NOT NULL,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
     type INT NOT NULL,
@@ -223,6 +196,33 @@ CREATE TABLE FEE(
     cost DOUBLE PRECISION NOT NULL CHECK(cost > 0),
     FOREIGN KEY(procedure_type) REFERENCES PROCEDURE_TYPE(id),
     PRIMARY KEY (procedure_code)
+);
+-- =============================================================
+-- PROCEDURE
+-- =============================================================
+DROP SEQUENCE IF EXISTS procedure_seq CASCADE;
+CREATE SEQUENCE procedure_seq START 1;
+DROP TABLE IF EXISTS PROCEDURE CASCADE;
+CREATE TABLE PROCEDURE (
+    id VARCHAR(255) NOT NULL DEFAULT 'PRO_' || nextval('procedure_seq')::VARCHAR(255) UNIQUE,
+    appointment_id BIGINT NOT NULL,
+    procedure_code BIGINT NOT NULL,
+    invoice_id BIGINT NOT NULL,
+    description VARCHAR(255),
+    tooth CHAR,
+    procedure_count INT CHECK(procedure_count >= 0)
+);
+-- =============================================================
+-- TREATMENT
+-- =============================================================
+DROP TABLE IF EXISTS TREATMENT CASCADE;
+CREATE TABLE TREATMENT (
+    medication VARCHAR(255) PRIMARY KEY,
+    procedure_id INT NOT NULL,
+    teeth CHAR,
+    --?
+    symptoms VARCHAR(255),
+    comments VARCHAR(255)
 );
 -- =============================================================
 -- INVOICE

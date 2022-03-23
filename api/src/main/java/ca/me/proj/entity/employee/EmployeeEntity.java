@@ -11,8 +11,8 @@ import lombok.Data;
 @Entity
 @Table(name = "EMPLOYEE")
 public class EmployeeEntity {
-    
- 
+
+
 
     @NotNull
     @Column(name = "SSN")
@@ -21,7 +21,7 @@ public class EmployeeEntity {
     @NotNull
     @Column(name = "role")
     private String role;
-    
+
     @NotNull
     @Column(name = "type")
     private String type;
@@ -29,20 +29,20 @@ public class EmployeeEntity {
     @NotNull
     @Column(name = "salary")
     private long salary;
-   
 
-    //FKS
+
+    // FKS
     @Id
     @NotNull
     @Column(name = "id")
     private String id;
 
     @NotNull
-    @Column(name = "managerID")
+    @Column(name = "manager_id")
     private String managerID;
 
     @NotNull
-    @Column(name = "branchID")
+    @Column(name = "branch_id")
     private String branchID;
 
 }

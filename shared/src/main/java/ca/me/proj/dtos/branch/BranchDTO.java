@@ -6,12 +6,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class BranchDTO {
-    //PK
+    // PK
     private String id;
 
-    //FK
+    // FK
     private String manager_id;
-    private long address_id;
+    private String address_id;
 
 
 }

@@ -10,7 +10,9 @@ import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.employee.IEmployeeRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class AuthenticationService {
 

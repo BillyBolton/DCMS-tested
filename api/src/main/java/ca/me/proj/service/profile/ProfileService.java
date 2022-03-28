@@ -30,6 +30,7 @@ public class ProfileService extends AuthenticationService {
                     HttpStatus.BAD_REQUEST);
         }
 
+
         repository.save(mapper.dtoToEntity(dto));
         return CustomResponseEntity.saveSuccess();
     }

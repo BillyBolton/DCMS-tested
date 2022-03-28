@@ -15,6 +15,7 @@ public class ProfileDTO {
     private String middleName;
     private String lastName;
     private Date DOB;
+    private String addressId;
 
 }
 

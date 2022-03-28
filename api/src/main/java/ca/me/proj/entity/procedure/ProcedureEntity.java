@@ -18,7 +18,7 @@ public class ProcedureEntity {
     @NotNull
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name = "description")
     private String description;

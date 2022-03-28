@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class ProcedureDTO {
 
-    private Long id;
+    private String id;
 
     private String description;
     private Character tooth;

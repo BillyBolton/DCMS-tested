@@ -2,7 +2,7 @@
 -- ADDRESS
 -- =============================================================
 DROP SEQUENCE IF EXISTS address_seq CASCADE;
-CREATE SEQUENCE address_seq START 1;
+CREATE SEQUENCE address_seq START 3;
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
     id VARCHAR(255) NOT NULL DEFAULT 'A_' || nextval('address_seq')::VARCHAR(255) UNIQUE,
@@ -39,7 +39,7 @@ CREATE TABLE ADDRESS(
 -- PROFILE
 -- =============================================================
 DROP SEQUENCE IF EXISTS profile_seq CASCADE;
-CREATE SEQUENCE profile_seq START 1;
+CREATE SEQUENCE profile_seq START 7;
 DROP TABLE IF EXISTS PROFILE CASCADE;
 CREATE TABLE PROFILE(
     id VARCHAR(255) NOT NULL DEFAULT 'P_' || nextval('profile_seq')::VARCHAR(255) UNIQUE,

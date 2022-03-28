@@ -45,4 +45,8 @@ public class ProfileEntity {
     @Column(name = "dob")
     private Date DOB;
 
+    @NotNull
+    @Column(name = "address_id")
+    private String addressId;
+
 }

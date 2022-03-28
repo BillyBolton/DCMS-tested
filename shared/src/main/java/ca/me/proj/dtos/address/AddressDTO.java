@@ -1,11 +1,17 @@
 package ca.me.proj.dtos.address;
 
+import ca.me.proj.constants.province.Province;
 import lombok.Data;
 
-@SuppressWarnings("unused")
+
 @Data
 public class AddressDTO {
 
-    private AddressIdDTO id;
+    private String id;
+    private Long buildingNumber;
+    private String street;
+    private String city;
+    private Province province;
+    private String postalCode;
 
 }

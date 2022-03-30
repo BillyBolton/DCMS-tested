@@ -2,7 +2,7 @@
 -- ADDRESS
 -- =============================================================
 DROP SEQUENCE IF EXISTS address_seq CASCADE;
-CREATE SEQUENCE address_seq START 1;
+CREATE SEQUENCE address_seq START 3;
 DROP TABLE IF EXISTS ADDRESS CASCADE;
 CREATE TABLE ADDRESS(
     id VARCHAR(255) NOT NULL DEFAULT 'A_' || nextval('address_seq')::VARCHAR(255) UNIQUE,
@@ -39,7 +39,7 @@ CREATE TABLE ADDRESS(
 -- PROFILE
 -- =============================================================
 DROP SEQUENCE IF EXISTS profile_seq CASCADE;
-CREATE SEQUENCE profile_seq START 1;
+CREATE SEQUENCE profile_seq START 7;
 DROP TABLE IF EXISTS PROFILE CASCADE;
 CREATE TABLE PROFILE(
     id VARCHAR(255) NOT NULL DEFAULT 'P_' || nextval('profile_seq')::VARCHAR(255) UNIQUE,
@@ -206,8 +206,8 @@ DROP TABLE IF EXISTS PROCEDURE CASCADE;
 CREATE TABLE PROCEDURE (
     id VARCHAR(255) NOT NULL DEFAULT 'PRO_' || nextval('procedure_seq')::VARCHAR(255) UNIQUE,
     appointment_id BIGINT NOT NULL,
-    procedure_code BIGINT NOT NULL,
-    invoice_id BIGINT NOT NULL,
+    procedure_code VARCHAR(255) NOT NULL,
+    -- invoice_id BIGINT NOT NULL,
     description VARCHAR(255),
     tooth CHAR,
     procedure_count INT CHECK(procedure_count >= 0)
@@ -215,12 +215,12 @@ CREATE TABLE PROCEDURE (
 -- =============================================================
 -- TREATMENT
 -- =============================================================
+-- Not sure about multiple teeth
 DROP TABLE IF EXISTS TREATMENT CASCADE;
 CREATE TABLE TREATMENT (
     medication VARCHAR(255) PRIMARY KEY,
-    procedure_id INT NOT NULL,
+    procedure_id VARCHAR(255) NOT NULL,
     teeth CHAR,
-    --?
     symptoms VARCHAR(255),
     comments VARCHAR(255)
 );
@@ -234,7 +234,7 @@ DROP TABLE IF EXISTS PAYMENT CASCADE;
 CREATE TABLE PAYMENT(
     id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE PRIMARY KEY,
     amount DOUBLE PRECISION NOT NULL CHECK(amount > 0),
-    date Date NOT NULL -- invoice_id BIGINT NOT NULL,
+    date Date NOT NULL DEFAULT now() -- invoice_id BIGINT NOT NULL,
     -- FOREIGN KEY(invoice_id) REFERENCES INVOICE(id)
 );
 -- =============================================================
@@ -250,7 +250,9 @@ CREATE TABLE PAYMENT_TYPE(
 -- =============================================================
 DROP TABLE IF EXISTS PATIENT_BILLING CASCADE;
 CREATE TABLE PATIENT_BILLING(
-    card_number BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE CHECK(LENGTH(card_number::TEXT) = 16),
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE,
+    date Date NOT NULL DEFAULT now(),
+    card_number BIGINT NOT NULL CHECK(LENGTH(card_number::TEXT) = 16),
     expiry_date smallint NOT NULL CHECK(
         expiry_date > 0
         AND(LENGTH(expiry_date::TEXT) = 4)
@@ -264,6 +266,7 @@ CREATE TABLE PATIENT_BILLING(
 -- =============================================================
 DROP TABLE IF EXISTS INSURANCE_CLAIM CASCADE;
 CREATE TABLE INSURANCE_CLAIM(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE,
     policy_number VARCHAR(255) NOT NULL,
     group_number VARCHAR(255) NOT NULL,
     UNIQUE (policy_number, group_number),

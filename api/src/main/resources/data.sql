@@ -239,14 +239,36 @@ INSERT INTO FEE(
         cost
     )
 VALUES('F_1', 'FLUORIDE', 'PT_1', 20.00);
--- =============================================================
--- PAYMENT_TYPE
--- =============================================================
-INSERT INTO PAYMENT_TYPE(type)
-VALUES('DEBIT'),
-    ('VISA'),
-    ('MASTER_CARD'),
-    ('AMEX');
+-- -- =============================================================
+-- -- PROCEDURE
+-- -- =============================================================
+INSERT INTO PROCEDURE(
+        id,
+        appointment_id,
+        procedure_code,
+        -- invoice_id,
+        description,
+        tooth,
+        procedure_count
+    )
+VALUES('PRO_1', 1, 'PT_1', 'SOME DESCRIPTION', 'c', 1);
+-- -- =============================================================
+-- -- TREATMENT
+-- -- =============================================================
+INSERT INTO TREATMENT(
+        medication,
+        procedure_id,
+        teeth,
+        symptoms,
+        comments
+    )
+VALUES(
+        'Acetaminophen 500mg',
+        'PRO_1',
+        'c',
+        'tooth pain',
+        'Use every 4 hours as needed'
+    );
 -- -- ============================================================
 -- -- INVOICE
 -- -- =============================================================
@@ -256,40 +278,27 @@ VALUES('DEBIT'),
 -- -- =============================================================
 -- -- PAYMENT
 -- -- =============================================================
--- -- 
--- -- TODO AFTER INVOICE
--- -- 
--- -- =============================================================
--- -- PROCEDURE
--- -- =============================================================
--- INSERT INTO PROCEDURE(
---         id,
---         appointment_id,
---         procedure_code,
---         invoice_id,
---         description,
---         tooth,
---         procedure_count
---     )
--- VALUES();
--- -- =============================================================
--- -- TREATMENT
--- -- =============================================================
--- INSERT INTO TREATMENT(
---         medication,
---         procedure_id,
---         teeth,
---         symptoms,
---         comments
---     )
--- VALUES();
+-- Not needed. Table used for inheritance in PATIENT_BILLING
+-- =============================================================
+-- PAYMENT_TYPE
+-- =============================================================
+INSERT INTO PAYMENT_TYPE(type)
+VALUES('DEBIT'),
+    ('VISA'),
+    ('MASTER_CARD'),
+    ('AMEX');
 -- -- =============================================================
 -- -- PATIENT_BILLING
 -- -- =============================================================
--- INSERT INTO PATIENT_BILLING(card_number, expiry_date, payment_type)
--- VALUES();
+INSERT INTO PATIENT_BILLING(
+        card_number,
+        expiry_date,
+        payment_type,
+        amount
+    )
+VALUES(1234123412341234, '2224', 2, 100.00);
 -- -- =============================================================
 -- -- INSURANCE_CLAIM
 -- -- =============================================================
--- INSERT INTO INSURANCE_CLAIM(policy_number, group_number)
--- VALUES();
+INSERT INTO INSURANCE_CLAIM(policy_number, group_number, amount)
+VALUES('POL123', 'GRP123', 99.99);

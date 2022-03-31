@@ -27,5 +27,8 @@ public class CustomResponseEntity {
     public static ResponseEntity<String> badRequestInvalidArgument() {
         return new ResponseEntity<>("BAD REQUEST - Invalid arguments", HttpStatus.BAD_REQUEST);
     }
+    public static ResponseEntity<String> badRequestInvalidArgument(String stg) {
+        return new ResponseEntity<>("BAD REQUEST - Invalid arguments: "+ stg, HttpStatus.BAD_REQUEST);
+    }
 
 }

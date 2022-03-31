@@ -40,7 +40,7 @@ public class ProcedureController {
         return service.createProcedure(dto);
     }
 
-    @DeleteMapping("/deleteProcedureById")
+    @DeleteMapping("/deleteById")
     public ResponseEntity<String> deletebyId(@RequestParam String id) {
         return service.deletebyId(id);
     }

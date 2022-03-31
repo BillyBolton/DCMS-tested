@@ -36,4 +36,14 @@ public class EmployeeController {
     public ResponseEntity<String> deleteEmployeeByID(@RequestParam String id) {
         return service.deleteEmployeeByID(id);
     }
+
+    @GetMapping("/existsByID")
+    public boolean existsByID(@RequestParam String id) {
+        return service.existsByID(id);
+    }
+
+    @GetMapping("/findById")
+    public EmployeeDTO findByID(@RequestParam String id) {
+        return service.findById(id);
+    }
 }

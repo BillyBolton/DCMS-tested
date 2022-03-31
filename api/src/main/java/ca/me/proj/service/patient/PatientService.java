@@ -57,4 +57,8 @@ public class PatientService {
         }
         return CustomResponseEntity.badRequestDNE();
     }
+
+    public PatientDTO findById(String id){
+        return mapper.entityToDto(patientRepository.findById(id).orElse(null));
+    }
 }

@@ -31,6 +31,11 @@ public class BranchController {
         return service.existsByID(id);
     }
 
+    @GetMapping("/findByID")
+    public BranchDTO findByID(@RequestParam String id) {
+        return service.findById(id);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> createPatient(@RequestBody BranchDTO dto) {
         return service.createBranch(dto);

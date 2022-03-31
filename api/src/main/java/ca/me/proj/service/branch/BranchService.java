@@ -44,6 +44,10 @@ public class BranchService {
         return repository.existsById(id);
     }
 
+    public BranchDTO findById(String id){
+        return mapper.entityToDto(repository.findById(id).orElse(null));
+    }
+
 
 
 }

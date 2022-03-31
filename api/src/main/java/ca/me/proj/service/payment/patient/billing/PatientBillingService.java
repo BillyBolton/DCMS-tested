@@ -20,4 +20,14 @@ public class PatientBillingService {
         return mapper.entityToDto(repository.findAll());
     }
 
+    public PatientBillingDTO findById(Long id) {
+        return mapper.entityToDto(repository.findById(id).orElse(null));
+    }
+
+    public boolean existsById(Long id) {
+        return repository.existsById(id);
+    }
+    
+
+
 }

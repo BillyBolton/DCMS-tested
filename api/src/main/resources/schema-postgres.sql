@@ -160,6 +160,7 @@ CREATE TABLE APPOINTMENT (
     type INT NOT NULL,
     status INT NOT NULL,
     room_number VARCHAR
+    --Add branch, employee, and patient foreign keys?
 );
 -- =============================================================
 -- INSURANCE
@@ -224,6 +225,7 @@ CREATE TABLE TREATMENT (
     -- teeth CHAR,
     symptoms VARCHAR(255),
     comments VARCHAR(255)
+    --Add procedure_id foreign key?
 );
 -- =============================================================
 -- INVOICE

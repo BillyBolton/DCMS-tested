@@ -36,6 +36,12 @@ public class PatientController {
         return service.existsByID(id);
     }
 
+    @GetMapping("/findByID")
+    public PatientDTO findByID(@RequestParam String id) {
+        return service.findById(id);
+    }
+
+
     @DeleteMapping("/deleteByID")
     public ResponseEntity<String> deletePatientByID(@RequestParam String id) {
         return service.deletePatientByID(id);

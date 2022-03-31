@@ -85,6 +85,14 @@ public class EmployeeService {
             // Not sure what proper syntax here would be if not a Response Entity
             return CustomResponseEntity.badRequestDNE();
         }
-
     }
+
+    public boolean existsByID(String id) {
+        return employeeRepository.existsById(id);
+    }
+
+    public EmployeeDTO findById(String id){
+        return mapper.entityToDto(employeeRepository.findById(id).orElse(null));
+    }
+    
 }

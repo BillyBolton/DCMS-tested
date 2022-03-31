@@ -7,4 +7,5 @@ import ca.me.proj.entity.payment.patient.billing.PatientBillingEntity;
 @Repository
 public interface IPatientBillingRepository extends CrudRepository<PatientBillingEntity, Long> {
 
+
 }

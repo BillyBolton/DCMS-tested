@@ -285,7 +285,7 @@ VALUES(
 INSERT INTO PAYMENT_TYPE(type)
 VALUES('DEBIT'),
     ('VISA'),
-    ('MASTER_CARD'),
+    ('MASTERCARD'),
     ('AMEX');
 -- -- =============================================================
 -- -- PATIENT_BILLING

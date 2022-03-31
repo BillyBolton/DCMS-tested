@@ -218,9 +218,10 @@ CREATE TABLE PROCEDURE (
 -- Not sure about multiple teeth
 DROP TABLE IF EXISTS TREATMENT CASCADE;
 CREATE TABLE TREATMENT (
-    medication VARCHAR(255) PRIMARY KEY,
+    id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY UNIQUE NOT NULL,
+    medication VARCHAR(255) NOT NULL,
     procedure_id VARCHAR(255) NOT NULL,
-    teeth CHAR,
+    -- teeth CHAR,
     symptoms VARCHAR(255),
     comments VARCHAR(255)
 );

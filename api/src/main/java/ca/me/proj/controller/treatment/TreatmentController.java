@@ -9,7 +9,7 @@ import ca.me.proj.dtos.treatment.TreatmentDTO;
 import ca.me.proj.service.treatment.TreatmentService;
 
 @RestController
-@RequestMapping("/Treatment")
+@RequestMapping("/treatment")
 public class TreatmentController {
 
     @Autowired

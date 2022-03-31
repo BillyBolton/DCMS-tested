@@ -258,14 +258,14 @@ VALUES('PRO_1', 1, 'PT_1', 'SOME DESCRIPTION', 'c', 1);
 INSERT INTO TREATMENT(
         medication,
         procedure_id,
-        teeth,
+        -- teeth,
         symptoms,
         comments
     )
 VALUES(
         'Acetaminophen 500mg',
         'PRO_1',
-        'c',
+        -- 'c',
         'tooth pain',
         'Use every 4 hours as needed'
     );

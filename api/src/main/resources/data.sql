@@ -302,3 +302,10 @@ VALUES(1234123412341234, '2224', 2, 100.00);
 -- -- =============================================================
 INSERT INTO INSURANCE_CLAIM(policy_number, group_number, amount)
 VALUES('POL123', 'GRP123', 99.99);
+-- =============================================================
+-- REVIEW
+-- =============================================================
+INSERT INTO REVIEW(date,branch_id,patient_id,professionalism,communication,cleanliness,value,comments)
+VALUES('2022-03-21','B_1', 'P_1',5,4,5,4,'Dr. Wonka was incredible!'),
+('2022-04-01','B_1','P_6',4,4,4,5,'Awesome visit, will come back soon!')
+

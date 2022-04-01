@@ -276,3 +276,20 @@ CREATE TABLE INSURANCE_CLAIM(
     FOREIGN KEY (policy_number) REFERENCES INSURANCE(policy_number),
     FOREIGN KEY (group_number) REFERENCES INSURANCE(group_number)
 ) INHERITS (PAYMENT);
+-- =============================================================
+-- REVIEW
+-- =============================================================
+DROP TABLE IF EXISTS REVIEW;
+CREATE TABLE REVIEW(
+    id BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY UNIQUE,
+    date Date NOT NULL,
+    branch_id VARCHAR(255) NOT NULL,
+    patient_id VARCHAR(255) NOT NULL,
+    professionalism BIGINT CHECK (professionalism  in (1,2,3,4,5)),
+    communication BIGINT CHECK (communication  in (1,2,3,4,5)),
+    cleanliness BIGINT CHECK (cleanliness in (1,2,3,4,5)),
+    value BIGINT CHECK (value in (1,2,3,4,5)),
+    comments VARCHAR(255),
+    FOREIGN KEY (branch_id) REFERENCES BRANCH(id),
+    FOREIGN KEY (patient_id) REFERENCES PATIENT(id)
+)

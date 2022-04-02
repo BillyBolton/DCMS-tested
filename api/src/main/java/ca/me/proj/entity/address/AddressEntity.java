@@ -1,17 +1,13 @@
 package ca.me.proj.entity.address;
 
 import javax.persistence.AttributeOverride;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import ca.me.proj.constants.province.Province;
 import ca.me.proj.entity.base.AbstractStringEntity;
-import ca.me.proj.entity.branch.BranchEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -45,6 +41,6 @@ public class AddressEntity extends AbstractStringEntity {
     public String postalCode;
 
 
-    @OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private BranchEntity branch;
+    // @OneToOne(mappedBy = "address", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    // private BranchEntity branch;
 }

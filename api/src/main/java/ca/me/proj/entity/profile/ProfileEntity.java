@@ -10,7 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import ca.me.proj.entity.address.NestedAddressEntity;
+import ca.me.proj.entity.address.AddressEntity;
 import lombok.Data;
 
 
@@ -54,6 +54,6 @@ public class ProfileEntity {
 
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private NestedAddressEntity address;
+    private AddressEntity address;
 
 }

@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import ca.me.proj.entity.address.NestedAddressEntity;
+import ca.me.proj.entity.address.AddressEntity;
 import ca.me.proj.entity.base.AbstractStringEntity;
 import ca.me.proj.entity.employee.EmployeeEntity;
 import lombok.Data;
@@ -31,5 +31,5 @@ public class BranchEntity extends AbstractStringEntity {
 
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
-    private NestedAddressEntity address;
+    private AddressEntity address;
 }

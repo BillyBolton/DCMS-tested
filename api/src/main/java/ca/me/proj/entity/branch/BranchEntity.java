@@ -9,6 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import ca.me.proj.entity.address.NestedAddressEntity;
 import ca.me.proj.entity.base.AbstractStringEntity;
+import ca.me.proj.entity.employee.EmployeeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,8 +21,12 @@ import lombok.EqualsAndHashCode;
 public class BranchEntity extends AbstractStringEntity {
 
     // FK
-    @Column(name = "manager_id")
-    private String manager_id;
+    // @Column(name = "manager_id")
+    // private String manager_id;
+
+    @OneToOne
+    @JoinColumn(name = "manager_id", referencedColumnName = "id")
+    private EmployeeEntity manager;
 
 
     @OneToOne

@@ -2,19 +2,19 @@ package ca.me.proj.mapper.branch;
 
 
 
-import java.util.List;
 import org.mapstruct.Mapper;
-
 import ca.me.proj.dtos.branch.BranchDTO;
 import ca.me.proj.entity.branch.BranchEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
 @Mapper
-public interface IBranchMapper {
-    BranchDTO entityToDto(BranchEntity entity);
+public interface IBranchMapper extends IBaseMapper<BranchDTO, BranchEntity> {
 
-    BranchEntity dtoToEntity(BranchDTO dto);
+    // BranchDTO entityToDto(BranchEntity entity);
 
-    List<BranchEntity> dtoToEntity(Iterable<BranchDTO> dtos);
+    // BranchEntity dtoToEntity(BranchDTO dto);
 
-    List<BranchDTO> entityToDto(Iterable<BranchEntity> entities);
+    // List<BranchEntity> dtoToEntity(Iterable<BranchDTO> dtos);
+
+    // List<BranchDTO> entityToDto(Iterable<BranchEntity> entities);
 }

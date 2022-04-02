@@ -20,6 +20,7 @@ compileJava.options.encoding = env.ENCODING
 
 ext {
   LOMBOK_VERSION = '1.18.+'
+  JACKSON_VERSION = '2.13.2'
 }
 
 dependencies {
@@ -27,4 +28,6 @@ dependencies {
 	annotationProcessor "org.projectlombok:lombok:$LOMBOK_VERSION"
 	testCompileOnly "org.projectlombok:lombok:$LOMBOK_VERSION"
 	testAnnotationProcessor "org.projectlombok:lombok:$LOMBOK_VERSION"
+
+	implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml:$JACKSON_VERSION"
 }

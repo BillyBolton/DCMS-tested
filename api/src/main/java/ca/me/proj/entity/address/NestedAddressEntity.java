@@ -1,19 +1,25 @@
 package ca.me.proj.entity.address;
 
-import java.io.Serializable;
+import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.Table;
 import ca.me.proj.constants.province.Province;
+import ca.me.proj.entity.base.AbstractStringEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Embeddable
 @Data
-public class AddressId implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+@Entity
+@Table(name = "ADDRESS")
+@AttributeOverride(name = "id", column = @Column(name = "id"))
+public class NestedAddressEntity extends AbstractStringEntity {
 
     @Column(name = "building_number")
-    public String buildingNumber;
+    public Long buildingNumber;
 
     @Column(name = "street")
     public String street;

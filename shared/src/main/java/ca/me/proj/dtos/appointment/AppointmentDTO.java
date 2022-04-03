@@ -36,5 +36,13 @@ public class AppointmentDTO {
         return this.startTime = LocalDateTime.parse(datetime);
     }
 
+    public String getStartTimeString() {
+        return this.startTime.toString();
+    }
+
+    public String getEndTimeString() {
+        return this.endTime.toString();
+    }
+
 
 }

@@ -9,7 +9,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import ca.me.proj.entity.address.AddressEntity;
 import ca.me.proj.entity.base.AbstractStringEntity;
-import ca.me.proj.entity.employee.EmployeeEntity;
+import ca.me.proj.entity.employee.NestedEmployeeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -18,16 +18,19 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "BRANCH")
 @AttributeOverride(name = "id", column = @Column(name = "id"))
-public class BranchEntity extends AbstractStringEntity {
+public class NestedBranchEntity extends AbstractStringEntity {
 
     // FK
     // @Column(name = "manager_id")
     // private String manager_id;
 
+    // @OneToMany(mappedBy = "branch")
+    // List<NestedEmployeeEntity> employees;
+
 
     @OneToOne
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
-    private EmployeeEntity manager;
+    private NestedEmployeeEntity manager;
 
 
     @OneToOne

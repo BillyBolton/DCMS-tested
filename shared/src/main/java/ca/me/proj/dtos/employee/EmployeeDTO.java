@@ -1,5 +1,6 @@
 package ca.me.proj.dtos.employee;
 
+import ca.me.proj.dtos.branch.BranchDTO;
 import ca.me.proj.dtos.profile.ProfileDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,8 +17,13 @@ public class EmployeeDTO {
 
     // FKS
     private String id;
-    private String managerID;
-    private String branchID;
+    // private String managerID;
+
+
+    // private String branchID;
+
+    // @JsonIgnore
+    private BranchDTO branch;
 
     private ProfileDTO profile;
 

@@ -2,7 +2,7 @@ package ca.me.proj.dtos.branch;
 
 import ca.me.proj.dtos.address.AddressDTO;
 import ca.me.proj.dtos.base.BaseDTO;
-import ca.me.proj.dtos.employee.EmployeeDTO;
+import ca.me.proj.dtos.employee.ManagerDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -14,10 +14,9 @@ public class BranchDTO extends BaseDTO {
 
     // FK
     // private String manager_id;
-    private EmployeeDTO manager;
+    private ManagerDTO manager;
 
     private AddressDTO address;
     // private String address_id;
-
 
 }

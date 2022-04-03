@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.appointment.AppointmentDTO;
+import ca.me.proj.entity.appointment.AppointmentEntity;
 import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.appointment.IAppointmentMapper;
 import ca.me.proj.repository.appointment.IAppointmentRepository;
@@ -44,28 +45,23 @@ public class AppointmentService {
 
     public ResponseEntity<String> createAppointment(AppointmentDTO dto) {
         dto.setId(null);
-
-        if (!branchRepository.existsById(dto.getBranchId())) {
+        AppointmentEntity entity = mapper.dtoToEntity(dto);
+        if (!branchRepository.existsById(entity.getBranchId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!employeeRepository.existsById(dto.getEmployeeId())) {
+        } else if (!employeeRepository.existsById(entity.getEmployeeId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
-        } else if (!patientRepository.existsById(dto.getPatientId())) {
+        } else if (!patientRepository.existsById(entity.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
-            // } else if (dto.getStartTime().isAfter(dto.getEndTime())) {
-            // return CustomResponseEntity.badRequestInvalidArgument("Start time is before end
-            // time");
-            // } else if (repository.findPatientScheduleConflict(dto.getStartTime(),
-            // dto.getEndTime(),
-            // dto.getPatientId())) {
-            // return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule
-            // conflict");
-            // } else if (repository.findEmployeeScheduleConflict(dto.getStartTime(),
-            // dto.getEndTime(),
-            // dto.getEmployeeId())) {
-            // return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule
-            // conflict");
+        } else if (entity.getStartTime().after(entity.getEndTime())) {
+            return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
+        } else if (repository.findPatientScheduleConflict(entity.getStartTime(),
+                entity.getEndTime(), entity.getPatientId())) {
+            return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
+        } else if (repository.findEmployeeScheduleConflict(entity.getStartTime(),
+                entity.getEndTime(), entity.getEmployeeId())) {
+            return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
         } else {
-            repository.save(mapper.dtoToEntity(dto));
+            repository.save(entity);
             return CustomResponseEntity.saveSuccess();
         }
     }
@@ -87,14 +83,16 @@ public class AppointmentService {
         return mapper.entityToDto(repository.findByEmployeeId(id));
     }
 
-    // public boolean findPatientScheduleConflict(AppointmentDTO dto) {
-    // return repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-    // dto.getPatientId());
-    // }
+    public boolean findPatientScheduleConflict(AppointmentDTO dto) {
+        AppointmentEntity entity = mapper.dtoToEntity(dto);
+        return repository.findPatientScheduleConflict(entity.getStartTime(), entity.getEndTime(),
+                dto.getPatientId());
+    }
 
-    // public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
-    // return repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-    // dto.getEmployeeId());
-    // }
+    public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
+        AppointmentEntity entity = mapper.dtoToEntity(dto);
+        return repository.findEmployeeScheduleConflict(entity.getStartTime(), entity.getEndTime(),
+                dto.getEmployeeId());
+    }
 
 }

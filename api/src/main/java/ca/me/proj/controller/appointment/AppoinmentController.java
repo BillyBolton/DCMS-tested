@@ -48,16 +48,16 @@ public class AppoinmentController {
         return service.findByEmployeeId(id);
     }
 
-    // @PostMapping("/findPatientScheduleConflict")
-    // public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
-    // log.info(dto.getStartTimeString());
-    // return service.findPatientScheduleConflict(dto);
-    // }
+    @PostMapping("/findPatientScheduleConflict")
+    public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
+        log.info(dto.getStartTime());
+        return service.findPatientScheduleConflict(dto);
+    }
 
-    // @PostMapping("/findEmployeeScheduleConflict")
-    // public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
-    // return service.findEmployeeScheduleConflict(dto);
-    // }
+    @PostMapping("/findEmployeeScheduleConflict")
+    public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
+        return service.findEmployeeScheduleConflict(dto);
+    }
 
     @PostMapping("/create")
     public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO dto) {

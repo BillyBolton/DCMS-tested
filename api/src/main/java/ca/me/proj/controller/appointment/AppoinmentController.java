@@ -1,6 +1,5 @@
 package ca.me.proj.controller.appointment;
 
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class AppoinmentController {
     public boolean existsByID(@RequestParam Long id) {
         return service.existsById(id);
     }
-    
+
     @GetMapping("/findById")
     public AppointmentDTO findById(@RequestParam Long id) {
         return service.findById(id);
@@ -46,12 +45,12 @@ public class AppoinmentController {
         return service.findByEmployeeId(id);
     }
 
-    @GetMapping("/findPatientScheduleConflict")
+    @PostMapping("/findPatientScheduleConflict")
     public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
         return service.findPatientScheduleConflict(dto);
     }
 
-    @GetMapping("/findEmployeeScheduleConflict")
+    @PostMapping("/findEmployeeScheduleConflict")
     public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
         return service.findEmployeeScheduleConflict(dto);
     }

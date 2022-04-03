@@ -51,13 +51,13 @@ public class AppointmentService {
             return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
         } else if (!patientRepository.existsById(dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
-        } else if (dto.getParsedStartTime().isAfter(dto.getParsedEndTime())) {
+        } else if (dto.getStartTime().isAfter(dto.getEndTime())) {
             return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
-        } else if (repository.findPatientScheduleConflict(dto.getParsedStartTime(),
-                dto.getParsedEndTime(), dto.getPatientId())) {
+        } else if (repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+                dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
-        } else if (repository.findEmployeeScheduleConflict(dto.getParsedStartTime(),
-                dto.getParsedEndTime(), dto.getEmployeeId())) {
+        } else if (repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+                dto.getEmployeeId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
         } else {
             repository.save(mapper.dtoToEntity(dto));
@@ -83,13 +83,13 @@ public class AppointmentService {
     }
 
     public boolean findPatientScheduleConflict(AppointmentDTO dto) {
-        return repository.findPatientScheduleConflict(dto.getParsedStartTime(),
-                dto.getParsedEndTime(), dto.getPatientId());
+        return repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+                dto.getPatientId());
     }
 
     public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
-        return repository.findEmployeeScheduleConflict(dto.getParsedStartTime(),
-                dto.getParsedEndTime(), dto.getEmployeeId());
+        return repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+                dto.getEmployeeId());
     }
 
 }

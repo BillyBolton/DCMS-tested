@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import ca.me.proj.entity.address.AddressEntity;
 import lombok.Data;
 
 
@@ -45,8 +48,12 @@ public class ProfileEntity {
     @Column(name = "dob")
     private Date DOB;
 
-    @NotNull
-    @Column(name = "address_id")
-    private String addressId;
+    // @NotNull
+    // @Column(name = "address_id")
+    // private String addressId;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
 
 }

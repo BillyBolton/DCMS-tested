@@ -41,10 +41,23 @@ public class AppointmentEntity {
     @Column(name = "branch_id")
     private String branchId;
 
+    // @ManyToOne
+    // @JoinColumn(name = "branch_id", nullable = false)
+    // private NestedBranchEntity branch;
+
     @Column(name = "employee_id")
     private String employeeId;
 
+    // @ManyToOne
+    // @JoinColumn(name = "employee_id", nullable = false)
+    // private EmployeeEntity dentist;
+
+
     @Column(name = "patient_id")
     private String patientId;
+
+    // @ManyToOne
+    // @JoinColumn(name = "patient_id", nullable = false)
+    // private PatientEntity patient;
 
 }

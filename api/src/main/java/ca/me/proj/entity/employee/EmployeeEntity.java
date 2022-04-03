@@ -2,15 +2,23 @@ package ca.me.proj.entity.employee;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import ca.me.proj.entity.base.AbstractStringEntity;
+import ca.me.proj.entity.branch.NestedBranchEntity;
+import ca.me.proj.entity.profile.ProfileEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "EMPLOYEE")
-public class EmployeeEntity {
+public class EmployeeEntity extends AbstractStringEntity {
 
 
 
@@ -32,17 +40,26 @@ public class EmployeeEntity {
 
 
     // FKS
-    @Id
-    @NotNull
-    @Column(name = "id")
-    private String id;
+    // @Id
+    // @NotNull
+    // @Column(name = "id")
+    // private String id;
 
-    @NotNull
-    @Column(name = "manager_id")
-    private String managerID;
+    // @NotNull
+    // @Column(name = "manager_id")
+    // private String managerID;
 
-    @NotNull
-    @Column(name = "branch_id")
-    private String branchID;
+    // @NotNull
+    // @Column(name = "branch_id")
+    // private String branchID;
+
+    @ManyToOne
+    @JoinColumn(name = "branch_id", nullable = false)
+    private NestedBranchEntity branch;
+
+    @OneToOne
+    @MapsId
+    @JoinColumn(name = "id")
+    private ProfileEntity profile;
 
 }

@@ -1,6 +1,5 @@
 package ca.me.proj.controller.appointment;
 
-import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ca.me.proj.dtos.appointment.AppointmentDTO;
 import ca.me.proj.service.appointment.AppointmentService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/appointment")
 public class AppoinmentController {
@@ -23,6 +24,7 @@ public class AppoinmentController {
 
     @GetMapping("/findAll")
     public List<AppointmentDTO> findAll() {
+
         return service.findAll();
     }
 
@@ -30,7 +32,7 @@ public class AppoinmentController {
     public boolean existsByID(@RequestParam Long id) {
         return service.existsById(id);
     }
-    
+
     @GetMapping("/findById")
     public AppointmentDTO findById(@RequestParam Long id) {
         return service.findById(id);
@@ -46,18 +48,20 @@ public class AppoinmentController {
         return service.findByEmployeeId(id);
     }
 
-    @GetMapping("/findPatientScheduleConflict")
+    @PostMapping("/findPatientScheduleConflict")
     public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
+        log.info(dto.getStartTime());
         return service.findPatientScheduleConflict(dto);
     }
 
-    @GetMapping("/findEmployeeScheduleConflict")
+    @PostMapping("/findEmployeeScheduleConflict")
     public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
         return service.findEmployeeScheduleConflict(dto);
     }
 
     @PostMapping("/create")
     public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO dto) {
+
         return service.createAppointment(dto);
     }
 

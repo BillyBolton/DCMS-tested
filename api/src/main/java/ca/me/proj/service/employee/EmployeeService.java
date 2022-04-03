@@ -61,15 +61,16 @@ public class EmployeeService {
         }
 
         // If Branch does not exist
-        else if (!branchRepository.existsById(dto.getBranchID())) {
-            return new ResponseEntity<>("Branch ID does not exist " + dto.getBranchID(),
+        else if (!branchRepository.existsById(dto.getBranch().getId())) {
+            return new ResponseEntity<>("Branch ID does not exist " + dto.getBranch().getId(),
                     HttpStatus.BAD_REQUEST);
 
-        }
-        // If ManagerID does not exists
-        else if (dto.getManagerID() != null && !employeeRepository.existsById(dto.getManagerID())) {
-            return new ResponseEntity<>("ManagerID does not exist " + dto.getManagerID(),
-                    HttpStatus.BAD_REQUEST);
+            // }
+            // // If ManagerID does not exists
+            // else if (dto.getManagerID() != null &&
+            // !employeeRepository.existsById(dto.getManagerID())) {
+            // return new ResponseEntity<>("ManagerID does not exist " + dto.getManagerID(),
+            // HttpStatus.BAD_REQUEST);
 
         } else {
             employeeRepository.save(mapper.dtoToEntity(dto));
@@ -91,8 +92,8 @@ public class EmployeeService {
         return employeeRepository.existsById(id);
     }
 
-    public EmployeeDTO findById(String id){
+    public EmployeeDTO findById(String id) {
         return mapper.entityToDto(employeeRepository.findById(id).orElse(null));
     }
-    
+
 }

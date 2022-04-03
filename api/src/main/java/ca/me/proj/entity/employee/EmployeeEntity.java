@@ -2,12 +2,15 @@ package ca.me.proj.entity.employee;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import ca.me.proj.dtos.employee.EmployeeRole;
 import ca.me.proj.entity.base.AbstractStringEntity;
 import ca.me.proj.entity.branch.NestedBranchEntity;
 import ca.me.proj.entity.profile.ProfileEntity;
@@ -27,8 +30,9 @@ public class EmployeeEntity extends AbstractStringEntity {
     private long SSN;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private EmployeeRole role;
 
     @NotNull
     @Column(name = "type")

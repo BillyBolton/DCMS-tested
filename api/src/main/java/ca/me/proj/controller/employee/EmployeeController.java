@@ -27,6 +27,11 @@ public class EmployeeController {
         return service.findAll();
     }
 
+    @GetMapping("/dentist/findByBranchId")
+    public List<EmployeeDTO> findDentistByBranchId(String branchId) {
+        return service.findDentistByBranchId(branchId);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<String> createEmployee(@RequestBody EmployeeDTO dto) {
         return service.createEmployee(dto);

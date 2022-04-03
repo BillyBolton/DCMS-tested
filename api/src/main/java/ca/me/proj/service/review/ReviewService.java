@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import ca.me.proj.dtos.review.AvgReviewDTO;
 import ca.me.proj.dtos.review.ReviewDTO;
 import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.review.IReviewMapper;
@@ -32,6 +33,33 @@ public class ReviewService {
 
     public List<ReviewDTO> findByBranchId(String id) {
         return mapper.entityToDto(repository.findByBranchId(id));
+    }
+
+    public AvgReviewDTO findAverageByBranchId(String id) {
+        List<ReviewDTO> dtos = findByBranchId(id);
+
+        Long professionalism = 0L;
+        Long communication = 0L;
+        Long cleanliness = 0L;
+        Long value = 0L;
+
+        for (ReviewDTO dto : dtos) {
+            professionalism += dto.getProfessionalism();
+            communication += dto.getCommunication();
+            cleanliness += dto.getCleanliness();
+            value += dto.getValue();
+        } ;
+
+        AvgReviewDTO avg = new AvgReviewDTO();
+        avg.setBranchId(id);
+        avg.setProfessionalism(professionalism / dtos.size());
+        avg.setCommunication(communication / dtos.size());
+        avg.setCleanliness(cleanliness / dtos.size());
+        avg.setValue(value / dtos.size());
+
+
+
+        return avg;
     }
 
     public List<ReviewDTO> findByPatientId(String id) {

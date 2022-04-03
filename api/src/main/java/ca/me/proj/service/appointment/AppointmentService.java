@@ -45,19 +45,19 @@ public class AppointmentService {
     public ResponseEntity<String> createAppointment(AppointmentDTO dto) {
         dto.setId(null);
 
-        if (!branchRepository.existsById(dto.getBranch().getId())) {
+        if (!branchRepository.existsById(dto.getBranchId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!employeeRepository.existsById(dto.getDentist().getId())) {
+        } else if (!employeeRepository.existsById(dto.getEmployeeId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
-        } else if (!patientRepository.existsById(dto.getPatient().getId())) {
+        } else if (!patientRepository.existsById(dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
-        } else if (dto.getStartTime().after(dto.getEndTime())) {
+        } else if (dto.getParsedStartTime().isAfter(dto.getParsedEndTime())) {
             return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
-        } else if (repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getPatient().getId())) {
+        } else if (repository.findPatientScheduleConflict(dto.getParsedStartTime(),
+                dto.getParsedEndTime(), dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
-        } else if (repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getDentist().getId())) {
+        } else if (repository.findEmployeeScheduleConflict(dto.getParsedStartTime(),
+                dto.getParsedEndTime(), dto.getEmployeeId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
         } else {
             repository.save(mapper.dtoToEntity(dto));
@@ -83,13 +83,13 @@ public class AppointmentService {
     }
 
     public boolean findPatientScheduleConflict(AppointmentDTO dto) {
-        return repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getPatient().getId());
+        return repository.findPatientScheduleConflict(dto.getParsedStartTime(),
+                dto.getParsedEndTime(), dto.getPatientId());
     }
 
     public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
-        return repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getDentist().getId());
+        return repository.findEmployeeScheduleConflict(dto.getParsedStartTime(),
+                dto.getParsedEndTime(), dto.getEmployeeId());
     }
 
 }

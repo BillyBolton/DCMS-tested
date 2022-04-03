@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ca.me.proj.dtos.appointment.AppointmentDTO;
 import ca.me.proj.service.appointment.AppointmentService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RestController
 @RequestMapping("/appointment")
 public class AppoinmentController {
@@ -22,6 +24,7 @@ public class AppoinmentController {
 
     @GetMapping("/findAll")
     public List<AppointmentDTO> findAll() {
+
         return service.findAll();
     }
 
@@ -45,18 +48,20 @@ public class AppoinmentController {
         return service.findByEmployeeId(id);
     }
 
-    @PostMapping("/findPatientScheduleConflict")
-    public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
-        return service.findPatientScheduleConflict(dto);
-    }
+    // @PostMapping("/findPatientScheduleConflict")
+    // public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
+    // log.info(dto.getStartTimeString());
+    // return service.findPatientScheduleConflict(dto);
+    // }
 
-    @PostMapping("/findEmployeeScheduleConflict")
-    public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
-        return service.findEmployeeScheduleConflict(dto);
-    }
+    // @PostMapping("/findEmployeeScheduleConflict")
+    // public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
+    // return service.findEmployeeScheduleConflict(dto);
+    // }
 
     @PostMapping("/create")
     public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO dto) {
+
         return service.createAppointment(dto);
     }
 

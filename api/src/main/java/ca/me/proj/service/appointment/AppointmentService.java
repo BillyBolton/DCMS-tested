@@ -51,14 +51,19 @@ public class AppointmentService {
             return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
         } else if (!patientRepository.existsById(dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
-        } else if (dto.getStartTime().isAfter(dto.getEndTime())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
-        } else if (repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getPatientId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
-        } else if (repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getEmployeeId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
+            // } else if (dto.getStartTime().isAfter(dto.getEndTime())) {
+            // return CustomResponseEntity.badRequestInvalidArgument("Start time is before end
+            // time");
+            // } else if (repository.findPatientScheduleConflict(dto.getStartTime(),
+            // dto.getEndTime(),
+            // dto.getPatientId())) {
+            // return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule
+            // conflict");
+            // } else if (repository.findEmployeeScheduleConflict(dto.getStartTime(),
+            // dto.getEndTime(),
+            // dto.getEmployeeId())) {
+            // return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule
+            // conflict");
         } else {
             repository.save(mapper.dtoToEntity(dto));
             return CustomResponseEntity.saveSuccess();
@@ -82,14 +87,14 @@ public class AppointmentService {
         return mapper.entityToDto(repository.findByEmployeeId(id));
     }
 
-    public boolean findPatientScheduleConflict(AppointmentDTO dto) {
-        return repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getPatientId());
-    }
+    // public boolean findPatientScheduleConflict(AppointmentDTO dto) {
+    // return repository.findPatientScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+    // dto.getPatientId());
+    // }
 
-    public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
-        return repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
-                dto.getEmployeeId());
-    }
+    // public boolean findEmployeeScheduleConflict(AppointmentDTO dto) {
+    // return repository.findEmployeeScheduleConflict(dto.getStartTime(), dto.getEndTime(),
+    // dto.getEmployeeId());
+    // }
 
 }

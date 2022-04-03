@@ -62,8 +62,8 @@ public class EmployeeService {
 
         // If Branch does not exist
         else if (!branchRepository.existsById(dto.getBranch().getId())) {
-            return new ResponseEntity<>("Branch ID does not exist " + dto.getBranch().getId()(),
-                    HttpStatus.BAD_REQUEST));
+            return new ResponseEntity<>("Branch ID does not exist " + dto.getBranch().getId(),
+                    HttpStatus.BAD_REQUEST);
 
             // }
             // // If ManagerID does not exists

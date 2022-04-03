@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 public class EmployeeDTO {
 
     private long SSN;
-    private String role;
+    private EmployeeRole role;
     private String type;
     private long salary;
 

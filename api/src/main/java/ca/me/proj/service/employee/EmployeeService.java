@@ -31,6 +31,10 @@ public class EmployeeService {
         return mapper.entityToDto(employeeRepository.findAll());
     }
 
+    public List<EmployeeDTO> findDentistByBranchId(String branchId) {
+        return mapper.entityToDto(employeeRepository.findDentistByBranchId(branchId));
+    }
+
     public ResponseEntity<String> createEmployee(EmployeeDTO dto) {
 
         dto.setId(null);

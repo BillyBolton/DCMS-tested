@@ -11,4 +11,8 @@ public interface IEmployeeRepository extends CrudRepository<EmployeeEntity, Stri
    @Query(value = "SELECT * from EMPLOYEE", nativeQuery = true)
    public List<EmployeeEntity> findAll();
 
+
+   @Query(value = "SELECT * from EMPLOYEE WHERE branch_id = ?1 AND role = 'DENTIST'",
+         nativeQuery = true)
+   public List<EmployeeEntity> findDentistByBranchId(String branchId);
 }

@@ -1,15 +1,19 @@
 package ca.me.proj.dtos.appointment;
 
+import java.time.LocalDateTime;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class AppointmentDTO {
 
+
     private Long id;
-    private String startTime;
-    private String endTime;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private int type;
     private int status;
     private String room;

@@ -181,6 +181,8 @@ dependencies {
   // implementation "org.glassfish:javax.el:3.0.0"
   annotationProcessor "javax.annotation:javax.annotation-api"
 
+  implementation 'org.springframework.boot:spring-boot-starter-validation:2.2.6.RELEASE'
+
   // protects API calls using oauth2 access tokens
   // implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
   implementation 'org.springframework.boot:spring-boot-starter-security:2.6.1'

@@ -1,5 +1,7 @@
 package ca.me.proj.controller.exception;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -25,6 +27,13 @@ public class ExceptionController {
         return new ResponseEntity<>(
                 createApiError(ex.getMessage(), ex.getCause(), HttpStatus.PRECONDITION_FAILED),
                 HttpStatus.PRECONDITION_FAILED);
+    }
+
+    @ExceptionHandler(value = {JsonParseException.class, DataIntegrityViolationException.class})
+    public ResponseEntity<ApiError> badRequest(Exception ex) {
+        return new ResponseEntity<>(
+                createApiError(ex.getMessage(), ex.getCause(), HttpStatus.BAD_REQUEST),
+                HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -1,6 +1,7 @@
 package ca.me.proj.service.appointment;
 
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -44,27 +45,30 @@ public class AppointmentService {
         return mapper.entityToDto(repository.findById(id).orElse(null));
     }
 
-    public ResponseEntity<String> createAppointment(AppointmentDTO dto) {
-        dto.setId(null);
-        AppointmentEntity entity = mapper.dtoToEntity(dto);
-        if (!branchRepository.existsById(entity.getBranchId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!employeeRepository.existsById(entity.getEmployeeId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
-        } else if (!patientRepository.existsById(entity.getPatientId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
-        } else if (entity.getStartTime().after(entity.getEndTime())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
-        } else if (repository.findPatientScheduleConflict(entity.getStartTime(),
-                entity.getEndTime(), entity.getPatientId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
-        } else if (repository.findEmployeeScheduleConflict(entity.getStartTime(),
-                entity.getEndTime(), entity.getEmployeeId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
-        } else {
-            repository.save(entity);
-            return CustomResponseEntity.saveSuccess();
-        }
+    public ResponseEntity<String> createAppointment(@Valid AppointmentDTO dto) {
+
+        repository.save(mapper.dtoToEntity(dto));
+        return CustomResponseEntity.saveSuccess();
+        // dto.setId(null);
+        // AppointmentEntity entity = mapper.dtoToEntity(dto);
+        // if (!branchRepository.existsById(entity.getBranchId())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
+        // } else if (!employeeRepository.existsById(entity.getEmployeeId())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Employee ID does not exist");
+        // } else if (!patientRepository.existsById(entity.getPatientId())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exist");
+        // } else if (entity.getStartTime().after(entity.getEndTime())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Start time is before end time");
+        // } else if (repository.findPatientScheduleConflict(entity.getStartTime(),
+        // entity.getEndTime(), entity.getPatientId())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Patient has schedule conflict");
+        // } else if (repository.findEmployeeScheduleConflict(entity.getStartTime(),
+        // entity.getEndTime(), entity.getEmployeeId())) {
+        // return CustomResponseEntity.badRequestInvalidArgument("Employee has schedule conflict");
+        // } else {
+        // repository.save(entity);
+        // return CustomResponseEntity.saveSuccess();
+        // }
     }
 
     public ResponseEntity<String> deletebyId(long id) {

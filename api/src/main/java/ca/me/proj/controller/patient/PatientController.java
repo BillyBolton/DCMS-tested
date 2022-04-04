@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ca.me.proj.dtos.patient.NewPatientDTO;
 import ca.me.proj.dtos.patient.PatientDTO;
 import ca.me.proj.service.patient.PatientService;
 
@@ -27,7 +28,7 @@ public class PatientController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPatient(@RequestBody PatientDTO dto) {
+    public NewPatientDTO createPatient(@RequestBody NewPatientDTO dto) {
         return service.createPatient(dto);
     }
 

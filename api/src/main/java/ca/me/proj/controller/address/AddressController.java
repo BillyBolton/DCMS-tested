@@ -2,7 +2,6 @@ package ca.me.proj.controller.address;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,13 +36,13 @@ public class AddressController {
     }
 
     @PostMapping("/create")
-    public AddressDTO createAddress(@RequestBody AddressDTO dto) {
+    public AddressDTO create(@RequestBody AddressDTO dto) {
         return service.create(dto);
     }
 
     @DeleteMapping("/deleteById")
-    public ResponseEntity<String> deleteAddressbyId(@RequestParam String id) {
-        return service.deleteById(id);
+    public void deleteById(@RequestParam String id) {
+        service.deleteById(id);
     }
 
 }

@@ -2,10 +2,8 @@ package ca.me.proj.service.address;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.address.AddressDTO;
-import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.address.IAddressMapper;
 import ca.me.proj.repository.address.IAddressRepository;
 
@@ -35,9 +33,8 @@ public class AddressService {
         return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
     }
 
-    public ResponseEntity<String> deleteById(String id) {
+    public void deleteById(String id) {
         repository.deleteById(id);
-        return CustomResponseEntity.deleteSuccess();
     }
 
 }

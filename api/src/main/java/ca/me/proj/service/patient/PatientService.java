@@ -4,12 +4,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import ca.me.proj.dtos.patient.NewPatientDTO;
 import ca.me.proj.dtos.patient.PatientDTO;
 import ca.me.proj.entity.response.CustomResponseEntity;
-import ca.me.proj.mapper.patient.INewPatientMapper;
 import ca.me.proj.mapper.patient.IPatientMapper;
-import ca.me.proj.repository.patient.INewPatientRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -22,11 +19,11 @@ public class PatientService {
     @Autowired
     private IPatientMapper mapper;
 
-    @Autowired
-    private INewPatientMapper newPatientMapper;
+    // @Autowired
+    // private INewPatientMapper newPatientMapper;
 
-    @Autowired
-    private INewPatientRepository newPatientRepository;
+    // @Autowired
+    // private INewPatientRepository newPatientRepository;
 
     @Autowired
     private IPatientRepository patientRepository;
@@ -45,8 +42,7 @@ public class PatientService {
         // if (!profileRepository.existsById(dto.getId())) {
         // throw new ResourceNotFoundException("Profile ID does not exist");
         // }
-        return newPatientMapper
-                .entityToDto(newPatientRepository.save(newPatientMapper.dtoToEntity(dto)));
+        return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
 
     }
 

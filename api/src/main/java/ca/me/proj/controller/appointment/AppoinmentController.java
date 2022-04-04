@@ -2,7 +2,6 @@ package ca.me.proj.controller.appointment;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,14 +59,14 @@ public class AppoinmentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createAppointment(@RequestBody AppointmentDTO dto) {
+    public AppointmentDTO createAppointment(@RequestBody AppointmentDTO dto) {
 
         return service.createAppointment(dto);
     }
 
     @DeleteMapping("/deleteById")
-    public ResponseEntity<String> deletebyId(@RequestParam Long id) {
-        return service.deletebyId(id);
+    public void deletebyId(@RequestParam Long id) {
+        service.deletebyId(id);
     }
 
 

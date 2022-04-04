@@ -50,7 +50,7 @@ public class AppoinmentController {
 
     @PostMapping("/findPatientScheduleConflict")
     public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
-        log.info(dto.getStartTime());
+        log.info(dto.getStartTime().toString());
         return service.findPatientScheduleConflict(dto);
     }
 

@@ -1,7 +1,6 @@
 package ca.me.proj.entity.profile;
 
 import java.sql.Date;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,7 +52,7 @@ public class ProfileEntity {
     // @Column(name = "address_id")
     // private String addressId;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 

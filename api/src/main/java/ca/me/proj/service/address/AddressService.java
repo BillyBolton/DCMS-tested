@@ -1,7 +1,6 @@
 package ca.me.proj.service.address;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -27,17 +26,16 @@ public class AddressService {
         return repository.existsById(id);
     }
 
-    public AddressDTO findByID(String id){
-        return mapper.entityToDto(repository.findByID(id));  
+    public AddressDTO findByID(String id) {
+        return mapper.entityToDto(repository.findByID(id));
     }
 
-    public ResponseEntity<String> createAddress(AddressDTO dto) {
+    public AddressDTO create(AddressDTO dto) {
         dto.setId(null);
-        repository.save(mapper.dtoToEntity(dto));
-        return CustomResponseEntity.saveSuccess();
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
     }
 
-    public ResponseEntity<String> deleteAddressbyId(String id) {
+    public ResponseEntity<String> deleteById(String id) {
         repository.deleteById(id);
         return CustomResponseEntity.deleteSuccess();
     }

@@ -12,9 +12,13 @@ import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.repository.patient.INewPatientRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class PatientService {
+
+
     @Autowired
     private IPatientMapper mapper;
 
@@ -32,6 +36,13 @@ public class PatientService {
 
     public List<PatientDTO> findAll() {
         return mapper.entityToDto(patientRepository.findAll());
+    }
+
+    public PatientDTO createPatient(PatientDTO dto) {
+
+        log.info("DTO STATE: {}", mapper.dtoToEntity(dto));
+
+        return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
     }
 
     public NewPatientDTO createPatient(NewPatientDTO dto) {

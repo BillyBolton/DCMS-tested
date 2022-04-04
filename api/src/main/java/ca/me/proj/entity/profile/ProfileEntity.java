@@ -3,6 +3,7 @@ package ca.me.proj.entity.profile;
 import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,6 @@ import lombok.Data;
 public class ProfileEntity {
 
     @Id
-    @NotNull
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -48,11 +48,8 @@ public class ProfileEntity {
     @Column(name = "dob")
     private Date DOB;
 
-    // @NotNull
-    // @Column(name = "address_id")
-    // private String addressId;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 

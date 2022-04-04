@@ -27,8 +27,13 @@ public class PatientController {
         return service.findAll();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/create/new")
     public NewPatientDTO createPatient(@RequestBody NewPatientDTO dto) {
+        return service.createPatient(dto);
+    }
+
+    @PostMapping("/create")
+    public PatientDTO createPatient(@RequestBody PatientDTO dto) {
         return service.createPatient(dto);
     }
 

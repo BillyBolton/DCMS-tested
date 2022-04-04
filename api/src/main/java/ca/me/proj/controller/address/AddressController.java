@@ -37,13 +37,13 @@ public class AddressController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createAddress(@RequestBody AddressDTO dto) {
-        return service.createAddress(dto);
+    public AddressDTO createAddress(@RequestBody AddressDTO dto) {
+        return service.create(dto);
     }
-    
+
     @DeleteMapping("/deleteById")
     public ResponseEntity<String> deleteAddressbyId(@RequestParam String id) {
-        return service.deleteAddressbyId(id);
+        return service.deleteById(id);
     }
 
 }

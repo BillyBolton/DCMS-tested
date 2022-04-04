@@ -1,15 +1,19 @@
 package ca.me.proj.entity.branch;
 
 
+import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import ca.me.proj.entity.address.AddressEntity;
 import ca.me.proj.entity.base.AbstractStringEntity;
 import ca.me.proj.entity.employee.EmployeeEntity;
+import ca.me.proj.entity.procedure.type.ProcedureTypeEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -33,4 +37,10 @@ public class BranchEntity extends AbstractStringEntity {
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
+
+    @ManyToMany
+    @JoinTable(name = "BRANCH_PROCEDURES", joinColumns = @JoinColumn(name = "branch_id"),
+            inverseJoinColumns = @JoinColumn(name = "procedure_id"))
+    private List<ProcedureTypeEntity> procedures;
+
 }

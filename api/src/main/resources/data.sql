@@ -230,6 +230,12 @@ INSERT INTO PROCEDURE_TYPE(id, type)
 VALUES('PT_1', 'NO_CLUE'),
     ('PT_2', 'NO_IDEA');
 -- =============================================================
+-- BRANCH_PROCEDURES
+-- =============================================================
+INSERT INTO BRANCH_PROCEDURES(branch_id, procedure_id)
+VALUES('B_1', 'PT_1'),
+    ('B_1', 'PT_2');
+-- =============================================================
 -- FEE
 -- =============================================================
 INSERT INTO FEE(
@@ -305,7 +311,33 @@ VALUES('POL123', 'GRP123', 99.99);
 -- =============================================================
 -- REVIEW
 -- =============================================================
-INSERT INTO REVIEW(date,branch_id,patient_id,professionalism,communication,cleanliness,value,comments)
-VALUES('2022-03-21','B_1', 'P_1',5,4,5,4,'Dr. Wonka was incredible!'),
-('2022-04-01','B_1','P_6',4,4,4,5,'Awesome visit, will come back soon!')
-
+INSERT INTO REVIEW(
+        date,
+        branch_id,
+        patient_id,
+        professionalism,
+        communication,
+        cleanliness,
+        value,
+        comments
+    )
+VALUES(
+        '2022-03-21',
+        'B_1',
+        'P_1',
+        5,
+        4,
+        5,
+        4,
+        'Dr. Wonka was incredible!'
+    ),
+    (
+        '2022-04-01',
+        'B_1',
+        'P_6',
+        4,
+        4,
+        4,
+        5,
+        'Awesome visit, will come back soon!'
+    )

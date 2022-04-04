@@ -1,9 +1,11 @@
 package ca.me.proj.entity.employee;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -61,9 +63,8 @@ public class EmployeeEntity extends AbstractStringEntity {
     @JoinColumn(name = "branch_id", nullable = false)
     private BranchEntity branch;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @MapsId
     @JoinColumn(name = "id")
     private ProfileEntity profile;
-
 }

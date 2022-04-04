@@ -9,6 +9,7 @@ import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.repository.patient.IPatientRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
+import ca.me.proj.service.profile.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -29,7 +30,7 @@ public class PatientService {
     private IPatientRepository patientRepository;
 
     @Autowired
-    private IProfileRepository profileRepository;
+    private ProfileService profileService;
 
     public List<PatientDTO> findAll() {
         return mapper.entityToDto(patientRepository.findAll());
@@ -42,7 +43,13 @@ public class PatientService {
         // if (!profileRepository.existsById(dto.getId())) {
         // throw new ResourceNotFoundException("Profile ID does not exist");
         // }
-        return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
+        if(profileService.existsByUsername(dto.getId())){
+            return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
+        }else{
+            dto.setProfile(profileService.createProfile(dto.getProfile()));
+            return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
+        }
+        
 
     }
 

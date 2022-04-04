@@ -6,9 +6,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import ca.me.proj.entity.patient.PatientEntity;
 import lombok.Data;
+import javax.persistence.JoinColumn;
 
 
 @Data
@@ -46,15 +50,15 @@ public class ReviewEntity {
     @Column(name = "branch_id")
     private String branchId;
 
-    @NotNull
-    @Column(name = "patient_id")
-    private String patientId;
+    //@NotNull
+    //@Column(name = "patient_id")
+    //private String patientId;
 
     // @ManyToOne
     // @JoinColumn(name = "branch_id", nullable = false)
     // private BranchViewEntity branch;
 
-    // @ManyToOne
-    // @JoinColumn(name = "patient_id", nullable = false)
-    // private PatientEntity patient;
+    @ManyToOne
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private PatientEntity patient;
 }

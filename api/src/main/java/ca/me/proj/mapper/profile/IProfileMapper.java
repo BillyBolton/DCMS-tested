@@ -1,18 +1,17 @@
 package ca.me.proj.mapper.profile;
 
-import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import ca.me.proj.dtos.profile.ProfileDTO;
 import ca.me.proj.entity.profile.ProfileEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
-@Mapper
-public interface IProfileMapper {
-    ProfileDTO entityToDto(ProfileEntity entity);
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IProfileMapper extends IBaseMapper<ProfileDTO, ProfileEntity> {
 
-    ProfileEntity dtoToEntity(ProfileDTO dto);
+    // ProfileDTO entityToDto(ProfileEntity entity);
 
-    List<ProfileEntity> dtoToEntity(Iterable<ProfileDTO> dtos);
+    // ProfileEntity dtoToEntity(ProfileDTO dto);
 
-    List<ProfileDTO> entityToDto(Iterable<ProfileEntity> entities);
-    
+
 }

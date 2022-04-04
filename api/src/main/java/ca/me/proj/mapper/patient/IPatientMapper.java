@@ -1,18 +1,15 @@
 package ca.me.proj.mapper.patient;
 
-import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import ca.me.proj.dtos.patient.PatientDTO;
 import ca.me.proj.entity.patient.PatientEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
-@Mapper
-public interface IPatientMapper {
-    PatientDTO entityToDto(PatientEntity entity);
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IPatientMapper extends IBaseMapper<PatientDTO, PatientEntity> {
+    // PatientDTO entityToDto(PatientEntity entity);
 
-    PatientEntity dtoToEntity(PatientDTO dto);
+    // PatientEntity dtoToEntity(PatientDTO dto);
 
-    List<PatientEntity> dtoToEntity(Iterable<PatientDTO> dtos);
-
-    List<PatientDTO> entityToDto(Iterable<PatientEntity> entities);
-    
 }

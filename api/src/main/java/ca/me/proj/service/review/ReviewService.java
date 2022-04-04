@@ -37,6 +37,16 @@ public class ReviewService {
 
     public AvgReviewDTO findAverageByBranchId(String id) {
         List<ReviewDTO> dtos = findByBranchId(id);
+        AvgReviewDTO avg = new AvgReviewDTO();
+
+        if (dtos.isEmpty()) {
+            avg.setBranchId(id);
+            avg.setProfessionalism(0L);
+            avg.setCommunication(0L);
+            avg.setCleanliness(0L);
+            avg.setValue(0L);
+            return avg;
+        }
 
         Long professionalism = 0L;
         Long communication = 0L;
@@ -50,7 +60,7 @@ public class ReviewService {
             value += dto.getValue();
         } ;
 
-        AvgReviewDTO avg = new AvgReviewDTO();
+
         avg.setBranchId(id);
         avg.setProfessionalism(professionalism / dtos.size());
         avg.setCommunication(communication / dtos.size());
@@ -68,9 +78,9 @@ public class ReviewService {
 
     public ResponseEntity<String> createReview(ReviewDTO dto) {
         dto.setId(null);
-        if (!branchRepository.existsById(dto.getBranch().getId())) {
+        if (!branchRepository.existsById(dto.getBranchId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!patientRepository.existsById(dto.getPatient().getId())) {
+        } else if (!patientRepository.existsById(dto.getPatientId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exists");
         } else if (dto.getProfessionalism() < 1 || dto.getProfessionalism() > 5) {
             return CustomResponseEntity

@@ -1,5 +1,6 @@
 package ca.me.proj.entity.profile;
 
+import java.sql.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class ProfileEntity {
 
     @NotNull
     @Column(name = "dob")
-    private String DOB;
+    private Date DOB;
 
     // @NotNull
     // @Column(name = "address_id")

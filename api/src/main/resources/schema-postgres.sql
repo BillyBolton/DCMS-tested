@@ -159,8 +159,7 @@ CREATE TABLE APPOINTMENT (
     end_time TIMESTAMP,
     type INT NOT NULL,
     status INT NOT NULL,
-    room_number VARCHAR
-    --Add branch, employee, and patient foreign keys?
+    room_number VARCHAR --Add branch, employee, and patient foreign keys?
 );
 -- =============================================================
 -- INSURANCE
@@ -183,6 +182,17 @@ CREATE TABLE PROCEDURE_TYPE(
     id VARCHAR(255) NOT NULL DEFAULT 'PT_' || nextval('procedure_type_seq')::VARCHAR(255) UNIQUE,
     type VARCHAR(255) UNIQUE NOT NULL,
     PRIMARY KEY (id)
+);
+-- =============================================================
+-- BRANCH_PROCEDURES
+-- =============================================================
+DROP TABLE IF EXISTS BRANCH_PROCEDURES CASCADE;
+CREATE TABLE BRANCH_PROCEDURES(
+    branch_id VARCHAR(255) NOT NULL,
+    procedure_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY(branch_id) REFERENCES BRANCH(id),
+    FOREIGN KEY(procedure_id) REFERENCES PROCEDURE_TYPE(id),
+    PRIMARY KEY (branch_id, procedure_id)
 );
 -- =============================================================
 -- FEE
@@ -224,8 +234,7 @@ CREATE TABLE TREATMENT (
     procedure_id VARCHAR(255) NOT NULL,
     -- teeth CHAR,
     symptoms VARCHAR(255),
-    comments VARCHAR(255)
-    --Add procedure_id foreign key?
+    comments VARCHAR(255) --Add procedure_id foreign key?
 );
 -- =============================================================
 -- INVOICE
@@ -285,10 +294,10 @@ CREATE TABLE REVIEW(
     date Date NOT NULL,
     branch_id VARCHAR(255) NOT NULL,
     patient_id VARCHAR(255) NOT NULL,
-    professionalism BIGINT CHECK (professionalism  in (1,2,3,4,5)),
-    communication BIGINT CHECK (communication  in (1,2,3,4,5)),
-    cleanliness BIGINT CHECK (cleanliness in (1,2,3,4,5)),
-    value BIGINT CHECK (value in (1,2,3,4,5)),
+    professionalism BIGINT CHECK (professionalism in (1, 2, 3, 4, 5)),
+    communication BIGINT CHECK (communication in (1, 2, 3, 4, 5)),
+    cleanliness BIGINT CHECK (cleanliness in (1, 2, 3, 4, 5)),
+    value BIGINT CHECK (value in (1, 2, 3, 4, 5)),
     comments VARCHAR(255),
     FOREIGN KEY (branch_id) REFERENCES BRANCH(id),
     FOREIGN KEY (patient_id) REFERENCES PATIENT(id)

@@ -15,7 +15,7 @@ public class ProcedureDTO {
 
     // FKs
     private Long appointmentId;
-    private Long procedureCode;
-    private Long invoicedId;
+    private String procedureCode;
+    // private Long invoicedId;
 
 }

@@ -27,7 +27,6 @@ public class PatientService {
 
     public ResponseEntity<String> createPatient(PatientDTO dto) {
 
-        dto.setId(null);
 
         // If ID does not exist in Profile repo
         if (!profileRepository.existsById(dto.getId())) {

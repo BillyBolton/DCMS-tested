@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.appointment.AppointmentDTO;
 import ca.me.proj.entity.appointment.AppointmentEntity;
 import ca.me.proj.entity.response.CustomResponseEntity;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.appointment.IAppointmentMapper;
 import ca.me.proj.repository.appointment.IAppointmentRepository;
 import ca.me.proj.repository.branch.IBranchRepository;
@@ -35,11 +36,11 @@ public class AppointmentService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public boolean existsById(Long id) {
+    public boolean existsById(long id) {
         return repository.existsById(id);
     }
 
-    public AppointmentDTO findById(Long id) {
+    public AppointmentDTO findById(long id) {
         return mapper.entityToDto(repository.findById(id).orElse(null));
     }
 
@@ -66,7 +67,11 @@ public class AppointmentService {
         }
     }
 
-    public ResponseEntity<String> deletebyId(Long id) {
+    public ResponseEntity<String> deletebyId(long id) {
+        if (!repository.existsById(id)) {
+            throw new ResourceNotFoundException("An entity with id " + id + " does not exist");
+        }
+
         if (repository.existsById(id)) {
             repository.deleteById(id);
             return CustomResponseEntity.deleteSuccess();

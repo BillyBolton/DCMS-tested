@@ -34,9 +34,10 @@ public class ProcedureEntity {
     private Long appointmentId;
 
     @Column(name = "procedure_code")
-    private Long procedureCode;
+    private String procedureCode;
 
-    @Column(name = "invoice_id")
-    private Long invoicedId;
+    // @Column(name = "invoice_id")
+    // private Long invoicedId;
 
 }
+

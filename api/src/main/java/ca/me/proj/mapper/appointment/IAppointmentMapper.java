@@ -1,19 +1,16 @@
 package ca.me.proj.mapper.appointment;
 
-import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import ca.me.proj.dtos.appointment.AppointmentDTO;
 import ca.me.proj.entity.appointment.AppointmentEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
-@Mapper
-public interface IAppointmentMapper {
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IAppointmentMapper extends IBaseMapper<AppointmentDTO, AppointmentEntity> {
 
-    AppointmentDTO entityToDto(AppointmentEntity entity);
+    // AppointmentDTO entityToDto(AppointmentEntity entity);
 
-    AppointmentEntity dtoToEntity(AppointmentDTO dto);
-
-    List<AppointmentEntity> dtoToEntity(Iterable<AppointmentDTO> dtos);
-
-    List<AppointmentDTO> entityToDto(Iterable<AppointmentEntity> entities);
+    // AppointmentEntity dtoToEntity(AppointmentDTO dto);
 
 }

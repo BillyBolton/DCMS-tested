@@ -1,21 +1,18 @@
 package ca.me.proj.mapper.review;
 
 
-import java.util.List;
 import org.mapstruct.Mapper;
-
+import org.mapstruct.ReportingPolicy;
 import ca.me.proj.dtos.review.ReviewDTO;
 import ca.me.proj.entity.review.ReviewEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
 
-@Mapper
-public interface IReviewMapper {
-    
-    ReviewDTO entityToDto(ReviewEntity entity);
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IReviewMapper extends IBaseMapper<ReviewDTO, ReviewEntity> {
 
-    ReviewEntity dtoToEntity(ReviewDTO dto);
+    // ReviewDTO entityToDto(ReviewEntity entity);
 
-    List<ReviewEntity> dtoToEntity(Iterable<ReviewDTO> dtos);
+    // ReviewEntity dtoToEntity(ReviewDTO dto);
 
-    List<ReviewDTO> entityToDto(Iterable<ReviewEntity> entities);
 }

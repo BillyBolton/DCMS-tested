@@ -14,7 +14,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "EMPLOYEE")
-public class NestedEmployeeEntity extends AbstractStringEntity {
+public class ManagerEntity extends AbstractStringEntity {
 
     @OneToOne
     @MapsId

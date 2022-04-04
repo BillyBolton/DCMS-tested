@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import ca.me.proj.dtos.employee.EmployeeRole;
 import ca.me.proj.entity.base.AbstractStringEntity;
-import ca.me.proj.entity.branch.NestedBranchEntity;
+import ca.me.proj.entity.branch.BranchEntity;
 import ca.me.proj.entity.profile.ProfileEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -59,7 +59,7 @@ public class EmployeeEntity extends AbstractStringEntity {
 
     @ManyToOne
     @JoinColumn(name = "branch_id", nullable = false)
-    private NestedBranchEntity branch;
+    private BranchEntity branch;
 
     @OneToOne
     @MapsId

@@ -1,5 +1,7 @@
 package ca.me.proj.entity.base;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
@@ -16,7 +18,7 @@ public class AbstractStringEntity {
 
     @NotNull(message = "ID cannot be null for Entity")
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
 }

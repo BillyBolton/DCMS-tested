@@ -1,18 +1,16 @@
 package ca.me.proj.mapper.employee;
 
-import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 import ca.me.proj.dtos.employee.EmployeeDTO;
 import ca.me.proj.entity.employee.EmployeeEntity;
+import ca.me.proj.mapper.base.IBaseMapper;
 
-@Mapper
-public interface IEmployeeMapper {
-    
-    EmployeeDTO entityToDto(EmployeeEntity entity);
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+public interface IEmployeeMapper extends IBaseMapper<EmployeeDTO, EmployeeEntity> {
 
-    EmployeeEntity dtoToEntity(EmployeeDTO dto);
+    // EmployeeDTO entityToDto(EmployeeEntity entity);
 
-    List<EmployeeEntity> dtoToEntity(Iterable<EmployeeDTO> dtos);
+    // EmployeeEntity dtoToEntity(EmployeeDTO dto);
 
-    List<EmployeeDTO> entityToDto(Iterable<EmployeeEntity> entities);
 }

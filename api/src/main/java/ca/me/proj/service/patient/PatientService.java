@@ -40,14 +40,6 @@ public class PatientService {
 
     public PatientDTO createPatient(PatientDTO dto) {
 
-        log.info("DTO STATE: {}", mapper.dtoToEntity(dto));
-
-        return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
-    }
-
-    public NewPatientDTO createPatient(NewPatientDTO dto) {
-
-        // dto.setId(null);
 
         // If ID does not exist in Profile repo
         // if (!profileRepository.existsById(dto.getId())) {

@@ -1,6 +1,7 @@
 
 package ca.me.proj.dtos.profile;
 
+import java.time.LocalDate;
 import ca.me.proj.dtos.address.AddressDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ public class ProfileDTO {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String DOB;
+    private LocalDate DOB;
     private AddressDTO address;
 
 }

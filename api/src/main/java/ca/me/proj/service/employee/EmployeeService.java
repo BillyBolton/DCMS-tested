@@ -11,6 +11,7 @@ import ca.me.proj.mapper.employee.IEmployeeMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
 import ca.me.proj.repository.employee.IEmployeeRepository;
 import ca.me.proj.repository.profile.IProfileRepository;
+import ca.me.proj.service.profile.ProfileService;
 
 @Service
 public class EmployeeService {
@@ -27,6 +28,9 @@ public class EmployeeService {
     @Autowired
     private IBranchRepository branchRepository;
 
+    @Autowired
+    private ProfileService profileService;
+
     public List<EmployeeDTO> findAll() {
         return mapper.entityToDto(employeeRepository.findAll());
     }
@@ -35,17 +39,17 @@ public class EmployeeService {
         return mapper.entityToDto(employeeRepository.findDentistByBranchId(branchId));
     }
 
-    public ResponseEntity<String> createEmployee(EmployeeDTO dto) {
+    public EmployeeDTO createEmployee(EmployeeDTO dto) {
 
-        dto.setId(null);
-
+        /*
         // If ID does not exist in Profile repo
-        if (!profileRepository.existsById(dto.getId())) {
-            return CustomResponseEntity.badRequestDNE();
-        }
+        //if (!profileRepository.existsById(dto.getId())) {
+           // return CustomResponseEntity.badRequestDNE();
+        //}
+
 
         // If Employee Role is incorrectly formated
-        else if (!dto.getRole().equals("MANAGER") && !dto.getRole().equals("RECEPTIONIST")
+        if (!dto.getRole().equals("MANAGER") && !dto.getRole().equals("RECEPTIONIST")
                 && !dto.getRole().equals("DENTIST") && !dto.getRole().equals("HYGIENIST")) {
             return new ResponseEntity<>("Invalid Employee Role: " + dto.getRole(),
                     HttpStatus.BAD_REQUEST);
@@ -76,11 +80,19 @@ public class EmployeeService {
             // return new ResponseEntity<>("ManagerID does not exist " + dto.getManagerID(),
             // HttpStatus.BAD_REQUEST);
 
-        } else {
-            employeeRepository.save(mapper.dtoToEntity(dto));
-            return CustomResponseEntity.saveSuccess();
-        }
+        } else {*/
+
+
+            if(profileService.existsByID(dto.getId())){
+                return mapper.entityToDto(employeeRepository.save(mapper.dtoToEntity(dto)));
+            }else{
+                dto.setProfile(profileService.createProfile(dto.getProfile()));
+                return mapper.entityToDto(employeeRepository.save(mapper.dtoToEntity(dto)));
+                
+            }
+            
     }
+    
 
     public ResponseEntity<String> deleteEmployeeByID(String id) {
         if (employeeRepository.existsById(id)) {

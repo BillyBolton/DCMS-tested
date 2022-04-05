@@ -80,7 +80,7 @@ public class ReviewService {
         dto.setId(null);
         if (!branchRepository.existsById(dto.getBranchId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!patientRepository.existsById(dto.getPatientId())) {
+        } else if (!patientRepository.existsById(dto.getPatient().getId())) {
             return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exists");
         } else if (dto.getProfessionalism() < 1 || dto.getProfessionalism() > 5) {
             return CustomResponseEntity

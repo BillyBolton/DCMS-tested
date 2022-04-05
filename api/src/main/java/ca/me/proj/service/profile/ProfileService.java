@@ -1,6 +1,7 @@
 package ca.me.proj.service.profile;
 
 import java.util.List;
+import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
@@ -33,9 +34,16 @@ public class ProfileService extends AuthenticationService {
         if (repository.existsByUsername(dto.getUsername())) {
             throw new ResourceAlreadyExistsException("Username already exists");
         }
-
         dto.setDOB(dto.getDOB().plusDays(1));
-        dto.setAddress(addressService.create(dto.getAddress()));
+
+        try {
+            addressService.checkExists(dto.getAddress());
+            dto.setAddress(addressService.create(dto.getAddress()));
+        } catch (ConstraintViolationException e) {
+            dto.setAddress(addressService.findByAddress(dto.getAddress()));
+        } catch (ResourceAlreadyExistsException e) {
+            dto.setAddress(addressService.findByAddress(dto.getAddress()));
+        }
 
         return save(dto);
     }

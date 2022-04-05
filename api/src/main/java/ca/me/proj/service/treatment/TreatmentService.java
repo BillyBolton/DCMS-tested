@@ -39,6 +39,7 @@ public class TreatmentService {
 
     public TreatmentDTO createTreatment(TreatmentDTO dto) {
         dto.setId(null);
+        // TODO validation
         return save(dto);
     }
 

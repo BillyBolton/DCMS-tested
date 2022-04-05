@@ -28,7 +28,7 @@ public class PatientService {
     }
 
     public PatientDTO createPatient(PatientDTO dto) {
-        // TODO migrate Jake's work
+
 
         if (profileService.existsByUsername(dto.getId())) {
             return save(dto);

@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.address.AddressDTO;
-import ca.me.proj.exceptions.ResourceNotFoundException;
+import ca.me.proj.exceptions.ResourceAlreadyExistsException;
 import ca.me.proj.mapper.address.IAddressMapper;
 import ca.me.proj.repository.address.IAddressRepository;
 
@@ -26,14 +26,24 @@ public class AddressService {
     }
 
     public AddressDTO findByID(String id) {
-        if (!repository.existsByID(id)) {
-            throw new ResourceNotFoundException("Address ID does not exist");
-        }
         return mapper.entityToDto(repository.findByID(id));
+    }
+
+    public AddressDTO findByAddress(AddressDTO dto) {
+
+        return mapper.entityToDto(repository.findByAddress(dto.getBuildingNumber(), dto.getStreet(),
+                dto.getCity(), dto.getProvince().toString(), dto.getPostalCode()));
     }
 
     public AddressDTO create(AddressDTO dto) {
         dto.setId(null);
+
+        checkExists(dto);
+
+        // if(existsByID(dto.getId()) && !existsByAddress(dto)){
+        // return findByAddress(dto);
+        // }
+
         return save(dto);
     }
 
@@ -41,8 +51,23 @@ public class AddressService {
         repository.deleteByID(id);
     }
 
-    public AddressDTO save(AddressDTO dto) {
+    private AddressDTO save(AddressDTO dto) {
         return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
+    public void checkExists(AddressDTO dto) {
+        if (dto.getId() != null && repository.existsByID(dto.getId())) {
+            throw new ResourceAlreadyExistsException("Address ID already exists");
+        }
+
+        if (existsByAddress(dto)) {
+            throw new ResourceAlreadyExistsException("Address already exists");
+        }
+    }
+
+    public boolean existsByAddress(AddressDTO dto) {
+        return repository.existsByAddress(dto.getBuildingNumber(), dto.getStreet(), dto.getCity(),
+                dto.getProvince().toString(), dto.getPostalCode());
     }
 
 }

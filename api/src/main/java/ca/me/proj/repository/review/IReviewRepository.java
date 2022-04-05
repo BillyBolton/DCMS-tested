@@ -18,7 +18,7 @@ public interface IReviewRepository extends JpaRepository<ReviewEntity, Long> {
             nativeQuery = true)
     public boolean existsByID(long id);
 
-    @Query(value = "DELETE from from REVIEW p where p.id = ?1", nativeQuery = true)
+    @Query(value = "DELETE from REVIEW p where p.id = ?1", nativeQuery = true)
     public void deleteByID(long id);
 
     @Query(value = "SELECT * FROM REVIEW WHERE branch_id = ?1", nativeQuery = true)

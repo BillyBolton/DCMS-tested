@@ -7,7 +7,7 @@ import ca.me.proj.entity.branch.BranchEntity;
 
 public interface IBranchRepository extends JpaRepository<BranchEntity, String> {
 
-    @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from Branch b where b.id = ?1",
+    @Query(value = "SELECT CASE WHEN count(b)> 0 THEN true ELSE false end from Branch b where b.id = ?1",
             nativeQuery = true)
     public boolean existsByID(String id);
 
@@ -18,6 +18,6 @@ public interface IBranchRepository extends JpaRepository<BranchEntity, String> {
     @Query(value = "SELECT * from Branch WHERE id = ?1 ", nativeQuery = true)
     public <Optional> BranchEntity findByID(String id);
 
-    @Query(value = "DELETE from from Branch a where a.id = ?1", nativeQuery = true)
+    @Query(value = "DELETE from from Branch b where b.id = ?1", nativeQuery = true)
     public void deleteByID(String id);
 }

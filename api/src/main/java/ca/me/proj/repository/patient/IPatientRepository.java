@@ -14,7 +14,7 @@ public interface IPatientRepository extends JpaRepository<PatientEntity, String>
     @Query(value = "SELECT * from PATIENT WHERE id = ?1 ", nativeQuery = true)
     public <Optional> PatientEntity findByID(String id);
 
-    @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from PATIENT p where p.id = ?1",
+    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PATIENT p where p.id = ?1",
             nativeQuery = true)
     public boolean existsByID(String id);
 

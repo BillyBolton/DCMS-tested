@@ -17,7 +17,7 @@ public interface IProcedureRepository extends JpaRepository<ProcedureEntity, Str
     @Query(value = "SELECT * from PROCEDURE WHERE id = ?1", nativeQuery = true)
     public Optional<ProcedureEntity> findByID(String id);
 
-    @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from PROCEDURE p where p.id = ?1",
+    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PROCEDURE p where p.id = ?1",
             nativeQuery = true)
     public boolean existsByID(String id);
 

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.employee.EmployeeDTO;
+import ca.me.proj.dtos.employee.NewEmployeeDTO;
 import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.employee.IEmployeeMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
@@ -24,7 +25,6 @@ public class EmployeeService {
 
     @Autowired
     private IBranchRepository branchRepository;
-
 
     public List<EmployeeDTO> findAll() {
         return mapper.entityToDto(employeeRepository.findAll());
@@ -47,6 +47,12 @@ public class EmployeeService {
 
         dto.setProfile(profileService.createProfile(dto.getProfile()));
         return save(dto);
+
+    }
+
+    public NewEmployeeDTO createEmployee(NewEmployeeDTO dto) {
+
+        return mapper.dtoToLite(createEmployee(mapper.liteToDto(dto)));
 
     }
 

@@ -9,27 +9,27 @@ import ca.me.proj.entity.profile.ProfileEntity;
 @Repository
 public interface IProfileRepository extends JpaRepository<ProfileEntity, String> {
 
-    @Override
-    @Query(value = "SELECT * from PROFILE", nativeQuery = true)
-    public List<ProfileEntity> findAll();
+        @Override
+        @Query(value = "SELECT * from PROFILE", nativeQuery = true)
+        public List<ProfileEntity> findAll();
 
-    @Query(value = "SELECT * from PROFILE WHERE username = ?1", nativeQuery = true)
-    public ProfileEntity findByUsername(String username);
+        @Query(value = "SELECT * from PROFILE WHERE username = ?1", nativeQuery = true)
+        public ProfileEntity findByUsername(String username);
 
-    @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1",
-            nativeQuery = true)
+        @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from Profile p where p.username = ?1",
+                        nativeQuery = true)
 
-    public boolean existsByUsername(String username);
+        public boolean existsByUsername(String username);
 
-    @Query(value = "SELECT * from PROFILE WHERE id = ?1 ", nativeQuery = true)
-    public <Optional> ProfileEntity findByID(String id);
+        @Query(value = "SELECT * from PROFILE WHERE id = ?1 ", nativeQuery = true)
+        public <Optional> ProfileEntity findByID(String id);
 
-    @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from PROFILE p where p.id = ?1",
-            nativeQuery = true)
-    public boolean existsByID(String id);
+        @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PROFILE p where p.id = ?1",
+                        nativeQuery = true)
+        public boolean existsByID(String id);
 
-    @Query(value = "DELETE from from PROFILE p where p.id = ?1", nativeQuery = true)
-    public void deleteByID(String id);
+        @Query(value = "DELETE from from PROFILE p where p.id = ?1", nativeQuery = true)
+        public void deleteByID(String id);
 
 
 }

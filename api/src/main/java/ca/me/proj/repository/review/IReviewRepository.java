@@ -14,7 +14,7 @@ public interface IReviewRepository extends JpaRepository<ReviewEntity, Long> {
     @Query(value = "SELECT * from PATIENT WHERE id = ?1 ", nativeQuery = true)
     public <Optional> ReviewEntity findByID(long id);
 
-    @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from REVIEW r where r.id = ?1",
+    @Query(value = "SELECT CASE WHEN count(r)> 0 THEN true ELSE false end from REVIEW r where r.id = ?1",
             nativeQuery = true)
     public boolean existsByID(long id);
 

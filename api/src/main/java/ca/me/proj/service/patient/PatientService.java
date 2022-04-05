@@ -30,7 +30,11 @@ public class PatientService {
     public PatientDTO createPatient(PatientDTO dto) {
 
 
-        if (profileService.existsByUsername(dto.getId())) {
+        if (profileService.existsByUsername(dto.getProfile().getUsername())) {
+            return save(dto);
+        }
+
+        if (profileService.existsByID(dto.getProfile().getId())) {
             return save(dto);
         }
 

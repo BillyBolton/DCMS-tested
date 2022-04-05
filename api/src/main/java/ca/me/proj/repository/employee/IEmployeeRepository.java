@@ -20,7 +20,7 @@ public interface IEmployeeRepository extends JpaRepository<EmployeeEntity, Strin
       @Query(value = "SELECT * from EMPLOYEE WHERE id = ?1 ", nativeQuery = true)
       public <Optional> EmployeeEntity findByID(String id);
 
-      @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from EMPLOYEE e where e.id = ?1",
+      @Query(value = "SELECT CASE WHEN count(e)> 0 THEN true ELSE false end from EMPLOYEE e where e.id = ?1",
                   nativeQuery = true)
       public boolean existsByID(String id);
 

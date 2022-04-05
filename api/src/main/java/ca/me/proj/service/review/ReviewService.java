@@ -73,7 +73,7 @@ public class ReviewService {
     }
 
     public ReviewDTO createReview(ReviewDTO dto) {
-        dto.setId(null);
+        // dto.setId(null);
         createValidation(dto);
         return save(dto);
     }

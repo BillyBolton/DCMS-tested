@@ -47,13 +47,13 @@ public class AppoinmentController {
         return service.findByEmployeeId(id);
     }
 
-    @PostMapping("/findPatientScheduleConflict")
+    @PostMapping("/patient/hasScheduleConflict")
     public boolean findPatientScheduleConflict(@RequestBody AppointmentDTO dto) {
         log.info(dto.getStartTime().toString());
         return service.findPatientScheduleConflict(dto);
     }
 
-    @PostMapping("/findEmployeeScheduleConflict")
+    @PostMapping("/employee/hasScheduleConflict")
     public boolean findEmployeeScheduleConflict(@RequestBody AppointmentDTO dto) {
         return service.findEmployeeScheduleConflict(dto);
     }

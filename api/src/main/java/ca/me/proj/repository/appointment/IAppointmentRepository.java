@@ -2,11 +2,14 @@ package ca.me.proj.repository.appointment;
 
 import java.util.Date;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ca.me.proj.entity.appointment.AppointmentEntity;
 
+@Transactional
 @Repository
 public interface IAppointmentRepository extends JpaRepository<AppointmentEntity, Long> {
 
@@ -21,6 +24,7 @@ public interface IAppointmentRepository extends JpaRepository<AppointmentEntity,
                         nativeQuery = true)
         public boolean existsByID(long id);
 
+        @Modifying
         @Query(value = "DELETE from APPOINTMENT a where a.id = ?1", nativeQuery = true)
         public void deleteByID(long id);
 

@@ -2,10 +2,15 @@ package ca.me.proj.repository.review;
 
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 import ca.me.proj.entity.review.ReviewEntity;
 
+@Transactional
+@Repository
 public interface IReviewRepository extends JpaRepository<ReviewEntity, Long> {
     @Override
     @Query(value = "SELECT * from REVIEW", nativeQuery = true)
@@ -18,6 +23,7 @@ public interface IReviewRepository extends JpaRepository<ReviewEntity, Long> {
             nativeQuery = true)
     public boolean existsByID(long id);
 
+    @Modifying
     @Query(value = "DELETE from REVIEW p where p.id = ?1", nativeQuery = true)
     public void deleteByID(long id);
 

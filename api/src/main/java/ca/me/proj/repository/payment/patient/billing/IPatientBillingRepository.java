@@ -1,11 +1,14 @@
 package ca.me.proj.repository.payment.patient.billing;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ca.me.proj.entity.payment.patient.billing.PatientBillingEntity;
 
+@Transactional
 @Repository
 public interface IPatientBillingRepository extends JpaRepository<PatientBillingEntity, Long> {
 
@@ -20,6 +23,7 @@ public interface IPatientBillingRepository extends JpaRepository<PatientBillingE
             nativeQuery = true)
     public boolean existsByID(long id);
 
+    @Modifying
     @Query(value = "DELETE from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)
     public void deleteByID(long id);
 

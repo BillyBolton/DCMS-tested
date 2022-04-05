@@ -1,11 +1,14 @@
 package ca.me.proj.repository.treatment;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ca.me.proj.entity.treatment.TreatmentEntity;
 
+@Transactional
 @Repository
 public interface ITreatmentRepository extends JpaRepository<TreatmentEntity, Long> {
 
@@ -21,6 +24,7 @@ public interface ITreatmentRepository extends JpaRepository<TreatmentEntity, Lon
                         nativeQuery = true)
         public boolean existsByID(long id);
 
+        @Modifying
         @Query(value = "DELETE from Treatment t where t.id = ?1", nativeQuery = true)
         public void deleteByID(long id);
 

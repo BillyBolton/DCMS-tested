@@ -29,7 +29,8 @@ public class ExceptionController {
                 HttpStatus.PRECONDITION_FAILED);
     }
 
-    @ExceptionHandler(value = {JsonParseException.class, DataIntegrityViolationException.class})
+    @ExceptionHandler(value = {JsonParseException.class, DataIntegrityViolationException.class,
+            IllegalArgumentException.class})
     public ResponseEntity<ApiError> badRequest(Exception ex) {
         return new ResponseEntity<>(
                 createApiError(ex.getMessage(), ex.getCause(), HttpStatus.BAD_REQUEST),

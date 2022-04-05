@@ -2,11 +2,10 @@ package ca.me.proj.service.review;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.review.AvgReviewDTO;
 import ca.me.proj.dtos.review.ReviewDTO;
-import ca.me.proj.entity.response.CustomResponseEntity;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.review.IReviewMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
@@ -58,16 +57,13 @@ public class ReviewService {
             communication += dto.getCommunication();
             cleanliness += dto.getCleanliness();
             value += dto.getValue();
-        } ;
-
+        }
 
         avg.setBranchId(id);
         avg.setProfessionalism(professionalism / dtos.size());
         avg.setCommunication(communication / dtos.size());
         avg.setCleanliness(cleanliness / dtos.size());
         avg.setValue(value / dtos.size());
-
-
 
         return avg;
     }
@@ -76,34 +72,43 @@ public class ReviewService {
         return mapper.entityToDto(repository.findByPatientId(id));
     }
 
-    public ResponseEntity<String> createReview(ReviewDTO dto) {
+    public ReviewDTO createReview(ReviewDTO dto) {
         dto.setId(null);
-        if (!branchRepository.existsById(dto.getBranchId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Branch ID does not exist");
-        } else if (!patientRepository.existsById(dto.getPatientId())) {
-            return CustomResponseEntity.badRequestInvalidArgument("Patient ID does not exists");
-        } else if (dto.getProfessionalism() < 1 || dto.getProfessionalism() > 5) {
-            return CustomResponseEntity
-                    .badRequestInvalidArgument("Professionalism must be within 0-5");
-        } else if (dto.getCommunication() < 1 || dto.getCommunication() > 5) {
-            return CustomResponseEntity
-                    .badRequestInvalidArgument("Communication must be within 0-5");
-        } else if (dto.getCleanliness() < 1 || dto.getCleanliness() > 5) {
-            return CustomResponseEntity.badRequestInvalidArgument("Cleanliness must be within 0-5");
-        } else if (dto.getValue() < 1 || dto.getValue() > 5) {
-            return CustomResponseEntity.badRequestInvalidArgument("Value must be within 0-5");
-        } else {
-            repository.save(mapper.dtoToEntity(dto));
-            return CustomResponseEntity.saveSuccess();
-        }
+        createValidation(dto);
+        return save(dto);
     }
 
-    public ResponseEntity<String> deleteById(Long id) {
-        if (repository.existsById(id)) {
-            repository.deleteById(id);
-            return CustomResponseEntity.deleteSuccess();
-        } else {
-            return CustomResponseEntity.badRequestDNE();
+    public ReviewDTO save(ReviewDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
+    public void createValidation(ReviewDTO dto) {
+
+        if (!branchRepository.existsByID(dto.getBranchId())) {
+            throw new ResourceNotFoundException("Branch ID does not exist");
         }
+        if (!patientRepository.existsByID(dto.getPatient().getId())) {
+            throw new ResourceNotFoundException("Patient ID does not exist");
+        }
+        if (dto.getProfessionalism() < 1 && dto.getProfessionalism() > 5) {
+            throw new IllegalArgumentException("Professionalism must be between 1 and 5");
+        }
+        if (dto.getCommunication() < 1 && dto.getCommunication() > 5) {
+            throw new IllegalArgumentException("Communication must be between 1 and 5");
+        }
+        if (dto.getCleanliness() < 1 && dto.getCleanliness() > 5) {
+            throw new IllegalArgumentException("Cleanliness must be between 1 and 5");
+        }
+        if (dto.getValue() < 1 && dto.getValue() > 5) {
+            throw new IllegalArgumentException("Value must be between 1 and 5");
+        }
+
+    }
+
+    public void deleteByID(Long id) {
+        if (!repository.existsByID(id)) {
+            throw new ResourceNotFoundException("Review ID does not exist");
+        }
+        repository.deleteByID(id);
     }
 }

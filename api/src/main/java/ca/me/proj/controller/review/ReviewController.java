@@ -2,7 +2,6 @@ package ca.me.proj.controller.review;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,18 +37,18 @@ public class ReviewController {
     }
 
     @GetMapping("/findByPatientId")
-    public List<ReviewDTO> findByPatientId(@RequestParam String id) {
+    public List<ReviewDTO> findByPatientID(@RequestParam String id) {
         return service.findByPatientId(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createReview(@RequestBody ReviewDTO dto) {
+    public ReviewDTO createReview(@RequestBody ReviewDTO dto) {
         return service.createReview(dto);
     }
 
-    @DeleteMapping("/deleteById")
-    public ResponseEntity<String> deletebyId(@RequestParam Long id) {
-        return service.deleteById(id);
+    @DeleteMapping("/deleteByID")
+    public void deletebyID(@RequestParam Long id) {
+        service.deleteByID(id);
     }
 
 }

@@ -19,8 +19,8 @@ public abstract class AbstractReadController<D extends BaseDTO, E extends Abstra
     }
 
     @GetMapping(ApiUri.EXISTS_BY_ID)
-    public boolean existsById(@RequestParam("id") Long id) {
-        return service.existsById(id);
+    public boolean existsByID(@RequestParam("id") Long id) {
+        return service.existsByID(id);
     }
 
     @GetMapping(ApiUri.FIND_ALL)
@@ -29,8 +29,8 @@ public abstract class AbstractReadController<D extends BaseDTO, E extends Abstra
     }
 
     @GetMapping(ApiUri.FIND_BY_ID)
-    public D findById(@RequestParam long id) {
-        return service.findById(id);
+    public D findByID(@RequestParam long id) {
+        return service.findByID(id);
     }
 
 }

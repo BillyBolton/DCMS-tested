@@ -2,72 +2,69 @@ package ca.me.proj.service.patient;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.patient.PatientDTO;
-import ca.me.proj.entity.response.CustomResponseEntity;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.repository.patient.IPatientRepository;
-import ca.me.proj.repository.profile.IProfileRepository;
+import ca.me.proj.service.profile.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
 public class PatientService {
 
+    @Autowired
+    private ProfileService profileService;
 
     @Autowired
     private IPatientMapper mapper;
 
-    // @Autowired
-    // private INewPatientMapper newPatientMapper;
-
-    // @Autowired
-    // private INewPatientRepository newPatientRepository;
-
     @Autowired
-    private IPatientRepository patientRepository;
-
-    @Autowired
-    private IProfileRepository profileRepository;
+    private IPatientRepository repository;
 
     public List<PatientDTO> findAll() {
-        return mapper.entityToDto(patientRepository.findAll());
+        return mapper.entityToDto(repository.findAll());
     }
 
     public PatientDTO createPatient(PatientDTO dto) {
+        // TODO migrate Jake's work
 
+        if (profileService.existsByUsername(dto.getId())) {
+            return save(dto);
+        }
 
-        // If ID does not exist in Profile repo
-        // if (!profileRepository.existsById(dto.getId())) {
-        // throw new ResourceNotFoundException("Profile ID does not exist");
-        // }
-        return mapper.entityToDto(patientRepository.save(mapper.dtoToEntity(dto)));
+        dto.setProfile(profileService.createProfile(dto.getProfile()));
+        return save(dto);
 
     }
 
     public boolean existsByID(String id) {
-        return patientRepository.existsById(id);
+        return repository.existsByID(id);
     }
 
-    public ResponseEntity<String> deletePatientByID(String id) {
-        if (!patientRepository.existsById(id)) {
-            return CustomResponseEntity.badRequestDNE();
+    public void deleteByID(String id) {
+        deleteValidation(id);
+        repository.deleteByID(id);
+    }
+
+
+    public PatientDTO findByID(String id) {
+        return mapper.entityToDto(repository.findByID(id));
+    }
+
+
+    public PatientDTO save(PatientDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
+    public void createValidation(PatientDTO dto) {
+        // TODO
+    }
+
+    public void deleteValidation(String id) {
+        if (!repository.existsByID(id)) {
+            throw new ResourceNotFoundException("Patient with id: " + id + " does not exist");
         }
-
-        patientRepository.deleteById(id);
-        return CustomResponseEntity.deleteSuccess();
-    }
-
-    public ResponseEntity<String> updateEmail(PatientDTO dto) {
-        if (patientRepository.existsById(dto.getId())) {
-            patientRepository.save(mapper.dtoToEntity(dto));
-            return CustomResponseEntity.updateSuccess();
-        }
-        return CustomResponseEntity.badRequestDNE();
-    }
-
-    public PatientDTO findById(String id) {
-        return mapper.entityToDto(patientRepository.findById(id).orElse(null));
     }
 }

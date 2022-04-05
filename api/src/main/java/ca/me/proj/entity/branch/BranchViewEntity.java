@@ -4,6 +4,7 @@ package ca.me.proj.entity.branch;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -28,12 +29,12 @@ public class BranchViewEntity extends AbstractStringEntity {
     // List<NestedEmployeeEntity> employees;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private ManagerEntity manager;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 }

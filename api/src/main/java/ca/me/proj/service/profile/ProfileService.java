@@ -2,11 +2,10 @@ package ca.me.proj.service.profile;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.ProfileDTO;
-import ca.me.proj.entity.response.CustomResponseEntity;
 import ca.me.proj.exceptions.ResourceAlreadyExistsException;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.repository.profile.IProfileRepository;
 import ca.me.proj.service.address.AddressService;
 
@@ -24,6 +23,8 @@ public class ProfileService extends AuthenticationService {
     }
 
     public ProfileDTO createProfile(ProfileDTO dto) {
+        // TODO migrate Jake's work
+
         dto.setId(null);
         // One way password encryption
         dto.setPassword(encoder.encode(dto.getPassword()));
@@ -36,6 +37,10 @@ public class ProfileService extends AuthenticationService {
         dto.setDOB(dto.getDOB().plusDays(1));
         dto.setAddress(addressService.create(dto.getAddress()));
 
+        return save(dto);
+    }
+
+    public ProfileDTO save(ProfileDTO dto) {
         return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
     }
 
@@ -47,17 +52,32 @@ public class ProfileService extends AuthenticationService {
         return mapper.entityToDto(repository.findByUsername(username));
     }
 
-    public ResponseEntity<String> deleteUserbyUsername(String username) {
+    public void deleteUserbyUsername(String username) {
+
         if (!repository.existsByUsername(username)) {
-            return CustomResponseEntity.badRequestDNE();
+            throw new ResourceNotFoundException(
+                    "Profile with username: " + username + " does not exist");
         }
 
-        repository.deleteById(mapper.entityToDto(repository.findByUsername(username)).getId());
-        return CustomResponseEntity.deleteSuccess();
+        repository.deleteByID((repository.findByUsername(username)).getId());
     }
 
     public boolean existsByID(String id) {
-        return repository.existsById(id);
+        return repository.existsByID(id);
     }
+
+    public ProfileDTO update(ProfileDTO dto) {
+
+        if (!repository.existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Profile with id: " + dto.getId() + " does not exist");
+        }
+
+        authenticate(mapper.profileDtoToAuthenticationDto(dto));
+
+        return save(dto);
+    }
+
+
 
 }

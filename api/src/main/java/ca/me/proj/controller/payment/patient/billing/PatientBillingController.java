@@ -22,14 +22,14 @@ public class PatientBillingController {
         return service.findAll();
     }
 
-    @GetMapping("/findById")
+    @GetMapping("/findByID")
     public PatientBillingDTO findByID(@RequestParam Long id) {
-        return service.findById(id);
+        return service.findByID(id);
     }
 
-    @GetMapping("/existsById")
+    @GetMapping("/existsByID")
     public boolean existsByID(@RequestParam Long id) {
-        return service.existsById(id);
+        return service.existsByID(id);
     }
 
 

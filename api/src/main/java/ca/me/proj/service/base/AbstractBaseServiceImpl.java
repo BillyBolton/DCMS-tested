@@ -17,7 +17,7 @@ public abstract class AbstractBaseServiceImpl<D extends BaseDTO, E extends Abstr
     @Autowired
     protected IBaseMapper<D, E> mapper;
 
-    public boolean existsById(long id) {
+    public boolean existsByID(long id) {
         return repository.existsById(id);
     }
 
@@ -25,7 +25,7 @@ public abstract class AbstractBaseServiceImpl<D extends BaseDTO, E extends Abstr
         return mapper.entityToDto(repository.findAll());
     }
 
-    public D findById(long id) {
+    public D findByID(long id) {
         return mapper.entityToDto(repository.findById(id).orElse(null));
     }
 

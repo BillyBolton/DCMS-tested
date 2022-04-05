@@ -2,7 +2,6 @@ package ca.me.proj.controller.profile;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,8 +52,8 @@ public class ProfileController {
     }
 
     @DeleteMapping("/deleteByUsername")
-    public ResponseEntity<String> deleteUserbyUsername(@RequestParam String username) {
-        return service.deleteUserbyUsername(username);
+    public void deleteUserbyUsername(@RequestParam String username) {
+        service.deleteUserbyUsername(username);
     }
 
 }

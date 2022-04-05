@@ -40,9 +40,9 @@ public class AddressController {
         return service.create(dto);
     }
 
-    @DeleteMapping("/deleteById")
-    public void deleteById(@RequestParam String id) {
-        service.deleteById(id);
+    @DeleteMapping("/deleteByID")
+    public void deleteByID(@RequestParam String id) {
+        service.deleteByID(id);
     }
 
 }

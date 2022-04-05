@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.profile.AuthenticationDTO;
 import ca.me.proj.dtos.profile.AuthenticationRole;
 import ca.me.proj.dtos.profile.ProfileDTO;
+import ca.me.proj.exceptions.AuthenticationException;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.profile.IProfileMapper;
 import ca.me.proj.repository.employee.IEmployeeRepository;
 import ca.me.proj.repository.patient.IPatientRepository;
@@ -30,10 +32,11 @@ public class AuthenticationService {
     @Autowired
     private IEmployeeRepository employeeRepository;
 
-
     public boolean authenticate(AuthenticationDTO credentials) {
+        boolean authenticated = false;
         if (!profileRepository.existsByUsername(credentials.getUsername())) {
-            return false;
+            throw new ResourceNotFoundException(
+                    "Profile with username: " + credentials.getUsername() + " does not exist");
         }
         ProfileDTO dto =
                 mapper.entityToDto(profileRepository.findByUsername(credentials.getUsername()));
@@ -42,11 +45,20 @@ public class AuthenticationService {
         AuthenticationRole role = credentials.getRole();
         switch (role) {
             case PATIENT:
-                return matchingCredentials && patientRepository.existsById(dto.getId());
+                authenticated = matchingCredentials && patientRepository.existsByID(dto.getId());
+                break;
             case EMPLOYEE:
-                return matchingCredentials && employeeRepository.existsById(dto.getId());
+                authenticated = matchingCredentials && employeeRepository.existsByID(dto.getId());
+                break;
             default:
-                return false;
+                authenticated = false;
+                break;
         }
+
+        if (!authenticated) {
+            throw new AuthenticationException("Authentication failed. Invalid credentials.");
+        }
+
+        return authenticated;
     }
 }

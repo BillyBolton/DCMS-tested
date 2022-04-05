@@ -1,6 +1,7 @@
 package ca.me.proj.dtos.review;
 
 import java.util.Date;
+import ca.me.proj.dtos.patient.PatientDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,9 +20,9 @@ public class ReviewDTO {
 
     // FKS
     private String branchId;
-    private String patientId;
+    // private String patientId;
 
     // private BranchViewDTO branch;
-    // private PatientDTO patient;
+    private PatientDTO patient;
 
 }

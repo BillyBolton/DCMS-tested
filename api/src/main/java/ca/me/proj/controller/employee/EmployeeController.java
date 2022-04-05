@@ -3,7 +3,6 @@ package ca.me.proj.controller.employee;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,13 +32,13 @@ public class EmployeeController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createEmployee(@RequestBody EmployeeDTO dto) {
+    public EmployeeDTO createEmployee(@RequestBody EmployeeDTO dto) {
         return service.createEmployee(dto);
     }
 
     @DeleteMapping("/deleteByID")
-    public ResponseEntity<String> deleteEmployeeByID(@RequestParam String id) {
-        return service.deleteEmployeeByID(id);
+    public void deleteEmployeeByID(@RequestParam String id) {
+        service.deleteEmployeeByID(id);
     }
 
     @GetMapping("/existsByID")
@@ -47,8 +46,8 @@ public class EmployeeController {
         return service.existsByID(id);
     }
 
-    @GetMapping("/findById")
+    @GetMapping("/findByID")
     public EmployeeDTO findByID(@RequestParam String id) {
-        return service.findById(id);
+        return service.findByID(id);
     }
 }

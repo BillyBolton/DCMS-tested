@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -29,16 +30,16 @@ public class BranchEntity extends AbstractStringEntity {
     // private String manager_id;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "manager_id", referencedColumnName = "id")
     private EmployeeEntity manager;
 
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private AddressEntity address;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "BRANCH_PROCEDURES", joinColumns = @JoinColumn(name = "branch_id"),
             inverseJoinColumns = @JoinColumn(name = "procedure_id"))
     private List<ProcedureTypeEntity> procedures;

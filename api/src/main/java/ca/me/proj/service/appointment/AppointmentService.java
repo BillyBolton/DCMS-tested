@@ -34,21 +34,22 @@ public class AppointmentService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public boolean existsById(long id) {
-        return repository.existsById(id);
+    public boolean existsByID(long id) {
+        return repository.existsByID(id);
     }
 
-    public AppointmentDTO findById(long id) {
-        return mapper.entityToDto(repository.findById(id).orElse(null));
+    public AppointmentDTO findByID(long id) {
+        return mapper.entityToDto(repository.findByID(id).orElse(null));
     }
 
     public AppointmentDTO createAppointment(AppointmentDTO dto) {
         createValidation(dto);
-        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+        return save(dto);
     }
 
     public void deletebyId(long id) {
-        repository.deleteById(id);
+        deleteValidation(id);
+        repository.deleteByID(id);
     }
 
     public List<AppointmentDTO> findByPatientId(String id) {
@@ -71,15 +72,19 @@ public class AppointmentService {
                 dto.getEmployeeId());
     }
 
+    public AppointmentDTO save(AppointmentDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
     private void createValidation(AppointmentDTO dto) {
         AppointmentEntity entity = mapper.dtoToEntity(dto);
-        if (!branchRepository.existsById(entity.getBranchId())) {
+        if (!branchRepository.existsByID(entity.getBranchId())) {
             throw new ResourceNotFoundException(
                     "A branch with id " + entity.getBranchId() + " does not exist");
-        } else if (!employeeRepository.existsById(entity.getEmployeeId())) {
+        } else if (!employeeRepository.existsByID(entity.getEmployeeId())) {
             throw new ResourceNotFoundException(
                     "An employee with id " + entity.getEmployeeId() + " does not exist");
-        } else if (!patientRepository.existsById(entity.getPatientId())) {
+        } else if (!patientRepository.existsByID(entity.getPatientId())) {
             throw new ResourceNotFoundException(
                     "A patient with id " + entity.getPatientId() + " does not exist");
         } else if (entity.getStartTime().after(entity.getEndTime())) {
@@ -93,10 +98,9 @@ public class AppointmentService {
         }
     }
 
-    public void deleteValidation(AppointmentDTO dto) {
-        if (!existsById(dto.getId())) {
-            throw new ResourceNotFoundException(
-                    "An entity with id " + dto.getId() + " does not exist");
+    public void deleteValidation(long id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("An entity with id " + id + " does not exist");
         }
 
 

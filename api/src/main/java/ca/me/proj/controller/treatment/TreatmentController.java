@@ -2,7 +2,6 @@ package ca.me.proj.controller.treatment;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,19 +25,19 @@ public class TreatmentController {
         return service.findAll();
     }
 
-    @GetMapping("/existsById")
-    public boolean existsById(@RequestParam Long id) {
-        return service.existsById(id);
+    @GetMapping("/existsByID")
+    public boolean existsByID(@RequestParam Long id) {
+        return service.existsByID(id);
     }
 
     @GetMapping("/existsByProcedureId")
-    public boolean existsById(@RequestParam String id) {
+    public boolean existsByID(@RequestParam String id) {
         return service.existsByProcedureId(id);
     }
 
-    @GetMapping("/findById")
-    public TreatmentDTO findById(@RequestParam Long id) {
-        return service.findById(id);
+    @GetMapping("/findByID")
+    public TreatmentDTO findByID(@RequestParam Long id) {
+        return service.findByID(id);
     }
 
     @GetMapping("/findByProcedureId")
@@ -47,13 +46,13 @@ public class TreatmentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createTreatment(@RequestBody TreatmentDTO dto) {
+    public TreatmentDTO createTreatment(@RequestBody TreatmentDTO dto) {
         return service.createTreatment(dto);
     }
 
-    @DeleteMapping("/deleteById")
-    public ResponseEntity<String> deletebyId(@RequestParam Long id) {
-        return service.deleteById(id);
+    @DeleteMapping("/deleteByID")
+    public void deletebyId(@RequestParam Long id) {
+        service.deleteByID(id);
     }
 }
 

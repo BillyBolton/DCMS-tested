@@ -3,7 +3,6 @@ package ca.me.proj.controller.branch;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,17 +32,17 @@ public class BranchController {
 
     @GetMapping("/findByID")
     public BranchDTO findByID(@RequestParam String id) {
-        return service.findById(id);
+        return service.findByID(id);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createPatient(@RequestBody BranchDTO dto) {
+    public BranchDTO createPatient(@RequestBody BranchDTO dto) {
         return service.createBranch(dto);
     }
 
     @DeleteMapping("/deleteByID")
-    public ResponseEntity<String> deletePatientByID(@RequestParam String id) {
-        return service.deleteBranchByID(id);
+    public void deletePatientByID(@RequestParam String id) {
+        service.deleteBranchByID(id);
     }
 
 }

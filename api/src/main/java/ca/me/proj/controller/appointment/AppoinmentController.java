@@ -27,14 +27,14 @@ public class AppoinmentController {
         return service.findAll();
     }
 
-    @GetMapping("/existsById")
+    @GetMapping("/existsByID")
     public boolean existsByID(@RequestParam Long id) {
-        return service.existsById(id);
+        return service.existsByID(id);
     }
 
-    @GetMapping("/findById")
-    public AppointmentDTO findById(@RequestParam Long id) {
-        return service.findById(id);
+    @GetMapping("/findByID")
+    public AppointmentDTO findByID(@RequestParam Long id) {
+        return service.findByID(id);
     }
 
     @GetMapping("/findByPatientId")
@@ -64,7 +64,7 @@ public class AppoinmentController {
         return service.createAppointment(dto);
     }
 
-    @DeleteMapping("/deleteById")
+    @DeleteMapping("/deleteByID")
     public void deletebyId(@RequestParam Long id) {
         service.deletebyId(id);
     }

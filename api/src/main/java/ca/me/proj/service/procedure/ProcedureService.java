@@ -2,10 +2,9 @@ package ca.me.proj.service.procedure;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.procedure.ProcedureDTO;
-import ca.me.proj.entity.response.CustomResponseEntity;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.procedure.IProcedureMapper;
 import ca.me.proj.repository.procedure.IProcedureRepository;
 
@@ -22,23 +21,31 @@ public class ProcedureService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public boolean existsById(String id) {
-        return repository.existsById(id);
+    public boolean existsByID(String id) {
+        return repository.existsByID(id);
     }
 
-    public ProcedureDTO findById(String id) {
-        return mapper.entityToDto(repository.findById(id).orElse(null));
+    public ProcedureDTO findByID(String id) {
+        return mapper.entityToDto(repository.findByID(id).orElse(null));
     }
 
-    public ResponseEntity<String> createProcedure(ProcedureDTO dto) {
+    public ProcedureDTO createProcedure(ProcedureDTO dto) {
         dto.setId(null);
-        repository.save(mapper.dtoToEntity(dto));
-        return CustomResponseEntity.saveSuccess();
-    } 
+        return save(dto);
 
-    public ResponseEntity<String> deletebyId(String id) {
-        repository.deleteById(id);
-        return CustomResponseEntity.deleteSuccess();
+    }
+
+    public ProcedureDTO save(ProcedureDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
+    public void deletebyId(String id) {
+
+        if (!repository.existsByID(id)) {
+            throw new ResourceNotFoundException("Procedure ID does not exist");
+        }
+
+        repository.deleteByID(id);
     }
 
 }

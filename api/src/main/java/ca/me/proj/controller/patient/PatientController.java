@@ -2,11 +2,9 @@ package ca.me.proj.controller.patient;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,19 +41,19 @@ public class PatientController {
 
     @GetMapping("/findByID")
     public PatientDTO findByID(@RequestParam String id) {
-        return service.findById(id);
+        return service.findByID(id);
     }
 
 
     @DeleteMapping("/deleteByID")
-    public ResponseEntity<String> deletePatientByID(@RequestParam String id) {
-        return service.deletePatientByID(id);
+    public void deletePatientByID(@RequestParam String id) {
+        service.deleteByID(id);
     }
 
-    @PutMapping("/updateEmail")
-    public ResponseEntity<String> updateEmail(@RequestBody PatientDTO dto) {
-        return service.updateEmail(dto);
-    }
+    // @PutMapping("/updateEmail")
+    // public ResponseEntity<String> updateEmail(@RequestBody PatientDTO dto) {
+    // return service.updateEmail(dto);
+    // }
 
 
 

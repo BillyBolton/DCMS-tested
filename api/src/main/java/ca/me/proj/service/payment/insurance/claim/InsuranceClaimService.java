@@ -20,4 +20,8 @@ public class InsuranceClaimService {
         return mapper.entityToDto(repository.findAll());
     }
 
+    public InsuranceClaimDTO save(InsuranceClaimDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
+    }
+
 }

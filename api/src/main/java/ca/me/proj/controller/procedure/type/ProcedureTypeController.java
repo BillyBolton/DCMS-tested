@@ -21,14 +21,14 @@ public class ProcedureTypeController {
         return service.findAll();
     }
 
-    @GetMapping("/existsById")
+    @GetMapping("/existsByID")
     public boolean existsByID(@RequestParam String id) {
-        return service.existsById(id);
+        return service.existsByID(id);
     }
 
-    @GetMapping("/findById")
+    @GetMapping("/findByID")
     public ProcedureTypeDTO findByID(@RequestParam String id) {
-        return service.findById(id);
+        return service.findByID(id);
     }
 
 }

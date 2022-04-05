@@ -20,11 +20,15 @@ public class ProcedureTypeService {
         return mapper.entityToDto(repository.findAll());
     }
 
-    public boolean existsById(String id) {
-        return repository.existsById(id);
+    public boolean existsByID(String id) {
+        return repository.existsByID(id);
     }
 
-    public ProcedureTypeDTO findById(String id) {
-        return mapper.entityToDto(repository.findById(id).orElse(null));
+    public ProcedureTypeDTO findByID(String id) {
+        return mapper.entityToDto(repository.findByID(id).orElse(null));
+    }
+
+    public ProcedureTypeDTO save(ProcedureTypeDTO dto) {
+        return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
     }
 }

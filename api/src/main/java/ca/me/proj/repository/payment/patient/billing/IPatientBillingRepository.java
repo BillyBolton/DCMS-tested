@@ -20,7 +20,7 @@ public interface IPatientBillingRepository extends JpaRepository<PatientBillingE
             nativeQuery = true)
     public boolean existsByID(long id);
 
-    @Query(value = "DELETE from from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)
+    @Query(value = "DELETE from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)
     public void deleteByID(long id);
 
 }

@@ -21,7 +21,7 @@ public interface ITreatmentRepository extends JpaRepository<TreatmentEntity, Lon
                         nativeQuery = true)
         public boolean existsByID(long id);
 
-        @Query(value = "DELETE from from Treatment t where t.id = ?1", nativeQuery = true)
+        @Query(value = "DELETE from Treatment t where t.id = ?1", nativeQuery = true)
         public void deleteByID(long id);
 
         @Query(value = "SELECT CASE WHEN count(t)> 0 THEN true ELSE false end from TREATMENT t where t.procedure_id = ?1",

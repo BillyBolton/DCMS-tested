@@ -21,7 +21,7 @@ public interface IProcedureRepository extends JpaRepository<ProcedureEntity, Str
             nativeQuery = true)
     public boolean existsByID(String id);
 
-    @Query(value = "DELETE from from PROCEDURE p where p.id = ?1", nativeQuery = true)
+    @Query(value = "DELETE from PROCEDURE p where p.id = ?1", nativeQuery = true)
     public void deleteByID(String id);
 
 }

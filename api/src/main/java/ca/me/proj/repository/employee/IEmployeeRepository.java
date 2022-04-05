@@ -24,7 +24,7 @@ public interface IEmployeeRepository extends JpaRepository<EmployeeEntity, Strin
                   nativeQuery = true)
       public boolean existsByID(String id);
 
-      @Query(value = "DELETE from from EMPLOYEE e where e.id = ?1", nativeQuery = true)
+      @Query(value = "DELETE from EMPLOYEE e where e.id = ?1", nativeQuery = true)
       public void deleteByID(String id);
 
 }

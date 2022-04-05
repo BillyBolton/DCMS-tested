@@ -21,7 +21,7 @@ public interface IAppointmentRepository extends JpaRepository<AppointmentEntity,
                         nativeQuery = true)
         public boolean existsByID(long id);
 
-        @Query(value = "DELETE from from APPOINTMENT a where a.id = ?1", nativeQuery = true)
+        @Query(value = "DELETE from APPOINTMENT a where a.id = ?1", nativeQuery = true)
         public void deleteByID(long id);
 
         @Query(value = "SELECT * FROM APPOINTMENT WHERE patient_id = ?1", nativeQuery = true)

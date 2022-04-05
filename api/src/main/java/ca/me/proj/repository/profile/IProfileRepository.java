@@ -28,7 +28,7 @@ public interface IProfileRepository extends JpaRepository<ProfileEntity, String>
                         nativeQuery = true)
         public boolean existsByID(String id);
 
-        @Query(value = "DELETE from from PROFILE p where p.id = ?1", nativeQuery = true)
+        @Query(value = "DELETE from PROFILE p where p.id = ?1", nativeQuery = true)
         public void deleteByID(String id);
 
 

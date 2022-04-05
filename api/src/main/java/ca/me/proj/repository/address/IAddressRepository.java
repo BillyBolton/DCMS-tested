@@ -30,7 +30,7 @@ public interface IAddressRepository extends JpaRepository<AddressEntity, String>
         public <Optional> AddressEntity findByAddress(long buildingNumber, String street,
                         String city, String province, String postalCode);
 
-        @Query(value = "DELETE from from ADDRESS a where a.id = ?1", nativeQuery = true)
+        @Query(value = "DELETE from ADDRESS a where a.id = ?1", nativeQuery = true)
         public void deleteByID(String id);
 
 

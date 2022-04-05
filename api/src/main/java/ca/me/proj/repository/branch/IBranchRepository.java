@@ -18,6 +18,6 @@ public interface IBranchRepository extends JpaRepository<BranchEntity, String> {
     @Query(value = "SELECT * from Branch WHERE id = ?1 ", nativeQuery = true)
     public <Optional> BranchEntity findByID(String id);
 
-    @Query(value = "DELETE from from Branch b where b.id = ?1", nativeQuery = true)
+    @Query(value = "DELETE from Branch b where b.id = ?1", nativeQuery = true)
     public void deleteByID(String id);
 }

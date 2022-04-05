@@ -25,6 +25,7 @@ public class EmployeeService {
     @Autowired
     private IBranchRepository branchRepository;
 
+
     public List<EmployeeDTO> findAll() {
         return mapper.entityToDto(employeeRepository.findAll());
     }

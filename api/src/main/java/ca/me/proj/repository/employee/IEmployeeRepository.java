@@ -19,7 +19,7 @@ public interface IEmployeeRepository extends JpaRepository<EmployeeEntity, Strin
       public List<EmployeeEntity> findDentistByBranchId(String branchId);
 
       @Override
-      @Query(value = "SELECT * from EMPLOYE", nativeQuery = true)
+      @Query(value = "SELECT * from EMPLOYEE", nativeQuery = true)
       public List<EmployeeEntity> findAll();
 
       @Query(value = "SELECT * from EMPLOYEE WHERE id = ?1 ", nativeQuery = true)

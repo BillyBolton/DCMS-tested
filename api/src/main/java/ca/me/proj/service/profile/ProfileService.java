@@ -57,6 +57,9 @@ public class ProfileService extends AuthenticationService {
     }
 
     public ProfileDTO findByUsername(String username) {
+        if (!existsByUsername(username)) {
+            throw new ResourceNotFoundException("Entity with username: " + username + " not found");
+        }
         return mapper.entityToDto(repository.findByUsername(username));
     }
 

@@ -54,6 +54,9 @@ public class PatientService {
 
 
     public PatientDTO findByID(String id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByID(id));
     }
 

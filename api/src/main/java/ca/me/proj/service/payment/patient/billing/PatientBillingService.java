@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.payment.patient.billing.PatientBillingDTO;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.payment.patient.billing.IPatientBillingMapper;
 import ca.me.proj.repository.payment.patient.billing.IPatientBillingRepository;
 
@@ -21,6 +22,9 @@ public class PatientBillingService {
     }
 
     public PatientBillingDTO findByID(long id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByID(id));
     }
 

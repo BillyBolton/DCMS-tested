@@ -66,6 +66,9 @@ public class EmployeeService {
     }
 
     public EmployeeDTO findByID(String id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(employeeRepository.findByID(id));
     }
 

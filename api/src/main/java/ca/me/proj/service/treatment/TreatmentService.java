@@ -30,10 +30,16 @@ public class TreatmentService {
     }
 
     public TreatmentDTO findByID(long id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByID(id));
     }
 
     public List<TreatmentDTO> findByProcedureId(String id) {
+        if (!existsByProcedureId(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByProcedureId(id));
     }
 

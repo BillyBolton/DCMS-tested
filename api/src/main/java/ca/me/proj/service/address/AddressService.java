@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.address.AddressDTO;
 import ca.me.proj.exceptions.ResourceAlreadyExistsException;
+import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.address.IAddressMapper;
 import ca.me.proj.repository.address.IAddressRepository;
 
@@ -26,11 +27,16 @@ public class AddressService {
     }
 
     public AddressDTO findByID(String id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByID(id));
     }
 
     public AddressDTO findByAddress(AddressDTO dto) {
-
+        if (!existsByAddress(dto)) {
+            throw new ResourceNotFoundException("Address: " + dto + " not found");
+        }
         return mapper.entityToDto(repository.findByAddress(dto.getBuildingNumber(), dto.getStreet(),
                 dto.getCity(), dto.getProvince().toString(), dto.getPostalCode()));
     }

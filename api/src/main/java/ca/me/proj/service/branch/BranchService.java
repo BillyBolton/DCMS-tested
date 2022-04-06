@@ -33,6 +33,9 @@ public class BranchService {
     }
 
     public boolean existsByID(String id) {
+        if (!existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return repository.existsByID(id);
     }
 

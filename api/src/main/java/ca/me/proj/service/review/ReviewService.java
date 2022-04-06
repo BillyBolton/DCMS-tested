@@ -31,6 +31,9 @@ public class ReviewService {
     }
 
     public List<ReviewDTO> findByBranchId(String id) {
+        if (!branchRepository.existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByBranchId(id));
     }
 
@@ -69,6 +72,9 @@ public class ReviewService {
     }
 
     public List<ReviewDTO> findByPatientId(String id) {
+        if (!patientRepository.existsByID(id)) {
+            throw new ResourceNotFoundException("Entity with id: " + id + " not found");
+        }
         return mapper.entityToDto(repository.findByPatientId(id));
     }
 

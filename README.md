@@ -1,3 +1,4 @@
+
 # 1. Download Repository
 
 - Go to url: `https://github.com/BillyBolton/DCMS`
@@ -12,7 +13,7 @@
 - Postgres SQL data: `api/src/main/resources/data.sql`
 - CRUD SQL scripts: `api/src/main/java/ca/me/proj/repository/**`
 
-# . Boot the Backend
+# 3. Boot the Backend
 
 - Ensure terminal is in the project's root directory.
 - From the terminal, run: `clear && ./gradlew api:clean api:build api:bootRun`
@@ -21,14 +22,14 @@
 - Optional: Feel free to test any of the endpoints on this page.
 - Problem? Please contact: `Billy Bolton - bbolt049@uOttawa.ca` and `Jake Kellett - @uOttawa.ca`
 
-# . Boot the Frontend
+# 4. Boot the Frontend
 
 - Open a separate terminal window.
 - Ensure terminal is in the project's root directory.
 -
 - Problem? Please contact: `Boss Girl - bGirl@uOttawa.ca`
 
-# . Technology Used
+# A. Technology Used
 
 - Design Pattern: `Model-View-Controller`
 - Postgres Database hosting: `Heroku`

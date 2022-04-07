@@ -10,7 +10,9 @@ import ca.me.proj.mapper.employee.IEmployeeMapper;
 import ca.me.proj.repository.branch.IBranchRepository;
 import ca.me.proj.repository.employee.IEmployeeRepository;
 import ca.me.proj.service.profile.ProfileService;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class EmployeeService {
 
@@ -36,12 +38,15 @@ public class EmployeeService {
 
     public EmployeeDTO createEmployee(EmployeeDTO dto) {
 
-        dto.setId(null);
+        // dto.setId(null);
 
         // @Jake Validation needed here?
         // createValidation(dto);
 
-        if (profileService.existsByUsername(dto.getId())) {
+        if (profileService.existsByUsername(dto.getProfile().getUsername())) {
+            log.info("Username already exists: {}", dto);
+            dto.setProfile(profileService.findByUsername(dto.getProfile().getUsername()));
+            dto.getProfile().getId();
             return save(dto);
         }
 

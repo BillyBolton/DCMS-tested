@@ -1,6 +1,7 @@
 package ca.me.proj.entity.employee;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -16,7 +17,7 @@ import lombok.EqualsAndHashCode;
 @Table(name = "EMPLOYEE")
 public class ManagerEntity extends AbstractStringEntity {
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @MapsId
     @JoinColumn(name = "id")
     private ProfileEntity profile;

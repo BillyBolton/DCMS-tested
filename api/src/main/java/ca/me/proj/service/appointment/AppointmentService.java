@@ -42,7 +42,7 @@ public class AppointmentService {
         if (!existsByID(id)) {
             throw new ResourceNotFoundException("Entity with id: " + id + " not found");
         }
-        return mapper.entityToDto(repository.findByID(id).orElse(null));
+        return mapper.entityToDto(repository.findByID(id));
     }
 
     public AppointmentDTO createAppointment(AppointmentDTO dto) {

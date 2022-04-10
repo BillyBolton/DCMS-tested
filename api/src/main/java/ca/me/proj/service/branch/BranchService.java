@@ -53,6 +53,14 @@ public class BranchService {
         }
     }
 
+    public BranchDTO update(BranchDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Entity with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
 
 
 }

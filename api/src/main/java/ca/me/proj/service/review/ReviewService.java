@@ -88,6 +88,14 @@ public class ReviewService {
         return mapper.entityToDto(repository.save(mapper.dtoToEntity(dto)));
     }
 
+    public ReviewDTO update(ReviewDTO dto) {
+        if (!repository.existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Entity with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
     public void createValidation(ReviewDTO dto) {
 
         if (!branchRepository.existsByID(dto.getBranchId())) {

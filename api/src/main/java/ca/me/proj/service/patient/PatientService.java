@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.dtos.patient.PatientDTO;
+import ca.me.proj.dtos.profile.ProfileDTO;
 import ca.me.proj.exceptions.ResourceNotFoundException;
 import ca.me.proj.mapper.patient.IPatientMapper;
 import ca.me.proj.repository.patient.IPatientRepository;
@@ -73,5 +74,20 @@ public class PatientService {
         if (!repository.existsByID(id)) {
             throw new ResourceNotFoundException("Patient with id: " + id + " does not exist");
         }
+    }
+
+    public PatientDTO update(PatientDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Patient with id: " + dto.getId() + " does not exist");
+        }
+
+        ProfileDTO profile = profileService.update(dto.getProfile());
+
+        log.info("PROFILE: {}", profile);
+
+        dto.setProfile(profile);
+
+        return save(dto);
     }
 }

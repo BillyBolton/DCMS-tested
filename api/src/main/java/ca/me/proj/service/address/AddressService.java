@@ -42,7 +42,7 @@ public class AddressService {
     }
 
     public AddressDTO create(AddressDTO dto) {
-        dto.setId(null);
+        // dto.setId(null);
 
         checkExists(dto);
 
@@ -74,6 +74,16 @@ public class AddressService {
     public boolean existsByAddress(AddressDTO dto) {
         return repository.existsByAddress(dto.getBuildingNumber(), dto.getStreet(), dto.getCity(),
                 dto.getProvince().toString(), dto.getPostalCode());
+    }
+
+    public AddressDTO update(AddressDTO dto) {
+        if (existsByAddress(dto)) {
+            AddressDTO address = findByAddress(dto);
+            address.setId(dto.getId());
+            dto = address;
+        }
+
+        return save(dto);
     }
 
 }

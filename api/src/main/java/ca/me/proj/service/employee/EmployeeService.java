@@ -46,7 +46,7 @@ public class EmployeeService {
         if (profileService.existsByUsername(dto.getProfile().getUsername())) {
             log.info("Username already exists: {}", dto);
             dto.setProfile(profileService.findByUsername(dto.getProfile().getUsername()));
-            dto.getProfile().getId();
+            dto.setId(dto.getProfile().getId());
             return save(dto);
         }
 
@@ -124,6 +124,18 @@ public class EmployeeService {
         if (!existsByID(id)) {
             throw new ResourceNotFoundException("Employee with id " + id + " does not exist");
         }
+    }
+
+    public EmployeeDTO update(EmployeeDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Employee with id: " + dto.getId() + " does not exist");
+        }
+
+        dto.setProfile(profileService.update(dto.getProfile()));
+
+
+        return save(dto);
     }
 
 }

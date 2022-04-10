@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,6 +44,11 @@ public class BranchController {
     @DeleteMapping("/deleteByID")
     public void deletePatientByID(@RequestParam String id) {
         service.deleteBranchByID(id);
+    }
+
+    @PutMapping("/update")
+    public BranchDTO update(@RequestBody BranchDTO dto) {
+        return service.update(dto);
     }
 
 }

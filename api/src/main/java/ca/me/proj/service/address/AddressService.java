@@ -42,7 +42,7 @@ public class AddressService {
     }
 
     public AddressDTO create(AddressDTO dto) {
-        dto.setId(null);
+        // dto.setId(null);
 
         checkExists(dto);
 
@@ -77,13 +77,12 @@ public class AddressService {
     }
 
     public AddressDTO update(AddressDTO dto) {
-        if (existsByID(dto.getId())) {
-            dto = findByID(dto.getId());
-        } else if (existsByAddress(dto)) {
-            dto = findByAddress(dto);
-        } else {
-            dto = create(dto);
+        if (existsByAddress(dto)) {
+            AddressDTO address = findByAddress(dto);
+            address.setId(dto.getId());
+            dto = address;
         }
+
         return save(dto);
     }
 

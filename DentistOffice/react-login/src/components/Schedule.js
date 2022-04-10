@@ -48,7 +48,6 @@ const Schedule = () => {
                          <Table.Cell>{ap.branchId}</Table.Cell>
                          <Table.Cell>{ap.employeeId}</Table.Cell>
                          <Table.Cell>{ap.patientId}</Table.Cell>
-                         <Table.Cell>{ap.status}</Table.Cell>
                      </Table.Row>
 
                  ))}

@@ -57,10 +57,6 @@ public class AppointmentEntity {
     @Column(name = "patient_id")
     private String patientId;
 
-    public AppointmentEntity orElse(Object object) {
-        return null;
-    }
-
     // @ManyToOne
     // @JoinColumn(name = "patient_id", nullable = false)
     // private PatientEntity patient;

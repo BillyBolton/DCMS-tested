@@ -74,4 +74,12 @@ public class PatientService {
             throw new ResourceNotFoundException("Patient with id: " + id + " does not exist");
         }
     }
+
+    public PatientDTO update(PatientDTO dto) {
+        if (!existsByID(dto.getId()) && !profileService.existsByID(dto.getProfile().getId())) {
+            throw new ResourceNotFoundException(
+                    "Patient with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
 }

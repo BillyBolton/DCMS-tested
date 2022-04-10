@@ -25,8 +25,8 @@
 # 4. Boot the Frontend
 
 - Open a separate terminal window.
-- Ensure terminal is in the project's root directory.
--
+- Ensure terminal is in the project directory: `./DentistOffice/react-login`
+- From the terminal, run: `npm install && npm start`
 - Problem? Please contact: `Boss Girl - bGirl@uOttawa.ca`
 iu
 '

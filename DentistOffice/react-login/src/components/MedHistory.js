@@ -34,7 +34,7 @@ export default class MedHistory extends Component {
     render() {
         return (
             <>
-            { this.state.appts !== [] && this.state.appts !== undefined ?
+            { this.state.appts !== [] || this.state.appts !== undefined ?
 
             this.state.appointments.map(appt => { return (
                 <Segment key={appt.id}>

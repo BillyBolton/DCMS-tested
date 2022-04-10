@@ -131,6 +131,9 @@ public class EmployeeService {
             throw new ResourceNotFoundException(
                     "Patient with id: " + dto.getId() + " does not exist");
         }
+
+        dto.getProfile().setDOB(dto.getProfile().getDOB().plusDays(1L));
+
         return save(dto);
     }
 

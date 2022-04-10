@@ -84,6 +84,8 @@ public class ProfileService extends AuthenticationService {
                     "Profile with id: " + dto.getId() + " does not exist");
         }
 
+        dto.setDOB(dto.getDOB().plusDays(1L));
+
         authenticate(mapper.profileDtoToAuthenticationDto(dto));
 
         return save(dto);

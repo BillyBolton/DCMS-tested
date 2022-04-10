@@ -83,8 +83,13 @@ public class ProfileService extends AuthenticationService {
             throw new ResourceNotFoundException(
                     "Profile with id: " + dto.getId() + " does not exist");
         }
+        if(addressService.existsByAddress(dto.getAddress())){
+            dto.setAddress(addressService.findByAddress(dto.getAddress()));
+        }else{
+            dto.setAddress(addressService.update(dto.getAddress()));
+        }
 
-        dto.setAddress(addressService.update(dto.getAddress()));
+        
         dto.setDOB(dto.getDOB().plusDays(1L));
 
         // authenticate(mapper.profileDtoToAuthenticationDto(dto));

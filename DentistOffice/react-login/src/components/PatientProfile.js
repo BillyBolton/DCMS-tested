@@ -4,6 +4,7 @@ import axios from "axios"
 
 import PatientModifyProfileForm from './PatientModifyProfileForm'
 
+
 export default class PatientProfile extends Component {
 
     state = {
@@ -115,7 +116,6 @@ export default class PatientProfile extends Component {
                 :
                 
                 <PatientModifyProfileForm currProfile={this.state.fullProfile}/>
-
                 }
 
             </Container>

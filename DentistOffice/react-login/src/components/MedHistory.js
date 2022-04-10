@@ -47,7 +47,6 @@ export default class MedHistory extends Component {
             :
             
             <p>Patient has no medical history.</p>
-            
             }
             </>
         )

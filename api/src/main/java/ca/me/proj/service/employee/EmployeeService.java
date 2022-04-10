@@ -133,7 +133,7 @@ public class EmployeeService {
         }
 
         dto.setProfile(profileService.update(dto.getProfile()));
-
+        dto.getProfile().setDOB(dto.getProfile().getDOB().plusDays(1L));
 
         return save(dto);
     }

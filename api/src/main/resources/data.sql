@@ -414,8 +414,10 @@ VALUES('POL123', 'GRP123', 'P_4');
 -- PROCEDURE_TYPE
 -- =============================================================
 INSERT INTO PROCEDURE_TYPE(id, type)
-VALUES('PT_1', 'NO_CLUE'),
-    ('PT_2', 'NO_IDEA');
+VALUES('PT_1', 'Cleaning'),
+    ('PT_2', 'Filling'),
+    ('PT_3', 'Extraction');;
+
 -- =============================================================
 -- BRANCH_PROCEDURES
 -- =============================================================
@@ -511,7 +513,7 @@ INSERT INTO REVIEW(
 VALUES(
         '2022-03-21',
         'B_1',
-        'P_1',
+        'P_9',
         5,
         4,
         5,

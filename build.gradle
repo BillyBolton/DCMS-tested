@@ -1,0 +1,21 @@
+plugins {
+  id 'eclipse' // easier use in eclipse and other IDEs
+}
+
+// pulls out properties from a global properties file
+Properties env = new Properties()
+File subPropertiesFile = new File("$projectDir/env.properties")
+subPropertiesFile.withInputStream {
+  env.load(it)
+}
+
+wrapper {
+  gradleVersion env.GRADLE_VERSION
+}
+
+subprojects {
+  repositories {
+	  mavenCentral()
+  }
+}
+

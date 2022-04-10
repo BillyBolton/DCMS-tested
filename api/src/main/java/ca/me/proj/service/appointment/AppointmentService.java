@@ -105,8 +105,15 @@ public class AppointmentService {
         if (!existsByID(id)) {
             throw new ResourceNotFoundException("An entity with id " + id + " does not exist");
         }
-
-
     }
+
+    public AppointmentDTO update(AppointmentDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Entity with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
 
 }

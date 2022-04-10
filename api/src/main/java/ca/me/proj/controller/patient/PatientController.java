@@ -52,8 +52,8 @@ public class PatientController {
     }
 
     @PutMapping("/update")
-    public void update(@RequestBody PatientDTO dto) {
-        service.update(dto);
+    public PatientDTO update(@RequestBody PatientDTO dto) {
+        return service.update(dto);
     }
 
 

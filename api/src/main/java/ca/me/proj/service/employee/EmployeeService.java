@@ -126,4 +126,12 @@ public class EmployeeService {
         }
     }
 
+    public EmployeeDTO update(EmployeeDTO dto) {
+        if (!existsByID(dto.getId()) && !profileService.existsByID(dto.getProfile().getId())) {
+            throw new ResourceNotFoundException(
+                    "Patient with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
 }

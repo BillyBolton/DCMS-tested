@@ -63,4 +63,12 @@ public class TreatmentService {
         repository.deleteByID(id);
     }
 
+    public TreatmentDTO update(TreatmentDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Entity with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
 }

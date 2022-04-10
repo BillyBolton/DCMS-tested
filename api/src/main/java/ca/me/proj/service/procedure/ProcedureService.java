@@ -51,4 +51,12 @@ public class ProcedureService {
         repository.deleteByID(id);
     }
 
+    public ProcedureDTO update(ProcedureDTO dto) {
+        if (!existsByID(dto.getId())) {
+            throw new ResourceNotFoundException(
+                    "Entity with id: " + dto.getId() + " does not exist");
+        }
+        return save(dto);
+    }
+
 }

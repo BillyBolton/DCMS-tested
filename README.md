@@ -1,5 +1,10 @@
+# DCMS
 
-# 1. Download Repository
+## Video Walk-Through
+
+- [Click here](https://youtu.be/d8amBgz9ddc)
+
+## 1. Download Repository
 
 - Go to url: `https://github.com/BillyBolton/DCMS`
 - Clone repository to local computer.
@@ -7,13 +12,13 @@
   - With SSH: `git@github.com:BillyBolton/DCMS.git`
 - Navigate to the cloned repository on your computer: `cd DCMS`
 
-# 2. Explore Code Base
+## 2. Explore Code Base
 
 - Postgres SQL schema: `api/src/main/resources/schema-postgres.sql`
 - Postgres SQL data: `api/src/main/resources/data.sql`
 - CRUD SQL scripts: `api/src/main/java/ca/me/proj/repository/**`
 
-# 3. Boot the Backend
+## 3. Boot the Backend
 
 - Ensure terminal is in the project's root directory.
 - From the terminal, run: `clear && ./gradlew api:clean api:build api:bootRun`
@@ -24,7 +29,7 @@
 
 - Problem? Please contact: `Billy Bolton - bbolt049@uOttawa.ca` and `Jake Kellett - jkell114@uOttawa.ca`
 
-# 4. Boot the Frontend
+## 4. Boot the Frontend
 
 - Open a separate terminal window.
 - Ensure terminal is in the front-end project directory: `cd ./DentistOffice/react-login`
@@ -32,7 +37,7 @@
 
 - Problem? Please contact: `Rachel Jamer - rjame070@uOttawa.ca`
 
-# A. Technology Used
+## A. Technology Used
 
 - Design Pattern: `Model-View-Controller`
 - Postgres Database hosting: `Heroku`

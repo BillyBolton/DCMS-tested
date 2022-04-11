@@ -4,6 +4,10 @@
 
 - [Click here](https://youtu.be/d8amBgz9ddc)
 
+## Prerequisites
+
+- [Downloading and installing Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
 ## 1. Download Repository
 
 - Go to url: `https://github.com/BillyBolton/DCMS`

@@ -36,4 +36,4 @@ jobs:
           SONAR_ORGANIZATION_KEY: ${{ secrets.SONAR_ORGANIZATION_KEY }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./gradlew sonarqube --info -Dsonar.projectKey=BillyBolton_DCMS-tested -Dsonar.organization=billybolton -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=564509e20beed4bcbd88e79059432928f7ad265b
+        run: ./gradlew sonarqube --info -Dsonar.projectKey=BillyBolton_DCMS-tested -Dsonar.organization=billybolton -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN

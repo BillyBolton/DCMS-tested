@@ -2,7 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.5.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'java'
-	id "org.sonarqube" version "3.3"
+	// id "org.sonarqube" version "3.3"
   id 'java-library' //important for QDSL
   id 'jacoco'
   id 'war' //important for QDSL
@@ -66,19 +66,28 @@ jacocoTestReport {
 }
 test.finalizedBy jacocoTestReport
 
-sonarqube {
-    properties {
-        def props = new Properties()
-        file("sonar-project.properties").withInputStream { props.load(it)}
-        props.each {
-          property("${it.key}", "${it.value}")
-        }
-    }
-}
+// sonarqube {
+//     properties {
+//         def props = new Properties()
+//         file("sonar-project.properties").withInputStream { props.load(it)}
+//         props.each {
+//           property("${it.key}", "${it.value}")
+//         }
+//     }
+// }
 
-tasks.named('sonarqube').configure {
-    dependsOn test
-}
+// sonarqube {
+//   properties {
+//     property "sonar.projectKey", "BillyBolton_DCMS-tested"
+//     property "sonar.organization", "billybolton"
+//     property "sonar.host.url", "https://sonarcloud.io"
+//     property "SONAR_TOKEN", "f9591a816570d3cd682f5c1335cbea107cfb1dbe"
+//   }
+// }
+
+// tasks.named('sonarqube').configure {
+//     dependsOn test
+// }
 
 configurations {
   developmentOnly

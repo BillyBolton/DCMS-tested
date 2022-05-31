@@ -1,5 +1,6 @@
 plugins {
   id 'eclipse' // easier use in eclipse and other IDEs
+   id "org.sonarqube" version "3.3"
 }
 
 // pulls out properties from a global properties file
@@ -13,9 +14,20 @@ wrapper {
   gradleVersion env.GRADLE_VERSION
 }
 
+
 subprojects {
   repositories {
 	  mavenCentral()
   }
+
+  sonarqube {
+  properties {
+    property "sonar.projectKey", "BillyBolton_DCMS-tested"
+    property "sonar.organization", "billybolton"
+    property "sonar.host.url", "https://sonarcloud.io"
+    // property "SONAR_TOKEN", "1ddac6b3b82e076b1954d508edfb1f47bbfc1b0e"
+    property "sonar.login", "1ddac6b3b82e076b1954d508edfb1f47bbfc1b0e"
+  }
+}
 }
 

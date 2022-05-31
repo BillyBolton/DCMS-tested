@@ -25,8 +25,7 @@ subprojects {
     property "sonar.projectKey", "BillyBolton_DCMS-tested"
     property "sonar.organization", "billybolton"
     property "sonar.host.url", "https://sonarcloud.io"
-    // property "SONAR_TOKEN", "1ddac6b3b82e076b1954d508edfb1f47bbfc1b0e"
-    property "sonar.login", "1ddac6b3b82e076b1954d508edfb1f47bbfc1b0e"
+    property "sonar.login", "4b5c2617a184aeb41820afc2fa1586f7004fbf2d"
   }
 }
 }

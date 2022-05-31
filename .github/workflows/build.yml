@@ -35,4 +35,4 @@ jobs:
           # SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
           SONAR_TOKEN: 8c165ded166e60d9a35901defabb01cd61ab2848
-        run: echo $GITHUB_TOKEN && ./gradlew sonarqube --info
+        run: echo $GITHUB_TOKEN && ./gradlew api:sonarqube --info

@@ -1,13 +1,14 @@
 package ca.me.proj.api.dtos.appointment;
 
 import java.time.LocalDateTime;
+import ca.me.proj.api.dtos.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class AppointmentDTO {
+public class AppointmentDTO extends BaseDTO {
 
 
     private Long id;

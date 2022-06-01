@@ -12,13 +12,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import ca.me.proj.api.entity.address.AddressEntity;
+import ca.me.proj.api.entity.base.AbstractBaseEntity;
 import lombok.Data;
 
 
 @Data
 @Entity
 @Table(name = "PROFILE")
-public class ProfileEntity {
+public class ProfileEntity extends AbstractBaseEntity {
 
     @Id
     @Column(name = "id")

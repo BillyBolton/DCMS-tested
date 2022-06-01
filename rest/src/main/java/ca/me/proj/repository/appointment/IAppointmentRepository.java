@@ -42,6 +42,4 @@ public interface IAppointmentRepository extends JpaRepository<AppointmentEntity,
                         nativeQuery = true)
         public boolean findEmployeeScheduleConflict(Date start_time, Date end_time, String id);
 
-
-
 }

@@ -1,9 +1,10 @@
 package ca.me.proj.api.dtos.treatment;
 
+import ca.me.proj.api.dtos.base.BaseDTO;
 import lombok.Data;
 
 @Data
-public class TreatmentDTO {
+public class TreatmentDTO extends BaseDTO {
 
     private Long id;
 

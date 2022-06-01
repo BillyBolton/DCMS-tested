@@ -30,7 +30,7 @@ public class AddressService extends AbstractBaseServiceImpl<AddressDTO, AddressE
         return save(dto);
     }
 
-    private void checkExists(AddressDTO dto) {
+    public void checkExists(AddressDTO dto) {
         if (dto.getId() != null && repository.existsById(dto.getId())) {
             throw new ResourceAlreadyExistsException("Address ID already exists");
         }

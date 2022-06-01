@@ -1,7 +1,9 @@
 package ca.me.proj.api.repository.employee;
 
+import java.util.List;
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
+import ca.me.proj.api.dtos.employee.EmployeeRole;
 import ca.me.proj.api.entity.employee.EmployeeEntity;
 import ca.me.proj.api.repository.base.IBaseRepository;
 
@@ -9,7 +11,7 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 @Repository
 public interface IEmployeeRepository extends IBaseRepository<EmployeeEntity, String> {
 
-
+      List<EmployeeEntity> findByRoleAndBranchId(EmployeeRole role, String branchId);
 
       // @Query(value = "SELECT * from EMPLOYEE WHERE branch_id = ?1 AND role = 'DENTIST'",
       // nativeQuery = true)

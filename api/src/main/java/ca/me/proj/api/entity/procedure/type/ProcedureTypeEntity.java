@@ -7,12 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import ca.me.proj.api.entity.base.AbstractBaseEntity;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "PROCEDURE_TYPE")
-public class ProcedureTypeEntity {
+public class ProcedureTypeEntity extends AbstractBaseEntity {
 
     @Id
     @NotNull

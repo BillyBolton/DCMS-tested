@@ -199,7 +199,7 @@ dependencies {
  
   // Spring and Azure Active Directory
   // compile "com.azure.spring:azure-spring-boot-starter-active-directory:3.6.1"
- 
+ implementation 'org.springframework.boot:spring-boot-starter-security:2.6.1'
  
   // API documentation
  

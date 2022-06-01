@@ -3,12 +3,13 @@ package ca.me.proj.api.dtos.profile;
 
 import java.time.LocalDate;
 import ca.me.proj.api.dtos.address.AddressDTO;
+import ca.me.proj.api.dtos.base.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ProfileDTO {
+public class ProfileDTO extends BaseDTO {
 
     private String id;
     private String username;

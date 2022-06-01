@@ -6,12 +6,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import ca.me.proj.api.entity.base.AbstractBaseEntity;
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "TREATMENT")
-public class TreatmentEntity {
+public class TreatmentEntity extends AbstractBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

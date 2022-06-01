@@ -18,36 +18,6 @@ public class AddressController extends AbstractCrudController<AddressDTO, Addres
     @Autowired
     private AddressService addressService;
 
-    // @GetMapping("/findAll")
-    // public List<AddressDTO> findAll() {
-    // return service.findAll();
-    // }
-
-    // @GetMapping("/existsByID")
-    // public boolean existsByID(@RequestParam String id) {
-    // return service.existsByID(id);
-    // }
-
-    // @GetMapping("/findByID")
-    // public AddressDTO findByID(@RequestParam String id) {
-    // return service.findByID(id);
-    // }
-
-    // @PostMapping("/create")
-    // public AddressDTO create(@RequestBody AddressDTO dto) {
-    // return service.create(dto);
-    // }
-
-    // @DeleteMapping("/deleteByID")
-    // public void deleteByID(@RequestParam String id) {
-    // service.deleteById(id);
-    // }
-
-    // @PutMapping("/update")
-    // public AddressDTO update(@RequestBody AddressDTO dto) {
-    // return service.update(dto);
-    // }
-
     @PostMapping("/findBy/address")
     public AddressDTO findByAddress(@RequestBody AddressDTO dto) {
         return addressService.findByAddress(dto);

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import ca.me.proj.api.entity.base.AbstractBaseEntity;
 import ca.me.proj.api.entity.patient.PatientEntity;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "REVIEW")
-public class ReviewEntity {
+public class ReviewEntity extends AbstractBaseEntity {
 
     @Id
     @NotNull

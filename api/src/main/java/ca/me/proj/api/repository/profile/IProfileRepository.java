@@ -9,6 +9,10 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 @Repository
 public interface IProfileRepository extends IBaseRepository<ProfileEntity, String> {
 
+        public ProfileEntity findByUsername(String username);
+
+        public boolean existsByUsername(String username);
+
         // @Override
         // @Query(value = "SELECT * from PROFILE", nativeQuery = true)
         // public List<ProfileEntity> findAll();

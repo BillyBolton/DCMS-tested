@@ -1,0 +1,240 @@
+plugins {
+                id 'org.springframework.boot' version '2.6.6'
+                id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+                id 'java'
+                id "org.sonarqube" version "3.3"
+  id 'java-library' //important for QDSL
+  id 'jacoco'
+  id 'war' //important for QDSL
+}
+ 
+// group = 'ca.gc.hc'
+// version = '0.0.1-SNAPSHOT'
+// sourceCompatibility = '1.8'
+ 
+apply plugin: 'war'
+apply plugin: 'io.spring.dependency-management'
+ 
+// pulls out properties from a global properties file
+Properties env = new Properties()
+File subPropertiesFile = new File("$projectDir/env.properties")
+subPropertiesFile.withInputStream {
+  env.load(it)
+}
+ 
+// define environment and application settings
+def applicationName = env.APPLICATION_NAME
+def buildNumber = env.APPLICATION_BUILD_VERSION
+group = env.APPLICATION_GROUP
+version = env.APPLICATION_VERSION
+def archiveClassifierName = env.ARCHIVE_CLASSIFIER
+def javaVersion = JavaVersion.toVersion(env.JAVA_VERSION)
+sourceCompatibility = javaVersion
+targetCompatibility = javaVersion
+compileJava.options.encoding = env.ENCODING
+ 
+def archiveName = "${applicationName}##${version}.${buildNumber}"
+ 
+def profiles = (project.hasProperty('profiles')
+  ? project.property('profiles')
+  : env.DEFAULT_LOCAL_SPRING_PROFILES).split(",");
+ 
+// configure tasks
+bootRun {
+  args = ["--spring.profiles.active=${profiles.join(",")}"]
+}
+ 
+bootJar {
+  archiveFileName = "${archiveName}.jar"
+}
+ 
+bootWar {
+  archiveFileName = "${archiveName}.war"
+}
+ 
+test {
+  useJUnitPlatform()
+ 
+  // need to be able to pass through the active profile supplied in gradle task
+  systemProperty 'spring.profiles.active', profiles.join(",")
+  testLogging {
+                  outputs.upToDateWhen {false}
+                  showStandardStreams = true
+  }
+ 
+}
+ 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+test.finalizedBy jacocoTestReport
+ 
+sonarqube {
+    properties {
+        def props = new Properties()
+        file("sonar-project.properties").withInputStream { props.load(it)}
+        props.each {
+          property("${it.key}", "${it.value}")
+        }
+    }
+}
+ 
+tasks.named('sonarqube').configure {
+    dependsOn test
+}
+ 
+configurations {
+  developmentOnly
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
+}
+ 
+ext {
+  DB_DRIVER_VERSION = "42.2.18"
+  GSON_VERSION = "2.8.5" // for JSON support
+  H2_VERSION = "1.4.+"
+  JUNIT_VERSION = "5.3.1"
+  VALIDATION_VERSION = "7.0.1.FINAL"
+  MAPSTRUCT_VERSION = '1.4.1.Final'
+  MAPSTRUCT_BINDING_VERSION = '0.2.0'
+  MOCKITO_VERSION = '2.18.3'
+  QDSL_VERSION = '5.0.0'
+  SPRINGDOC_VERSION='1.5.10'
+  RESTASSURED_VERSION = '4.1.2'
+  XML_VERSION='4.+'
+  QUERYDSL_VERSION = '5.0.0'
+}
+ 
+compileJava {
+    options.compilerArgs += [
+        '-Amapstruct.defaultComponentModel=spring'
+    ]
+}
+ 
+sourceSets {
+    generated {
+        java {
+            srcDirs += ["$projectDir/build/generated/sources/annotationProcessor/java/main"]
+        }
+    }
+}
+ 
+ 
+ 
+dependencies {
+
+ 
+     runtimeOnly "org.postgresql:postgresql:$DB_DRIVER_VERSION"
+  // else {
+ 
+  //   // if (profiles.contains("tc")) {
+  //   if (false) {
+  //   implementation "org.postgresql:postgresql:$DB_DRIVER_VERSION"
+ 
+  //     implementation "org.testcontainers:postgresql:$TESTCONTAINERS_VERSION"
+  //     runtimeOnly "org.testcontainers:testcontainers:$TESTCONTAINERS_VERSION"
+  //     testCompile "org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION"
+  //   }
+  // } 
+ 
+  annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+ 
+ 
+  // annotations for getters/setters/ctors/equals/hashCode
+  annotationProcessor "org.projectlombok:lombok"
+  testAnnotationProcessor "org.projectlombok:lombok"
+  implementation "org.projectlombok:lombok"
+ 
+  // easier/faster DTOs
+  annotationProcessor "org.mapstruct:mapstruct-processor:$MAPSTRUCT_VERSION"
+  implementation "org.mapstruct:mapstruct:$MAPSTRUCT_VERSION"
+  testAnnotationProcessor "org.mapstruct:mapstruct-processor:$MAPSTRUCT_VERSION"
+ 
+ 
+ 
+  // required for binding mapstruct and lombok together
+  annotationProcessor "org.projectlombok:lombok-mapstruct-binding:$MAPSTRUCT_BINDING_VERSION"
+ 
+  // better dev experience in bootRun
+  developmentOnly "org.springframework.boot:spring-boot-devtools"
+ 
+  // work with XML
+  annotationProcessor "jakarta.xml.bind:jakarta.xml.bind-api:$XML_VERSION"
+  implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-xml"
+ 
+  // health checks
+  implementation "org.springframework.boot:spring-boot-starter-actuator"
+ 
+  // persistance and validation with hibernate
+  implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    annotationProcessor "org.springframework.boot:spring-boot-starter-data-jpa" // Needed for Qdsl
+  // implementation "org.hibernate.validator:hibernate-validator:$VALIDATION_VERSION"
+  // implementation "javax.validation:validation-api:2.0.1.Final"
+  annotationProcessor "javax.validation:validation-api:2.0.1.Final"
+  // implementation "org.glassfish:javax.el:3.0.0"
+  annotationProcessor "javax.annotation:javax.annotation-api"
+ 
+  // protects API calls using oauth2 access tokens
+  // implementation "org.springframework.boot:spring-boot-starter-oauth2-resource-server"
+  // implementation 'org.springframework.boot:spring-boot-starter-security:2.6.1'
+ 
+ 
+  // standard MVC architecture
+  implementation "org.springframework.boot:spring-boot-starter-web"
+ 
+  // set to 'providedRuntime' to allow both jar/war deploys
+  providedRuntime "org.springframework.boot:spring-boot-starter-tomcat"
+ 
+  // easier mocks
+  testImplementation "org.mockito:mockito-junit-jupiter:$MOCKITO_VERSION"
+ 
+  // easier REST testing
+  testImplementation "io.rest-assured:rest-assured-all:$RESTASSURED_VERSION"
+  testImplementation "io.rest-assured:spring-mock-mvc:3.3.0"
+ 
+  // allows for SpringBootTest
+  testImplementation ("org.springframework.boot:spring-boot-starter-test")
+ 
+  // Spring and Azure Active Directory
+  // compile "com.azure.spring:azure-spring-boot-starter-active-directory:3.6.1"
+ 
+ 
+  // API documentation
+ 
+  implementation "org.springdoc:springdoc-openapi-ui:$SPRINGDOC_VERSION"
+  implementation "org.springdoc:springdoc-openapi-data-rest:$SPRINGDOC_VERSION"
+  // implementation "org.springdoc:springdoc-openapi-security:$SPRINGDOC_VERSION"
+ 
+ 
+ 
+  // Better Queries
+  // api "com.querydsl:querydsl-jpa:$QDSL_VERSION"
+  // annotationProcessor "com.querydsl:querydsl-apt:$QDSL_VERSION:jpa"
+  // implementation "com.querydsl:querydsl-apt:$QDSL_VERSION:jpa"
+  // compile "com.querydsl:querydsl-jpa:$QDSL_VERSION"
+  annotationProcessor "javax.annotation:javax.annotation-api"
+  // implementation "com.querydsl:querydsl-core:$QDSL_VERSION"
+ 
+  implementation "com.google.code.gson:gson:$GSON_VERSION"
+ 
+  implementation 'javax.interceptor:javax.interceptor-api:1.2.2'
+ 
+ 
+}
+ 
+// make sure your environment is set up correctly!
+task checkEnvironment {
+  doFirst {
+    if(JavaVersion.current() != javaVersion) {
+      throw new IOException("Configured version of Java (${javaVersion}) is different than the host version (${JavaVersion.current()})")
+    }
+ 
+    println "Spring Boot profiles: ${profiles}"
+    println "Java: ${javaVersion} (${env.JAVA_VERSION})"
+  }
+}
+ 
+compileJava.dependsOn checkEnvironment

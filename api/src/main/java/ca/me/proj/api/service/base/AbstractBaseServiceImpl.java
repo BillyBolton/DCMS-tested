@@ -11,11 +11,16 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 public abstract class AbstractBaseServiceImpl<D extends BaseDTO, E extends AbstractBaseEntity, PK>
         implements IBaseService<D, PK> {
 
-    @Autowired
+
     protected IBaseMapper<D, E> mapper;
+    protected IBaseRepository<E, PK> repository;
 
     @Autowired
-    protected IBaseRepository<E, PK> repository;
+    public void setService(IBaseMapper<D, E> mapper, IBaseRepository<E, PK> repository) {
+        this.mapper = mapper;
+        this.repository = repository;
+    }
+
 
     public boolean existsById(PK id) {
         return repository.existsById(id);

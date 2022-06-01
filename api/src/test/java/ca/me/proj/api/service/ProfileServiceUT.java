@@ -16,7 +16,6 @@ import ca.me.proj.api.dtos.profile.ProfileDTO;
 import ca.me.proj.api.entity.profile.ProfileEntity;
 import ca.me.proj.api.mapper.profile.IProfileMapper;
 import ca.me.proj.api.repository.profile.IProfileRepository;
-import ca.me.proj.api.service.address.AddressService;
 import ca.me.proj.api.service.profile.AuthenticationService;
 import ca.me.proj.api.service.profile.ProfileService;
 import lombok.extern.slf4j.Slf4j;
@@ -34,8 +33,8 @@ class ProfileServiceUT {
     @Mock
     private AuthenticationService authenticationService;
 
-    @Mock
-    private AddressService addressService;
+    // @Mock
+    // private AddressService addressService;
 
     @InjectMocks
     private ProfileService service;

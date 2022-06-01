@@ -28,7 +28,7 @@ public class PatientService extends AbstractBaseServiceImpl<PatientDTO, PatientE
             return save(dto);
         }
 
-        dto.setProfile(profileService.create(dto.getProfile()));
+        // dto.setProfile(profileService.create(dto.getProfile()));
         return save(dto);
 
     }

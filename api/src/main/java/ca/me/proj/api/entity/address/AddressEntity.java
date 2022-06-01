@@ -12,11 +12,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "ADDRESS")
 @AttributeOverride(name = "id", column = @Column(name = "id"))
 public class AddressEntity extends AbstractStringEntity {
+
+    private static final long servialVersionUID = 539485762983745923L;
 
     // @Id
     // @NotNull

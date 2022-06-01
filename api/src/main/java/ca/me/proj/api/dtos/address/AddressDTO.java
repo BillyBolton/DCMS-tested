@@ -9,8 +9,10 @@ import lombok.EqualsAndHashCode;
 
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 public class AddressDTO extends BaseDTO {
+
+    private static final long servialVersionUID = 5394857629837459234L;
 
     private String id;
     private Long buildingNumber;

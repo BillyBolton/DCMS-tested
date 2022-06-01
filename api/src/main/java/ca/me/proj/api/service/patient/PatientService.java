@@ -17,7 +17,7 @@ public class PatientService extends AbstractBaseServiceImpl<PatientDTO, PatientE
     private ProfileService profileService;
 
 
-    public PatientDTO createPatient(PatientDTO dto) {
+    public PatientDTO create(PatientDTO dto) {
 
 
         if (profileService.existsByUsername(dto.getProfile().getUsername())) {
@@ -28,7 +28,7 @@ public class PatientService extends AbstractBaseServiceImpl<PatientDTO, PatientE
             return save(dto);
         }
 
-        dto.setProfile(profileService.createProfile(dto.getProfile()));
+        dto.setProfile(profileService.create(dto.getProfile()));
         return save(dto);
 
     }

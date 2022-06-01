@@ -38,11 +38,9 @@ public class ProfileController extends AbstractCrudController<ProfileDTO, Profil
         return profileService.existsByUsername(username);
     }
 
-
-
     @PostMapping("/create")
-    public ProfileDTO createProfile(@RequestBody ProfileDTO dto) {
-        return profileService.createProfile(dto);
+    public ProfileDTO create(@RequestBody ProfileDTO dto) {
+        return profileService.create(dto);
     }
 
     @DeleteMapping("/deleteByUsername")

@@ -4,6 +4,6 @@ import java.io.Serializable;
 import lombok.Data;
 
 @Data
-public class BaseDTO implements IBaseDTO, Serializable {
+public abstract class BaseDTO implements IBaseDTO, Serializable {
 
 }

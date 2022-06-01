@@ -28,7 +28,7 @@ public class ProfileService extends AbstractBaseServiceImpl<ProfileDTO, ProfileE
         return authenticationService.authenticate(credentials);
     }
 
-    public ProfileDTO createProfile(ProfileDTO dto) {
+    public ProfileDTO create(ProfileDTO dto) {
         // TODO migrate Jake's work
 
         dto.setId(null);

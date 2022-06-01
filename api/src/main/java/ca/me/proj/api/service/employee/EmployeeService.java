@@ -51,7 +51,7 @@ public class EmployeeService extends AbstractBaseServiceImpl<EmployeeDTO, Employ
             return save(dto);
         }
 
-        dto.setProfile(profileService.createProfile(dto.getProfile()));
+        dto.setProfile(profileService.create(dto.getProfile()));
         return save(dto);
 
     }
@@ -60,8 +60,6 @@ public class EmployeeService extends AbstractBaseServiceImpl<EmployeeDTO, Employ
         return employeeMapper.dtoToLite(createEmployee(employeeMapper.liteToDto(dto)));
 
     }
-
-
 
     public void createValidation(EmployeeDTO dto) {
 
@@ -103,7 +101,7 @@ public class EmployeeService extends AbstractBaseServiceImpl<EmployeeDTO, Employ
     }
 
 
-
+    @Override
     public EmployeeDTO update(EmployeeDTO dto) {
 
 

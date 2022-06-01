@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ca.me.proj.api.dtos.exceptions.ResourceAlreadyExistsException;
 import ca.me.proj.api.dtos.exceptions.ResourceNotFoundException;
+import ca.me.proj.api.dtos.profile.AuthenticationDTO;
 import ca.me.proj.api.dtos.profile.ProfileDTO;
 import ca.me.proj.api.entity.profile.ProfileEntity;
 import ca.me.proj.api.repository.profile.IProfileRepository;
@@ -22,6 +23,10 @@ public class ProfileService extends AbstractBaseServiceImpl<ProfileDTO, ProfileE
 
     @Autowired
     private IProfileRepository profileRepository;
+
+    public boolean authenticate(AuthenticationDTO credentials) {
+        return authenticationService.authenticate(credentials);
+    }
 
     public ProfileDTO createProfile(ProfileDTO dto) {
         // TODO migrate Jake's work

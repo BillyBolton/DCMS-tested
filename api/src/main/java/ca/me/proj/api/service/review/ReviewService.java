@@ -32,7 +32,7 @@ public class ReviewService extends AbstractBaseServiceImpl<ReviewDTO, ReviewEnti
         return mapper.entityToDto(reviewRepository.findByBranchId(id));
     }
 
-    public AvgReviewDTO findAverageByBranchId(String id) {
+    public AvgReviewDTO findAverageRatingByBranchId(String id) {
         List<ReviewDTO> dtos = findByBranchId(id);
         AvgReviewDTO avg = new AvgReviewDTO();
 

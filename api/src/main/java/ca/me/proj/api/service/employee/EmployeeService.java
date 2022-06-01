@@ -56,7 +56,7 @@ public class EmployeeService extends AbstractBaseServiceImpl<EmployeeDTO, Employ
 
     }
 
-    public NewEmployeeDTO createEmployee(NewEmployeeDTO dto) {
+    public NewEmployeeDTO create(NewEmployeeDTO dto) {
         return employeeMapper.dtoToLite(createEmployee(employeeMapper.liteToDto(dto)));
 
     }

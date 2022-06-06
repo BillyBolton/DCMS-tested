@@ -19,7 +19,7 @@ public interface IProcedureRepository extends IBaseRepository<ProcedureEntity, S
     // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PROCEDURE p where
     // p.id = ?1",
     // nativeQuery = true)
-    // public boolean existsByID(String id);
+    // public boolean existsById(String id);
 
     // @Modifying
     // @Query(value = "DELETE from PROCEDURE p where p.id = ?1", nativeQuery = true)

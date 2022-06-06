@@ -19,7 +19,7 @@ public interface IPatientRepository extends IBaseRepository<PatientEntity, Strin
     // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PATIENT p where
     // p.id = ?1",
     // nativeQuery = true)
-    // public boolean existsByID(String id);
+    // public boolean existsById(String id);
 
     // @Modifying
     // @Query(value = "DELETE from PATIENT p where p.id = ?1", nativeQuery = true)

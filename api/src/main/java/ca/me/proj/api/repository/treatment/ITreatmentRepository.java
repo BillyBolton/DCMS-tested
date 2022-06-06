@@ -25,7 +25,7 @@ public interface ITreatmentRepository extends IBaseRepository<TreatmentEntity, L
         // @Query(value = "SELECT CASE WHEN count(t)> 0 THEN true ELSE false end from TREATMENT t
         // where t.id = ?1",
         // nativeQuery = true)
-        // public boolean existsByID(long id);
+        // public boolean existsById(long id);
 
         // @Modifying
         // @Query(value = "DELETE from Treatment t where t.id = ?1", nativeQuery = true)

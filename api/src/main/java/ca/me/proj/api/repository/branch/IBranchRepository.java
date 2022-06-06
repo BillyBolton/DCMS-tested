@@ -12,7 +12,7 @@ public interface IBranchRepository extends IBaseRepository<BranchEntity, String>
     // @Query(value = "SELECT CASE WHEN count(b)> 0 THEN true ELSE false end from Branch b where
     // b.id = ?1",
     // nativeQuery = true)
-    // public boolean existsByID(String id);
+    // public boolean existsById(String id);
 
     // @Override
     // @Query(value = "SELECT * from Branch", nativeQuery = true)

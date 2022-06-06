@@ -25,7 +25,7 @@ public interface IReviewRepository extends IBaseRepository<ReviewEntity, Long> {
     // @Query(value = "SELECT CASE WHEN count(r)> 0 THEN true ELSE false end from REVIEW r where
     // r.id = ?1",
     // nativeQuery = true)
-    // public boolean existsByID(long id);
+    // public boolean existsById(long id);
 
     // @Modifying
     // @Query(value = "DELETE from REVIEW p where p.id = ?1", nativeQuery = true)

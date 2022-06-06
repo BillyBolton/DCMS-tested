@@ -1,4 +1,4 @@
-package ca.me.proj.api.service;
+package ca.me.proj.api.unit.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

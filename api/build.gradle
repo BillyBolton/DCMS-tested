@@ -6,6 +6,7 @@ plugins {
   id 'java-library' //important for QDSL
   id 'jacoco'
   id 'war' //important for QDSL
+  id 'info.solidsoft.pitest' version '1.7.4'
 }
  
 apply plugin: 'war'
@@ -46,6 +47,11 @@ bootJar {
  
 bootWar {
   archiveFileName = "${archiveName}.war"
+}
+
+pitest {
+    //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
+    junit5PluginVersion = '0.15'
 }
  
 test {
@@ -90,18 +96,20 @@ configurations {
  
 ext {
   DB_DRIVER_VERSION = "42.2.18"
+  FLYWAY_VERSION = "8.5.12"
   GSON_VERSION = "2.8.5" // for JSON support
   H2_VERSION = "1.4.+"
   JUNIT_VERSION = "5.3.1"
+  LIQUIBASE_VERSION = "4.11.0"
   VALIDATION_VERSION = "7.0.1.FINAL"
   MAPSTRUCT_VERSION = '1.4.1.Final'
   MAPSTRUCT_BINDING_VERSION = '0.2.0'
   MOCKITO_VERSION = '2.18.3'
   QDSL_VERSION = '5.0.0'
-  SPRINGDOC_VERSION='1.5.10'
   RESTASSURED_VERSION = '4.1.2'
+  SPRINGDOC_VERSION='1.5.10'
+  TESTCONTAINERS_VERSION="1.17.2"
   XML_VERSION='4.+'
-  QUERYDSL_VERSION = '5.0.0'
 }
  
 compileJava {
@@ -124,6 +132,16 @@ dependencies {
 
  
      runtimeOnly "org.postgresql:postgresql:$DB_DRIVER_VERSION"
+     testImplementation "org.testcontainers:postgresql:$TESTCONTAINERS_VERSION"
+     testImplementation "org.testcontainers:junit-jupiter:$TESTCONTAINERS_VERSION"
+      if(profiles.contains("liquibase")){
+        runtimeOnly "org.liquibase:liquibase-core:$LIQUIBASE_VERSION"
+      }
+      if(profiles.contains("flyway")){
+        implementation "org.flywaydb:flyway-core:$FLYWAY_VERSION"
+      }
+
+
   // else {
  
   //   // if (profiles.contains("tc")) {

@@ -26,7 +26,7 @@ public interface IAppointmentRepository extends IBaseRepository<AppointmentEntit
         // @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from APPOINTMENT a
         // where a.id = ?1",
         // nativeQuery = true)
-        // public boolean existsByID(long id);
+        // public boolean existsById(long id);
 
         // @Modifying
         // @Query(value = "DELETE from APPOINTMENT a where a.id = ?1", nativeQuery = true)

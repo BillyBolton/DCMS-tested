@@ -19,7 +19,7 @@ public interface IPatientBillingRepository extends IBaseRepository<PatientBillin
     // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PATIENT_BILLING p
     // where p.id = ?1",
     // nativeQuery = true)
-    // public boolean existsByID(long id);
+    // public boolean existsById(long id);
 
     // @Modifying
     // @Query(value = "DELETE from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)

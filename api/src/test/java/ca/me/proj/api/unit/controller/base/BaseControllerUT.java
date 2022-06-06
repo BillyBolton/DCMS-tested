@@ -1,4 +1,4 @@
-package ca.me.proj.api.controller.base;
+package ca.me.proj.api.unit.controller.base;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

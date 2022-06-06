@@ -19,7 +19,7 @@ public abstract class AbstractReadController<D extends BaseDTO, E extends Abstra
     }
 
     @GetMapping(ApiUri.EXISTS_BY_ID)
-    public boolean existsByID(@RequestParam("id") PK id) {
+    public boolean existsById(@RequestParam("id") PK id) {
         return service.existsById(id);
     }
 

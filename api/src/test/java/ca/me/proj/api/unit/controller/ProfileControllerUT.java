@@ -1,4 +1,4 @@
-package ca.me.proj.api.controller;
+package ca.me.proj.api.unit.controller;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
@@ -11,10 +11,10 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.web.servlet.MvcResult;
 import ca.me.proj.api.constants.ApiUri;
-import ca.me.proj.api.controller.base.BaseControllerUT;
 import ca.me.proj.api.controller.profile.ProfileController;
 import ca.me.proj.api.dtos.profile.ProfileDTO;
 import ca.me.proj.api.service.profile.ProfileService;
+import ca.me.proj.api.unit.controller.base.BaseControllerUT;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

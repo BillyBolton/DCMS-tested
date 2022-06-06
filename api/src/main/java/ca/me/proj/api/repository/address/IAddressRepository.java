@@ -13,7 +13,7 @@ public interface IAddressRepository extends IBaseRepository<AddressEntity, Strin
         // @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from ADDRESS a
         // where a.id = ?1",
         // nativeQuery = true)
-        // public boolean existsByID(String id);
+        // public boolean existsById(String id);
 
         // @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from ADDRESS a
         // where (a.building_number = ?1 and a.street = ?2 and a.city = ?3 and a.province = ?4 and

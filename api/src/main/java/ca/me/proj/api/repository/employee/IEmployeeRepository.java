@@ -27,7 +27,7 @@ public interface IEmployeeRepository extends IBaseRepository<EmployeeEntity, Str
       // @Query(value = "SELECT CASE WHEN count(e)> 0 THEN true ELSE false end from EMPLOYEE e where
       // e.id = ?1",
       // nativeQuery = true)
-      // public boolean existsByID(String id);
+      // public boolean existsById(String id);
 
       // @Modifying
       // @Query(value = "DELETE from EMPLOYEE e where e.id = ?1", nativeQuery = true)

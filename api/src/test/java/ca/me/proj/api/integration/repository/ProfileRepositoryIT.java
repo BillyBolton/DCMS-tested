@@ -20,7 +20,7 @@ class ProfileRepositoryIT extends AbstractIT {
     private IProfileRepository repository;
 
     @Test
-    void findAllProfiles() {
+    void givenEntityExists_whenSearchingByValidProfile_returnEntity() {
         String id = "P_1";
         ProfileEntity entity = repository.findById(id).orElse(null);
         assertNotNull(entity);

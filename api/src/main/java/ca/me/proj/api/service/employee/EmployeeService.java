@@ -69,11 +69,10 @@ public class EmployeeService extends AbstractBaseServiceImpl<EmployeeDTO, Employ
                     "Profile with id " + dto.getId() + " does not exist");
         }
 
-        // If Employee Role is incorrectly formated
-        if (!dto.getRole().equals("MANAGER") && !dto.getRole().equals("RECEPTIONIST")
-                && !dto.getRole().equals("DENTIST") && !dto.getRole().equals("HYGIENIST")) {
+        // Employee role is self validated when using enumeration.
+        // Therefore role is invalid only when it is null.
+        if (dto.getRole() == null) {
             throw new IllegalArgumentException("Invalid Employee Role: " + dto.getRole());
-
         }
 
         // If Employee type is incorrectly formated

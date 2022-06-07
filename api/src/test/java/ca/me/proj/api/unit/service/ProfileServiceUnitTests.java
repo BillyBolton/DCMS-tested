@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-class UTProfileService {
+class ProfileServiceUnitTests {
 
     @Mock
     private IProfileMapper mapper;

@@ -15,22 +15,22 @@ export default class Dentist extends Component {
             loggedInUser: {}
         }
 
-        this.handleSubmit=this.handleSubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit() {
 
-        axios.get('http://localhost:8080/patient/existsById', { params: {id: this.state.userId} })
-            .then( res => {
+        axios.get('http://localhost:8080/patient/existsById', { params: { id: this.state.userId } })
+            .then(res => {
                 if (res.data) {
-                    axios.get('http://localhost:8080/patient/findById', { params: {id: this.state.userId} })
-                    .then(user => {
-                    this.setState({
-                        valid: res.data,
-                        loggedInUser: user.data
-                    })
-                    console.log(this.state)
-                })
+                    axios.get('http://localhost:8080/patient/find/byId', { params: { id: this.state.userId } })
+                        .then(user => {
+                            this.setState({
+                                valid: res.data,
+                                loggedInUser: user.data
+                            })
+                            console.log(this.state)
+                        })
                 }
             })
     }
@@ -53,13 +53,13 @@ export default class Dentist extends Component {
                     </Segment>}
 
             </div><br></br><br></br><div>
-            <h1>Dentist Look Up</h1>
-                <Segment raised>
-                    <DentistSchedule />
-                </Segment>
+                    <h1>Dentist Look Up</h1>
+                    <Segment raised>
+                        <DentistSchedule />
+                    </Segment>
 
                 </div></>
         )
     }
-    
+
 }

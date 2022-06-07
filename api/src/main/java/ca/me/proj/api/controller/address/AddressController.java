@@ -12,13 +12,13 @@ import ca.me.proj.api.service.address.AddressService;
 
 
 @RestController
-@RequestMapping("/address")
+@RequestMapping(AddressUri.DOMAIN)
 public class AddressController extends AbstractCrudController<AddressDTO, AddressEntity, String> {
 
     @Autowired
     private AddressService addressService;
 
-    @PostMapping("/findBy/address")
+    @PostMapping(AddressUri.FIND_BY_ADDRESS)
     public AddressDTO findByAddress(@RequestBody AddressDTO dto) {
         return addressService.findByAddress(dto);
     }

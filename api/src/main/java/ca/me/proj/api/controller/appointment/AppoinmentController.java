@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/appointment")
+@RequestMapping(AppointmentUri.DOMAIN)
 public class AppoinmentController
         extends AbstractCrudController<AppointmentDTO, AppointmentEntity, Long> {
 
@@ -24,12 +24,12 @@ public class AppoinmentController
     private AppointmentService appointmentService;
 
 
-    @GetMapping("/findByPatientId")
+    @GetMapping(AppointmentUri.FIND_BY_PATIENT_ID)
     public List<AppointmentDTO> findByPatientId(@RequestParam String id) {
         return appointmentService.findByPatientId(id);
     }
 
-    @GetMapping("/findByEmployeeId")
+    @GetMapping(AppointmentUri.FIND_BY_EMPLOYEE_ID)
     public List<AppointmentDTO> findByEmployeeId(@RequestParam String id) {
         return appointmentService.findByEmployeeId(id);
     }

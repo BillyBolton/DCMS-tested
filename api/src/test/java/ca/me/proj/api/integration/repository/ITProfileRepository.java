@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import ca.me.proj.api.entity.profile.ProfileEntity;
-import ca.me.proj.api.integration.base.AbstractIT;
+import ca.me.proj.api.integration.base.ITAbstract;
 import ca.me.proj.api.repository.profile.IProfileRepository;
 import lombok.extern.slf4j.Slf4j;
 
@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @DataJpaTest
-class ProfileRepositoryIT extends AbstractIT {
+class ITProfileRepository extends ITAbstract {
 
     @Autowired
     private IProfileRepository repository;

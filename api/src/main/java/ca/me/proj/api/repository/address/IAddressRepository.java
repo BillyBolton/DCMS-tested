@@ -27,7 +27,7 @@ public interface IAddressRepository extends IBaseRepository<AddressEntity, Strin
         // public List<AddressEntity> findAll();
 
         // @Query(value = "SELECT * from ADDRESS WHERE id = ?1 ", nativeQuery = true)
-        // public <Optional> AddressEntity findByID(String id);
+        // public <Optional> AddressEntity findById(String id);
 
         // @Query(value = "SELECT * from ADDRESS a WHERE (a.building_number = ?1 and a.street = ?2
         // and a.city = ?3 and a.province = ?4 and a.postal_code = ?5) ",
@@ -45,7 +45,7 @@ public interface IAddressRepository extends IBaseRepository<AddressEntity, Strin
 
         // @Modifying
         // @Query(value = "DELETE from ADDRESS a where a.id = ?1", nativeQuery = true)
-        // public void deleteByID(String id);
+        // public void deleteById(String id);
 
 
 

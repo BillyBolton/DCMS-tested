@@ -52,6 +52,14 @@ bootWar {
 pitest {
     //adds dependency to org.pitest:pitest-junit5-plugin and sets "testPlugin" to "junit5"
     junit5PluginVersion = '0.15'
+
+    // https://gradle-pitest-plugin.solidsoft.info
+    // targetClasses = ['ca.me.proj.api.service.*']
+    excludedTestClasses = ['ca.me.proj.api.integration.*']
+    
+    threads = 10
+    outputFormats = ['HTML']
+    timestampedReports = false
 }
  
 test {
@@ -85,6 +93,10 @@ sonarqube {
  
 tasks.named('sonarqube').configure {
     dependsOn test
+}
+
+tasks.named('pitest').configure {
+    dependsOn build
 }
  
 configurations {

@@ -20,7 +20,7 @@ public interface ITreatmentRepository extends IBaseRepository<TreatmentEntity, L
         // public List<TreatmentEntity> findAll();
 
         // @Query(value = "SELECT * from TREATMENT WHERE id = ?1 ", nativeQuery = true)
-        // public <Optional> TreatmentEntity findByID(long id);
+        // public <Optional> TreatmentEntity findById(long id);
 
         // @Query(value = "SELECT CASE WHEN count(t)> 0 THEN true ELSE false end from TREATMENT t
         // where t.id = ?1",
@@ -29,7 +29,7 @@ public interface ITreatmentRepository extends IBaseRepository<TreatmentEntity, L
 
         // @Modifying
         // @Query(value = "DELETE from Treatment t where t.id = ?1", nativeQuery = true)
-        // public void deleteByID(long id);
+        // public void deleteById(long id);
 
         // @Query(value = "SELECT CASE WHEN count(t)> 0 THEN true ELSE false end from TREATMENT t
         // where t.procedure_id = ?1",

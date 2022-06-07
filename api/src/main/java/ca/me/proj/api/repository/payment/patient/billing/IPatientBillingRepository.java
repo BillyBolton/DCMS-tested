@@ -14,7 +14,7 @@ public interface IPatientBillingRepository extends IBaseRepository<PatientBillin
     // public List<PatientBillingEntity> findAll();
 
     // @Query(value = "SELECT * from PATIENT_BILLING WHERE id = ?1 ", nativeQuery = true)
-    // public <Optional> PatientBillingEntity findByID(long id);
+    // public <Optional> PatientBillingEntity findById(long id);
 
     // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PATIENT_BILLING p
     // where p.id = ?1",
@@ -23,6 +23,6 @@ public interface IPatientBillingRepository extends IBaseRepository<PatientBillin
 
     // @Modifying
     // @Query(value = "DELETE from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)
-    // public void deleteByID(long id);
+    // public void deleteById(long id);
 
 }

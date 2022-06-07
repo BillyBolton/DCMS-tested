@@ -20,7 +20,7 @@ public interface IReviewRepository extends IBaseRepository<ReviewEntity, Long> {
     // public List<ReviewEntity> findAll();
 
     // @Query(value = "SELECT * from PATIENT WHERE id = ?1 ", nativeQuery = true)
-    // public <Optional> ReviewEntity findByID(long id);
+    // public <Optional> ReviewEntity findById(long id);
 
     // @Query(value = "SELECT CASE WHEN count(r)> 0 THEN true ELSE false end from REVIEW r where
     // r.id = ?1",
@@ -29,7 +29,7 @@ public interface IReviewRepository extends IBaseRepository<ReviewEntity, Long> {
 
     // @Modifying
     // @Query(value = "DELETE from REVIEW p where p.id = ?1", nativeQuery = true)
-    // public void deleteByID(long id);
+    // public void deleteById(long id);
 
     // @Query(value = "SELECT * FROM REVIEW WHERE branch_id = ?1", nativeQuery = true)
     // public List<ReviewEntity> findByBranchId(String id);

@@ -23,7 +23,7 @@ export default class Dentist extends Component {
         axios.get('http://localhost:8080/patient/existsById', { params: {id: this.state.userId} })
             .then( res => {
                 if (res.data) {
-                    axios.get('http://localhost:8080/patient/findByID', { params: {id: this.state.userId} })
+                    axios.get('http://localhost:8080/patient/findById', { params: {id: this.state.userId} })
                     .then(user => {
                     this.setState({
                         valid: res.data,

@@ -22,7 +22,7 @@ public abstract class AbstractCrudController<D extends BaseDTO, E extends Abstra
         return service.update(dto);
     }
 
-    @DeleteMapping(ApiUri.DELETE)
+    @DeleteMapping(ApiUri.DELETE_BY_ID)
     public boolean deleteById(@RequestParam PK id) {
         return service.deleteById(id);
     }

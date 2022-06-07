@@ -18,7 +18,7 @@ const BranchDetails = () => {
 
     const fetchBranchDetails = async () => {
         try {
-            const {data} = await axios.get(`http://localhost:8080/branch/findByID?id=${id}`);
+            const {data} = await axios.get(`http://localhost:8080/branch/findById?id=${id}`);
             SetProfile(data.manager.profile)
             SetAddress(data.address)
         } catch (err) {

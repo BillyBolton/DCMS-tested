@@ -14,7 +14,7 @@ public interface IProcedureRepository extends IBaseRepository<ProcedureEntity, S
     // public List<ProcedureEntity> findAll();
 
     // @Query(value = "SELECT * from PROCEDURE WHERE id = ?1", nativeQuery = true)
-    // public Optional<ProcedureEntity> findByID(String id);
+    // public Optional<ProcedureEntity> findById(String id);
 
     // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PROCEDURE p where
     // p.id = ?1",
@@ -23,6 +23,6 @@ public interface IProcedureRepository extends IBaseRepository<ProcedureEntity, S
 
     // @Modifying
     // @Query(value = "DELETE from PROCEDURE p where p.id = ?1", nativeQuery = true)
-    // public void deleteByID(String id);
+    // public void deleteById(String id);
 
 }

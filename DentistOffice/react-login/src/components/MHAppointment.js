@@ -34,7 +34,7 @@ export default class MHAppointment extends Component {
             })
 
             // get address
-            axios.get('http://localhost:8080/branch/findByID', { params: {id: (this.props.appt).branchId} } )
+            axios.get('http://localhost:8080/branch/findById', { params: {id: (this.props.appt).branchId} } )
             .then(res => {
                 const address = res.data.address
 

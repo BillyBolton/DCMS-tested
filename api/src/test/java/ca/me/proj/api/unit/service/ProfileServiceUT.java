@@ -42,7 +42,7 @@ class ProfileServiceUT {
     @ParameterizedTest
     @EmptySource
     @NullSource
-    @ValueSource(strings = {"yodaBae"})
+    @ValueSource(strings = {"yodaBaes"})
     void givenEntityExists_whenFindByUsername_thenReturnTrue(String username) {
 
 

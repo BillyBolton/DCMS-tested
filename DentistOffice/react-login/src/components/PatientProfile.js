@@ -31,7 +31,7 @@ export default class PatientProfile extends Component {
             this.setState({...this.state, mode: 'modify'})
         } else if (this.state.mode == 'modify') {
 
-            axios.get('http://localhost:8080/patient/findByID', { params: {id: this.state.id} })
+            axios.get('http://localhost:8080/patient/findById', { params: {id: this.state.id} })
             .then(user => {
                 const u = user.data
                 this.setState({...this.state,

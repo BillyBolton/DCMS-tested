@@ -61,14 +61,14 @@ public class ProfileService extends AbstractBaseServiceImpl<ProfileDTO, ProfileE
         return mapper.entityToDto(profileRepository.findByUsername(username));
     }
 
-    public void deleteByUsername(String username) {
+    public boolean deleteByUsername(String username) {
 
         if (!profileRepository.existsByUsername(username)) {
             throw new ResourceNotFoundException(
                     "Profile with username: " + username + " does not exist");
         }
 
-        profileRepository.deleteById((profileRepository.findByUsername(username)).getId());
+        return deleteById((profileRepository.findByUsername(username)).getId());
     }
 
 

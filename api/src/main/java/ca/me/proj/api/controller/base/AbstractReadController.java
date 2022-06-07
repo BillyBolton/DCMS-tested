@@ -29,7 +29,7 @@ public abstract class AbstractReadController<D extends BaseDTO, E extends Abstra
     }
 
     @GetMapping(ApiUri.FIND_BY_ID)
-    public D findByID(@RequestParam PK id) {
+    public D findById(@RequestParam PK id) {
         return service.findById(id);
     }
 

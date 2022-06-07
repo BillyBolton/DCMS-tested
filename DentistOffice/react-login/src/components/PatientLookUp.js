@@ -34,7 +34,7 @@ export default class PatientLookUp extends Component {
 
         console.log("id=", id)
 
-        axios.get('http://localhost:8080/patient/findByID', { params: {id: id} })
+        axios.get('http://localhost:8080/patient/findById', { params: {id: id} })
             .then(user => {
                 console.log(user.data)
                 

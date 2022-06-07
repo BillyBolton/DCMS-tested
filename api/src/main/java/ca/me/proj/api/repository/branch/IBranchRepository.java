@@ -19,9 +19,9 @@ public interface IBranchRepository extends IBaseRepository<BranchEntity, String>
     // public List<BranchEntity> findAll();
 
     // @Query(value = "SELECT * from Branch WHERE id = ?1 ", nativeQuery = true)
-    // public <Optional> BranchEntity findByID(String id);
+    // public <Optional> BranchEntity findById(String id);
 
     // @Modifying
     // @Query(value = "DELETE from Branch b where b.id = ?1", nativeQuery = true)
-    // public void deleteByID(String id);
+    // public void deleteById(String id);
 }

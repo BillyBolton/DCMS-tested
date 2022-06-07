@@ -21,7 +21,7 @@ public interface IAppointmentRepository extends IBaseRepository<AppointmentEntit
         // public List<AppointmentEntity> findAll();
 
         // @Query(value = "SELECT * from APPOINTMENT WHERE id = ?1 ", nativeQuery = true)
-        // public <Optional> AppointmentEntity findByID(long id);
+        // public <Optional> AppointmentEntity findById(long id);
 
         // @Query(value = "SELECT CASE WHEN count(a)> 0 THEN true ELSE false end from APPOINTMENT a
         // where a.id = ?1",
@@ -30,7 +30,7 @@ public interface IAppointmentRepository extends IBaseRepository<AppointmentEntit
 
         // @Modifying
         // @Query(value = "DELETE from APPOINTMENT a where a.id = ?1", nativeQuery = true)
-        // public void deleteByID(long id);
+        // public void deleteById(long id);
 
         // @Query(value = "SELECT * FROM APPOINTMENT WHERE patient_id = ?1", nativeQuery = true)
         // public List<AppointmentEntity> findByPatientId(String id);

@@ -16,24 +16,24 @@ import ca.me.proj.api.service.profile.ProfileService;
 
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping(ProfileUri.DOMAIN)
 public class ProfileController extends AbstractCrudController<ProfileDTO, ProfileEntity, String> {
 
     @Autowired
     private ProfileService profileService;
 
-    @PostMapping("/authenticate")
+    @PostMapping(ProfileUri.AUTHENTICATE)
     public boolean authenticate(@RequestBody AuthenticationDTO credentials) {
         return profileService.authenticate(credentials);
     }
 
 
-    @GetMapping("/findByUsername")
+    @GetMapping(ProfileUri.FIND_BY_USERNAME)
     public ProfileDTO findbyUsername(@RequestParam String username) {
         return profileService.findByUsername(username);
     }
 
-    @GetMapping("/existsByUsername")
+    @GetMapping(ProfileUri.EXISTS_BY_USERNAME)
     public boolean existsByUsername(@RequestParam String username) {
         return profileService.existsByUsername(username);
     }
@@ -43,9 +43,9 @@ public class ProfileController extends AbstractCrudController<ProfileDTO, Profil
     // return profileService.create(dto);
     // }
 
-    @DeleteMapping("/deleteByUsername")
-    public void deleteUserbyUsername(@RequestParam String username) {
-        profileService.deleteByUsername(username);
+    @DeleteMapping(ProfileUri.DELETE_BY_USERNAME)
+    public boolean deleteByUsername(@RequestParam String username) {
+        return profileService.deleteByUsername(username);
     }
 
 

@@ -39,7 +39,7 @@ public interface IProfileRepository extends IBaseRepository<ProfileEntity, Strin
 
         // @Modifying
         // @Query(value = "DELETE from PROFILE p where p.id = ?1", nativeQuery = true)
-        // public void deleteByID(String id);
+        // public void deleteById(String id);
 
 
 }

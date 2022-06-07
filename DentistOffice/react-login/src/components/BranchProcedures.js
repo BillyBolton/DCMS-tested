@@ -9,7 +9,7 @@ const BranchProcedures = () => {
 
     const fetchProcedures = async () => {
         try {
-            const {data} = await axios.get(`http://localhost:8080/branch/findByID?id=${id}`);
+            const {data} = await axios.get(`http://localhost:8080/branch/findById?id=${id}`);
             SetProcedures(data.procedures);
 
         } catch (err) {

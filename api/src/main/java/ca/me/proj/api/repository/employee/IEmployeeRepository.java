@@ -22,7 +22,7 @@ public interface IEmployeeRepository extends IBaseRepository<EmployeeEntity, Str
       // public List<EmployeeEntity> findAll();
 
       // @Query(value = "SELECT * from EMPLOYEE WHERE id = ?1 ", nativeQuery = true)
-      // public <Optional> EmployeeEntity findByID(String id);
+      // public <Optional> EmployeeEntity findById(String id);
 
       // @Query(value = "SELECT CASE WHEN count(e)> 0 THEN true ELSE false end from EMPLOYEE e where
       // e.id = ?1",
@@ -31,6 +31,6 @@ public interface IEmployeeRepository extends IBaseRepository<EmployeeEntity, Str
 
       // @Modifying
       // @Query(value = "DELETE from EMPLOYEE e where e.id = ?1", nativeQuery = true)
-      // public void deleteByID(String id);
+      // public void deleteById(String id);
 
 }

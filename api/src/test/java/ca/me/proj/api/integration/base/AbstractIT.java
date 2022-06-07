@@ -14,9 +14,9 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-@ContextConfiguration(initializers = ITAbstract.DockerPostgreDataSourceInitializer.class)
+@ContextConfiguration(initializers = AbstractIT.DockerPostgreDataSourceInitializer.class)
 @Testcontainers
-public abstract class ITAbstract {
+public abstract class AbstractIT {
 
     public static PostgreSQLContainer<?> postgreDBContainer =
             new PostgreSQLContainer<>("postgres:10.1");

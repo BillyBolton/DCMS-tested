@@ -19,7 +19,7 @@ import ca.me.proj.api.config.TestWebConfig;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest
-public abstract class UTBaseController {
+public abstract class BaseControllerUnitTests {
 
     @Autowired
     protected MockMvc mvc;

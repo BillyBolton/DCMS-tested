@@ -19,12 +19,12 @@ import ca.me.proj.api.dtos.profile.AuthenticationDTO;
 import ca.me.proj.api.dtos.profile.AuthenticationRole;
 import ca.me.proj.api.dtos.profile.ProfileDTO;
 import ca.me.proj.api.service.profile.ProfileService;
-import ca.me.proj.api.unit.controller.base.BaseControllerUT;
+import ca.me.proj.api.unit.controller.base.BaseControllerUnitTests;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @ContextConfiguration(classes = ProfileController.class)
-public class UTProfileController extends BaseControllerUT {
+public class ProfileControllerUnitTests extends BaseControllerUnitTests {
 
     @MockBean
     private ProfileService service;

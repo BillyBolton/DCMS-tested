@@ -9,8 +9,4 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 @Repository
 public interface INewPatientRepository extends IBaseRepository<NewPatientEntity, Long> {
 
-    // @Override
-    // @Query(value = "SELECT * from PATIENT", nativeQuery = true)
-    // public List<NewPatientEntity> findAll();
-
 }

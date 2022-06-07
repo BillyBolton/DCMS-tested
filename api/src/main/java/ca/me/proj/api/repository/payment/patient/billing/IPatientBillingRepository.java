@@ -9,20 +9,4 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 @Repository
 public interface IPatientBillingRepository extends IBaseRepository<PatientBillingEntity, Long> {
 
-    // @Override
-    // @Query(value = "SELECT * from PATIENT_BILLING", nativeQuery = true)
-    // public List<PatientBillingEntity> findAll();
-
-    // @Query(value = "SELECT * from PATIENT_BILLING WHERE id = ?1 ", nativeQuery = true)
-    // public <Optional> PatientBillingEntity findById(long id);
-
-    // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PATIENT_BILLING p
-    // where p.id = ?1",
-    // nativeQuery = true)
-    // public boolean existsById(long id);
-
-    // @Modifying
-    // @Query(value = "DELETE from PATIENT_BILLING p where p.id = ?1", nativeQuery = true)
-    // public void deleteById(long id);
-
 }

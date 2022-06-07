@@ -9,20 +9,4 @@ import ca.me.proj.api.repository.base.IBaseRepository;
 @Repository
 public interface IProcedureTypeRepository extends IBaseRepository<ProcedureTypeEntity, String> {
 
-    // @Override
-    // @Query(value = "SELECT * from PROCEDURE_TYPE", nativeQuery = true)
-    // public List<ProcedureTypeEntity> findAll();
-
-    // @Query(value = "SELECT * from PROCEDURE_TYPE WHERE id = ?1", nativeQuery = true)
-    // public Optional<ProcedureTypeEntity> findById(String id);
-
-    // @Query(value = "SELECT CASE WHEN count(p)> 0 THEN true ELSE false end from PROCEDURE_TYPE p
-    // where p.id = ?1",
-    // nativeQuery = true)
-    // public boolean existsById(String id);
-
-    // @Modifying
-    // @Query(value = "DELETE from PROCEDURE_TYPE p where p.id = ?1", nativeQuery = true)
-    // public void deleteById(String id);
-
 }

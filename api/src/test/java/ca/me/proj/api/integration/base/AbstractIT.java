@@ -1,5 +1,6 @@
 package ca.me.proj.api.integration.base;
 
+import org.junit.jupiter.api.Disabled;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,7 +13,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 // IMPORTANT: make sure you have the docker client running on your desktop.
 // Running a docker image is not necessary though. This is handled automatically below.
 
-// @Disabled
+@Disabled
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(initializers = AbstractIT.DockerPostgreDataSourceInitializer.class)

@@ -2,6 +2,7 @@ package ca.me.proj.api.integration.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -12,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 // https://www.arhohuttunen.com/spring-boot-datajpatest/
 
-// @Disabled
+@Disabled
 @Slf4j
 @DataJpaTest
 class ProfileRepositoryIT extends AbstractIT {

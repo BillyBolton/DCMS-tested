@@ -16,5 +16,8 @@
         "titleBar.inactiveBackground": "#74318c99",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
-    "peacock.color": "#74318c"
+    "peacock.color": "#74318c",
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": ".github/workflows/*"
+    }
 }

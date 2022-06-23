@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {List} from "semantic-ui-react";
-import {useParams} from "react-router-dom";
+import { List } from "semantic-ui-react";
+import { useParams } from "react-router-dom";
 
 const BranchProcedures = () => {
-    const {id} = useParams();
-    const[procedures, SetProcedures] = useState([]);
+    const { id } = useParams();
+    const [procedures, SetProcedures] = useState([]);
 
     const fetchProcedures = async () => {
         try {
-            const {data} = await axios.get(`http://localhost:8080/branch/findByID?id=${id}`);
+            const { data } = await axios.get(`http://localhost:8080/branch/find/byId?id=${id}`);
             SetProcedures(data.procedures);
 
         } catch (err) {
@@ -32,7 +32,7 @@ const BranchProcedures = () => {
     function toTitleCase(str) {
         return str.replace(
             /\w\S*/g,
-            function(txt) {
+            function (txt) {
                 return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
             }
         );
@@ -41,7 +41,7 @@ const BranchProcedures = () => {
     return (
         <List>
             {procedures.map((procedure) => (
-                <List.Item><List.Icon name='plus'/>{toTitleCase(procedure.type.replace("_"," "))}</List.Item>
+                <List.Item><List.Icon name='plus' />{toTitleCase(procedure.type.replace("_", " "))}</List.Item>
             ))}
         </List>
     )

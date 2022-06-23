@@ -15,9 +15,9 @@ export default class PatientLookUp extends Component {
             selectedUser: {}
         }
 
-        this.handleSearch=this.handleSearch.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
     }
-    
+
 
     componentDidMount() {
         axios.get('http://localhost:8080/profile/findAll')
@@ -34,59 +34,61 @@ export default class PatientLookUp extends Component {
 
         console.log("id=", id)
 
-        axios.get('http://localhost:8080/patient/findByID', { params: {id: id} })
+        axios.get('http://localhost:8080/patient/find/byId', { params: { id: id } })
             .then(user => {
                 console.log(user.data)
-                
+
                 this.setState({
                     searchVal: '',
                     showSearch: false,
                     selectedUser: user.data
                 })
             })
-            console.log(this.state)
+        console.log(this.state)
     }
 
     render() {
-        return(
+        return (
             <>
-            <Header as='h4'>Patient Look Up</Header>
-            { this.state.showSearch ?
-                (<>
-                    <Form.Field
-                    control={Input}
-                    placeholder='Search for patient by ID'
-                    onChange={(e, search) => this.setState({searchVal: search.value})}
-                    width={5}
-                    icon='search'
-                    />
-                    <Segment>
-                        { this.state.searchVal != '' &&
-                        (this.state.users).filter(user => (user.id).includes((this.state.searchVal).toUpperCase()))
-                            .map(match => { return (
-                                <Segment key={(match.id)}>
-                                    <Header as='h4'>{match.firstName+" "+match.middleName+" "+match.lastName}</Header>
-                                    <p>{"Patient ID: "+match.id}</p>
-                                    <p>{"Date of Birth: "+(match.dob).substring(0, 10)}</p>
+                <Header as='h4'>Patient Look Up</Header>
+                {this.state.showSearch ?
+                    (<>
+                        <Form.Field
+                            control={Input}
+                            placeholder='Search for patient by ID'
+                            onChange={(e, search) => this.setState({ searchVal: search.value })}
+                            width={5}
+                            icon='search'
+                        />
+                        <Segment>
+                            {this.state.searchVal != '' &&
+                                (this.state.users).filter(user => (user.id).includes((this.state.searchVal).toUpperCase()))
+                                    .map(match => {
+                                        return (
+                                            <Segment key={(match.id)}>
+                                                <Header as='h4'>{match.firstName + " " + match.middleName + " " + match.lastName}</Header>
+                                                <p>{"Patient ID: " + match.id}</p>
+                                                <p>{"Date of Birth: " + (match.dob).substring(0, 10)}</p>
 
-                                    <Button content="see full profile" onClick={() => this.handleSearch(match.id)}/>
-                                </Segment>
-                            )})
-                        }
-                    </Segment>
+                                                <Button content="see full profile" onClick={() => this.handleSearch(match.id)} />
+                                            </Segment>
+                                        )
+                                    })
+                            }
+                        </Segment>
 
-                </>)
-                :
-                (<>
-                    <Button content="return to search" onClick={() => this.setState({...this.state, showSearch: true, selectedUser: {} })}/>
-                    <Segment>
-                        <PatientTabs loggedInUser={this.state.selectedUser}/>
-                    </Segment>
-                </>)
-            }
-            
+                    </>)
+                    :
+                    (<>
+                        <Button content="return to search" onClick={() => this.setState({ ...this.state, showSearch: true, selectedUser: {} })} />
+                        <Segment>
+                            <PatientTabs loggedInUser={this.state.selectedUser} />
+                        </Segment>
+                    </>)
+                }
+
             </>
         )
     }
-    
+
 }

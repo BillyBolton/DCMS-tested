@@ -1,0 +1,57 @@
+package ca.me.proj.api.entity.profile;
+
+import java.sql.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import ca.me.proj.api.entity.address.AddressEntity;
+import ca.me.proj.api.entity.base.AbstractBaseEntity;
+import lombok.Data;
+
+
+@Data
+@Entity
+@Table(name = "PROFILE")
+public class ProfileEntity extends AbstractBaseEntity {
+
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @NotNull
+    @Column(name = "username")
+    private String username;
+
+    @NotNull
+    @Column(name = "password")
+    private String password;
+    @NotNull
+    @Column(name = "firstname")
+    private String firstName;
+
+    @NotNull
+    @Column(name = "middlename")
+    private String middleName;
+
+    @NotNull
+    @Column(name = "lastname")
+    private String lastName;
+
+    @NotNull
+    @Column(name = "dob")
+    private Date DOB;
+
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private AddressEntity address;
+
+}

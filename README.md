@@ -1,5 +1,7 @@
 # DCMS
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=BillyBolton_DCMS-tested&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=BillyBolton_DCMS-tested)
+
 ## Video Walk-Through
 
 - [Click here](https://youtu.be/d8amBgz9ddc)

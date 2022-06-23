@@ -13,8 +13,8 @@ export default class MedHistory extends Component {
     }
 
     componentDidMount() {
-        
-        axios.get('http://localhost:8080/appointment/findByPatientId', { params: { id: (this.props.profile).id } })
+
+        axios.get('http://localhost:8080/appointment/find/byPatientId', { params: { id: (this.props.profile).id } })
             .then(app_res => {
                 const app = app_res.data;
                 console.log(app);
@@ -27,27 +27,28 @@ export default class MedHistory extends Component {
     componentDidUpdate() {
         if (this.props.profile != undefined && this.state.didUpdate == false) {
             this.componentDidMount()
-            this.setState({didUpdate: true})
+            this.setState({ didUpdate: true })
         }
     }
 
     render() {
         return (
             <>
-            { this.state.appts !== [] || this.state.appts !== undefined ?
+                {this.state.appts !== [] || this.state.appts !== undefined ?
 
-            this.state.appointments.map(appt => { return (
-                <Segment key={appt.id}>
-                    <MHAppointment appt={appt}/>
-                </Segment>
-            )
+                    this.state.appointments.map(appt => {
+                        return (
+                            <Segment key={appt.id}>
+                                <MHAppointment appt={appt} />
+                            </Segment>
+                        )
 
-            })
+                    })
 
-            :
-            
-            <p>Patient has no medical history.</p>
-            }
+                    :
+
+                    <p>Patient has no medical history.</p>
+                }
             </>
         )
     }

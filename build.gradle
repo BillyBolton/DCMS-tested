@@ -1,5 +1,6 @@
 plugins {
   id 'eclipse' // easier use in eclipse and other IDEs
+  //  id "org.sonarqube" version "3.3"
 }
 
 // pulls out properties from a global properties file
@@ -13,9 +14,20 @@ wrapper {
   gradleVersion env.GRADLE_VERSION
 }
 
+
 subprojects {
   repositories {
 	  mavenCentral()
   }
+
+  //   sonarqube {
+  //     properties {
+  //         def props = new Properties()
+  //         file("../sonar-project.properties").withInputStream { props.load(it)}
+  //         props.each {
+  //           property("${it.key}", "${it.value}")
+  //         }
+  //     }
+  // }
 }
 

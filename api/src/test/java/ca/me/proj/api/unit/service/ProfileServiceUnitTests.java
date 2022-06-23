@@ -20,6 +20,7 @@ import ca.me.proj.api.service.profile.AuthenticationService;
 import ca.me.proj.api.service.profile.ProfileService;
 import lombok.extern.slf4j.Slf4j;
 
+// @Disabled
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 class ProfileServiceUnitTests {
@@ -43,7 +44,7 @@ class ProfileServiceUnitTests {
     @EmptySource
     @NullSource
     @ValueSource(strings = {"yodaBaes"})
-    void givenEntityExists_whenFindByUsername_thenReturnTrue(String username) {
+    void givenEntityExists_whenFindByUsername_thenReturnDto(String username) {
 
 
         if (username == null || username.isEmpty()) {

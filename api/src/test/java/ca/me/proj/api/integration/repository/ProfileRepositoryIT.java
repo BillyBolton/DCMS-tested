@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 // https://www.arhohuttunen.com/spring-boot-datajpatest/
 
+// @Disabled
 @Slf4j
 @DataJpaTest
 class ProfileRepositoryIT extends AbstractIT {

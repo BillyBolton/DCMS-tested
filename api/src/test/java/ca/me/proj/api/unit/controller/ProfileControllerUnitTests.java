@@ -45,7 +45,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
 
     }
 
-
+    // @Disabled
     @ParameterizedTest
     @EmptySource
     @NullSource
@@ -60,6 +60,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
 
     }
 
+    // @Disabled
     @ParameterizedTest
     @MethodSource("provideProfileDtoData")
     void givenEntityExists_whenFindById_thenReturnDto(ProfileDTO dto) throws Exception {
@@ -77,6 +78,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
     // Abstracted tests for parent CrudController
     // ********************************************************************************************************************
 
+    // @Disabled
     @ParameterizedTest
     @MethodSource("provideProfileDtoData")
     void givenEntityExists_whenSavingDto_thenReturnDto(ProfileDTO dto) throws Exception {
@@ -87,6 +89,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
         assertEquals(toJson(dto), postRequest(uri, dto));
     }
 
+    // @Disabled
     @ParameterizedTest
     @MethodSource("provideProfileDtoData")
     void givenEntityExists_whenUpdatingDto_thenReturnDto(ProfileDTO dto) throws Exception {
@@ -97,9 +100,8 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
 
     }
 
+    // @Disabled
     @ParameterizedTest
-    // @EmptySource
-    // @NullSource
     @ValueSource(strings = {"P_1"})
     void givenEntityExists_whenDeleteById_thenSuccessful(String id) throws Exception {
 
@@ -112,6 +114,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
     // Abstracted tests for ProfileController
     // ********************************************************************************************************************
 
+    // @Disabled
     @ParameterizedTest
     @MethodSource("provideProfileDtoData")
     void givenEntityExists_whenFindByUsername_thenReturnSuccess(ProfileDTO dto) throws Exception {
@@ -129,6 +132,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
         assertEquals(toJson(expected), getRequest(uri));
     }
 
+    // @Disabled
     @ParameterizedTest
     @EmptySource
     @NullSource
@@ -144,6 +148,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
 
     }
 
+    // @Disabled
     @ParameterizedTest
     @EmptySource
     @NullSource
@@ -159,6 +164,7 @@ public class ProfileControllerUnitTests extends BaseControllerUnitTests {
         assertEquals(toJson(expected), deleteRequest(uri));
     }
 
+    // @Disabled
     @ParameterizedTest
     @MethodSource("provideAuthentcationDtoData")
     void givenEntityExists_whenAuthenticating_thenSuccessful(AuthenticationDTO credentials)

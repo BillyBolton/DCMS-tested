@@ -12,6 +12,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 // IMPORTANT: make sure you have the docker client running on your desktop.
 // Running a docker image is not necessary though. This is handled automatically below.
 
+// @Disabled
 @ActiveProfiles("test")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ContextConfiguration(initializers = AbstractIT.DockerPostgreDataSourceInitializer.class)
